@@ -2,68 +2,27 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dora Soccer Drone</title>
 
 <style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Microsoft JhengHei",sans-serif;
+}
 
 body{
-    margin:0;
-    font-family:"Microsoft JhengHei";
-    background:#8fd3ff;
+    background:#f4f8fb;
+    color:#333;
 }
 
 header{
-    background:#0099ff;
+    background:linear-gradient(135deg,#0099ff,#66ccff);
     color:white;
     text-align:center;
-    padding:50px;
-}
-
-.hero{
-    text-align:center;
-    padding:60px;
-}
-
-.hero h1{
-    font-size:50px;
-}
-
-.hero p{
-    font-size:22px;
-}
-
-button{
-    padding:15px 35px;
-    border:none;
-    border-radius:30px;
-    background:#ff5050;
-    color:white;
-    font-size:20px;
-    cursor:pointer;
-}
-
-.features{
-    display:flex;
-    justify-content:center;
-    gap:30px;
-    flex-wrap:wrap;
-    padding:50px;
-}
-
-.card{
-    background:white;
-    width:250px;
-    padding:20px;
-    border-radius:20px;
-    box-shadow:0 5px 15px rgba(0,0,0,.2);
-    text-align:center;
-}
-
-footer{
-    background:#0099ff;
-    color:white;
-    text-align:center;
-    padding:20px;
+    padding:80px 20px;
 }
 
 .drone{
@@ -77,56 +36,399 @@ footer{
     100%{transform:translateY(0);}
 }
 
-</style>
+header h1{
+    font-size:3rem;
+    margin:20px 0;
+}
 
+header p{
+    font-size:1.2rem;
+    margin-bottom:20px;
+}
+
+.btn{
+    display:inline-block;
+    background:#ff4d4d;
+    color:white;
+    padding:15px 30px;
+    border-radius:30px;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.1);
+}
+
+section{
+    padding:70px 10%;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:40px;
+    color:#0099ff;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.card span{
+    font-size:50px;
+}
+
+.ai{
+    background:#eaf8ff;
+    border-radius:20px;
+    text-align:center;
+}
+
+.ai ul{
+    list-style:none;
+    margin-top:20px;
+}
+
+.ai li{
+    padding:10px;
+    font-size:18px;
+}
+
+.battery{
+    background:white;
+    border-radius:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.battery-info{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+    margin-top:30px;
+}
+
+.info-box{
+    background:#eaf8ff;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+}
+
+.knowledge{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.tip{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:15px;
+    text-align:center;
+}
+
+th{
+    background:#0099ff;
+    color:white;
+}
+
+footer{
+    background:#0099ff;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:50px;
+}
+
+.counter{
+    font-size:40px;
+    color:#0099ff;
+    font-weight:bold;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    text-align:center;
+}
+
+.stat-box{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+</style>
 </head>
 
 <body>
 
 <header>
-<h1>⚽ Dora Soccer Drone 🚁</h1>
-<p>來自未來的足球無人機</p>
-</header>
-
-<section class="hero">
-
 <div class="drone">🚁⚽</div>
 
-<h1>飛向夢想</h1>
+<h1>Dora Soccer Drone</h1>
 
-<p>AI 足球追蹤｜智慧射門分析｜自動飛行</p>
+<p>來自未來的足球助手</p>
 
-<button>開始體驗</button>
+<p>智慧追蹤｜AI分析｜穩定飛行</p>
+
+<a href="#features" class="btn">開始探索</a>
+</header>
+
+<section>
+<h2>🚁 無人機介紹</h2>
+
+<p style="text-align:center;font-size:18px;">
+Dora Soccer Drone 是一款結合 AI 與足球訓練的智慧無人機，
+能夠自動追蹤足球、分析球員動作並進行高畫質錄影，
+協助球員提升訓練效率。
+</p>
+</section>
+
+<section id="features">
+<h2>⚽ 功能介紹</h2>
+
+<div class="cards">
+
+<div class="card">
+<span>🚁</span>
+<h3>自動追蹤</h3>
+<p>AI辨識足球位置並自動跟隨。</p>
+</div>
+
+<div class="card">
+<span>⚽</span>
+<h3>射門分析</h3>
+<p>分析速度、角度與命中率。</p>
+</div>
+
+<div class="card">
+<span>📷</span>
+<h3>4K錄影</h3>
+<p>即時記錄比賽與訓練過程。</p>
+</div>
+
+<div class="card">
+<span>🎮</span>
+<h3>手機控制</h3>
+<p>透過 App 即可遠端操控。</p>
+</div>
+
+</div>
+</section>
+
+<section class="ai">
+<h2>🤖 AI智慧系統</h2>
+
+<ul>
+<li>✅ 即時辨識足球</li>
+<li>✅ 自動追蹤球員</li>
+<li>✅ 分析射門成功率</li>
+<li>✅ 智慧飛行路徑規劃</li>
+<li>✅ 即時資料回傳</li>
+</ul>
+</section>
+
+<section>
+<h2>📊 系統數據</h2>
+
+<div class="stats">
+
+<div class="stat-box">
+<div class="counter" data-target="35">0</div>
+<p>分鐘續航</p>
+</div>
+
+<div class="stat-box">
+<div class="counter" data-target="500">0</div>
+<p>公尺控制距離</p>
+</div>
+
+<div class="stat-box">
+<div class="counter" data-target="40">0</div>
+<p>km/h速度</p>
+</div>
+
+</div>
+</section>
+
+<section class="battery">
+
+<h2>🔋 電池介紹</h2>
+
+<p>
+本無人機採用高效能鋰電池，
+兼具高能量密度、重量輕及長續航等特性。
+</p>
+
+<div class="battery-info">
+
+<div class="info-box">
+<h3>🔋 容量</h3>
+<p>5000mAh</p>
+</div>
+
+<div class="info-box">
+<h3>⚡ 電壓</h3>
+<p>11.1V</p>
+</div>
+
+<div class="info-box">
+<h3>⏰ 飛行時間</h3>
+<p>35分鐘</p>
+</div>
+
+<div class="info-box">
+<h3>🔌 充電時間</h3>
+<p>60分鐘</p>
+</div>
+
+</div>
 
 </section>
 
-<section class="features">
+<section>
 
-<div class="card">
-<h2>🚁 自動追蹤</h2>
-<p>即時鎖定足球位置</p>
+<h2>💡 電池小知識</h2>
+
+<div class="knowledge">
+
+<div class="tip">
+<h3>高能量密度</h3>
+<p>在相同重量下提供更多電力。</p>
 </div>
 
-<div class="card">
-<h2>⚽ AI分析</h2>
-<p>紀錄每次射門數據</p>
+<div class="tip">
+<h3>重量較輕</h3>
+<p>提升飛行效率與機動性。</p>
 </div>
 
-<div class="card">
-<h2>📹 4K錄影</h2>
-<p>高畫質比賽拍攝</p>
+<div class="tip">
+<h3>可重複充電</h3>
+<p>循環壽命可達數百次以上。</p>
 </div>
 
-<div class="card">
-<h2>🎮 遙控模式</h2>
-<p>手機一鍵控制</p>
+<div class="tip">
+<h3>安全使用</h3>
+<p>避免高溫、碰撞與過度充放電。</p>
 </div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>📋 規格表</h2>
+
+<table>
+
+<tr>
+<th>項目</th>
+<th>規格</th>
+</tr>
+
+<tr>
+<td>重量</td>
+<td>680g</td>
+</tr>
+
+<tr>
+<td>飛行時間</td>
+<td>35分鐘</td>
+</tr>
+
+<tr>
+<td>最大速度</td>
+<td>40km/h</td>
+</tr>
+
+<tr>
+<td>控制距離</td>
+<td>500公尺</td>
+</tr>
+
+<tr>
+<td>電池</td>
+<td>11.1V 鋰電池</td>
+</tr>
+
+<tr>
+<td>相機</td>
+<td>4K UHD</td>
+</tr>
+
+</table>
 
 </section>
 
 <footer>
-©2026 Dora Soccer Drone
+
+<h3>Dora Soccer Drone</h3>
+
+<p>未來足球訓練系統</p>
+
+<p>© 2026 All Rights Reserved</p>
+
 </footer>
+
+<script>
+
+const counters=document.querySelectorAll('.counter');
+
+counters.forEach(counter=>{
+
+const update=()=>{
+
+const target=+counter.getAttribute('data-target');
+const current=+counter.innerText;
+
+const increment=target/100;
+
+if(current<target){
+counter.innerText=Math.ceil(current+increment);
+setTimeout(update,20);
+}
+else{
+counter.innerText=target;
+}
+
+};
+
+update();
+
+});
+
+</script>
 
 </body>
 </html>
