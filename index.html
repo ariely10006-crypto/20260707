@@ -5,26 +5,18 @@
 
 <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>親密關係傾向測驗</title>
 
-
 <style>
-
-/* =====================================================
-   基本
-===================================================== */
 
 *{
     box-sizing:border-box;
 }
 
-html,
-body{
+html,body{
     margin:0;
     min-height:100%;
 }
@@ -43,12 +35,16 @@ body{
     color:#403b39;
 
     transition:
-        background 2.5s ease,
-        color 2.5s ease;
+        background 3s ease,
+        color 3s ease;
 
     overflow-x:hidden;
 }
 
+
+/* =========================
+   主畫面
+========================= */
 
 #app{
 
@@ -62,14 +58,9 @@ body{
 
     padding:25px;
 
-    transition:
-        transform .2s;
+    transition:transform .15s;
 }
 
-
-/* =====================================================
-   卡片
-===================================================== */
 
 .card{
 
@@ -90,9 +81,9 @@ body{
         rgba(50,35,30,.08);
 
     transition:
-        background 2s,
-        border 2s,
-        box-shadow 2s;
+        background 3s,
+        border 3s,
+        box-shadow 3s;
 }
 
 
@@ -165,9 +156,9 @@ h1{
 }
 
 
-/* =====================================================
+/* =========================
    題目
-===================================================== */
+========================= */
 
 .question-number{
 
@@ -197,7 +188,7 @@ h1{
 
     flex-direction:column;
 
-    gap:8px;
+    gap:9px;
 }
 
 
@@ -223,7 +214,7 @@ h1{
     transition:
         background .2s,
         border .2s,
-        opacity .4s,
+        opacity .35s,
         transform .15s;
 }
 
@@ -266,7 +257,7 @@ h1{
 
 .feedback{
 
-    min-height:25px;
+    min-height:26px;
 
     margin-top:18px;
 
@@ -298,92 +289,9 @@ h1{
 }
 
 
-/* =====================================================
-   中段
-===================================================== */
-
-body.late{
-
-    background:#ddd2ce;
-}
-
-
-body.late .card{
-
-    border-color:#bea69e;
-}
-
-
-/* =====================================================
-   紅色氣氛
-===================================================== */
-
-body.red{
-
-    background:
-
-        radial-gradient(
-            circle at 50% 40%,
-            #4c2927,
-            #291716 65%,
-            #120909
-        );
-
-    color:#ded0cc;
-}
-
-
-body.red .card{
-
-    background:
-        rgba(30,16,15,.96);
-
-    border-color:#67423d;
-
-    box-shadow:
-        0 25px 90px
-        rgba(0,0,0,.55);
-}
-
-
-body.red h1,
-body.red .question{
-
-    color:#dcc9c4;
-}
-
-
-body.red .question-number{
-
-    color:#99736d;
-}
-
-
-body.red .option{
-
-    background:#281716;
-
-    color:#d3c1bd;
-
-    border-color:#67423d;
-}
-
-
-body.red .option:hover{
-
-    background:#38201e;
-}
-
-
-body.red .feedback{
-
-    color:#aa8982;
-}
-
-
-/* =====================================================
-   雪花屏
-===================================================== */
+/* =========================
+   前段偶發異常
+========================= */
 
 #noise{
 
@@ -401,10 +309,10 @@ body.red .feedback{
 
         repeating-linear-gradient(
             0deg,
-            rgba(255,255,255,.18) 0px,
-            rgba(255,255,255,.18) 1px,
-            rgba(0,0,0,.18) 1px,
-            rgba(0,0,0,.18) 3px
+            rgba(255,255,255,.14) 0px,
+            rgba(255,255,255,.14) 1px,
+            rgba(0,0,0,.16) 1px,
+            rgba(0,0,0,.16) 3px
         );
 
     mix-blend-mode:screen;
@@ -414,7 +322,7 @@ body.red .feedback{
 #noise.active{
 
     animation:
-        staticBurst 1.1s steps(8);
+        staticBurst .75s steps(7);
 }
 
 
@@ -424,28 +332,20 @@ body.red .feedback{
         opacity:0;
     }
 
-    12%{
-        opacity:.45;
+    20%{
+        opacity:.32;
     }
 
-    25%{
-        opacity:.12;
-    }
-
-    38%{
-        opacity:.55;
-    }
-
-    52%{
+    35%{
         opacity:.08;
     }
 
-    67%{
-        opacity:.4;
+    55%{
+        opacity:.27;
     }
 
-    82%{
-        opacity:.13;
+    75%{
+        opacity:.05;
     }
 
     100%{
@@ -454,14 +354,14 @@ body.red .feedback{
 }
 
 
-/* =====================================================
-   畫面晃動
-===================================================== */
+/* =========================
+   輕微晃動
+========================= */
 
 body.shake #app{
 
     animation:
-        screenShake .65s;
+        screenShake .55s;
 }
 
 
@@ -471,24 +371,20 @@ body.shake #app{
         transform:translate(0,0);
     }
 
-    15%{
+    20%{
         transform:translate(-2px,1px);
     }
 
-    30%{
+    40%{
         transform:translate(2px,-1px);
     }
 
-    45%{
-        transform:translate(-2px,1px);
-    }
-
     60%{
-        transform:translate(1px,-1px);
+        transform:translate(-1px,1px);
     }
 
-    75%{
-        transform:translate(-1px,1px);
+    80%{
+        transform:translate(1px,-1px);
     }
 
     100%{
@@ -497,9 +393,76 @@ body.shake #app{
 }
 
 
-/* =====================================================
-   微小文字
-===================================================== */
+/* =========================
+   暗紅模式
+========================= */
+
+body.red{
+
+    background:
+
+        radial-gradient(
+            circle at 50% 40%,
+            #482725,
+            #251413 68%,
+            #0d0707
+        );
+
+    color:#ddd0cc;
+}
+
+
+body.red .card{
+
+    background:
+        rgba(27,14,14,.96);
+
+    border-color:#63413c;
+
+    box-shadow:
+        0 25px 90px
+        rgba(0,0,0,.6);
+}
+
+
+body.red h1,
+body.red .question{
+
+    color:#dcc9c4;
+}
+
+
+body.red .question-number{
+
+    color:#98716b;
+}
+
+
+body.red .option{
+
+    background:#251514;
+
+    color:#d5c4c0;
+
+    border-color:#62403b;
+}
+
+
+body.red .option:hover{
+
+    background:#38201e;
+}
+
+
+body.red .feedback{
+
+    color:#a98a84;
+}
+
+
+/* =========================
+   小字異常
+========================= */
 
 #whisper{
 
@@ -529,7 +492,7 @@ body.shake #app{
 #whisper.show{
 
     animation:
-        whisperAppear 4s forwards;
+        whisperAppear 3.8s forwards;
 }
 
 
@@ -540,15 +503,15 @@ body.shake #app{
     }
 
     20%{
-        opacity:.65;
+        opacity:.62;
     }
 
-    42%{
+    45%{
         opacity:.12;
     }
 
-    62%{
-        opacity:.5;
+    65%{
+        opacity:.48;
     }
 
     100%{
@@ -557,9 +520,9 @@ body.shake #app{
 }
 
 
-/* =====================================================
-   三秒恐怖問題
-===================================================== */
+/* =========================
+   3 秒問題
+========================= */
 
 #threeSecondQuestion{
 
@@ -576,13 +539,13 @@ body.shake #app{
     align-items:center;
 
     background:
-        rgba(8,5,5,.92);
+        rgba(8,5,5,.94);
 
     opacity:0;
 
     pointer-events:none;
 
-    transition:opacity .4s;
+    transition:opacity .35s;
 }
 
 
@@ -665,7 +628,6 @@ body.shake #app{
     margin:25px auto 0;
 
     background:#3c2826;
-
 }
 
 
@@ -694,9 +656,9 @@ body.shake #app{
 }
 
 
-/* =====================================================
+/* =========================
    正常恢復
-===================================================== */
+========================= */
 
 body.normal-again{
 
@@ -719,9 +681,9 @@ body.normal-again .card{
 }
 
 
-/* =====================================================
+/* =========================
    手機
-===================================================== */
+========================= */
 
 @media(max-width:600px){
 
@@ -754,6 +716,9 @@ body.normal-again .card{
 
 <div id="whisper"></div>
 
+
+<!-- 3 秒問題 -->
+
 <div id="threeSecondQuestion">
 
     <div class="three-box">
@@ -763,8 +728,11 @@ body.normal-again .card{
         </div>
 
         <div class="three-title">
+
             如果你現在回頭，<br>
+
             你覺得房間裡會多出什麼？
+
         </div>
 
         <button
@@ -813,10 +781,11 @@ body.normal-again .card{
 
 
 /* =====================================================
-   題目
+   前 15 題
+   全部保持正常心理測驗
 ===================================================== */
 
-const questions = [
+const normalQuestions = [
 
 {
 q:"當你情緒低落時，你最希望喜歡的人怎麼做？",
@@ -825,12 +794,6 @@ a:[
 "先給我一點空間。",
 "直接問我發生了什麼。",
 "陪在旁邊，不一定要說話。"
-],
-f:[
-"有人願意聽，通常就已經足夠了。",
-"懂得給彼此空間，也是一種體貼。",
-"有時候直接說出來反而比較輕鬆。",
-"陪伴不一定需要很多話。"
 ]
 },
 
@@ -841,12 +804,6 @@ a:[
 "大概知道就好。",
 "如果對方願意，我會想知道。",
 "重要的事情可以互相說。"
-],
-f:[
-"關係裡保留自己的生活很重要。",
-"適度了解，通常能讓人安心。",
-"分享生活有時候也是親近的一種方式。",
-"知道重要的事情，就已經足夠了。"
 ]
 },
 
@@ -857,12 +814,6 @@ a:[
 "晚一點再傳訊息。",
 "有點想知道他在忙什麼。",
 "如果和平常差很多，會問問。"
-],
-f:[
-"你不太容易被短暫的沉默影響。",
-"你不會立刻把沉默當成問題。",
-"你會注意到聯絡頻率。",
-"真正讓你在意的是和平常不一樣。"
 ]
 },
 
@@ -873,12 +824,6 @@ a:[
 "告訴他需要時可以找我。",
 "有點失落，但還是會給空間。",
 "等他自己願意說。"
-],
-f:[
-"尊重界線是關係中很重要的一件事。",
-"你希望對方知道你一直都在。",
-"失落和理解可以同時存在。",
-"有些事情需要自己說出口。"
 ]
 },
 
@@ -889,12 +834,6 @@ a:[
 "偶爾看一下手機。",
 "有點期待通知。",
 "如果很反常，會稍微擔心。"
-],
-f:[
-"你不太容易因為短暫沉默焦慮。",
-"等待時，你還是會注意手機。",
-"你會期待在意的人回覆。",
-"真正讓你在意的是反常。"
 ]
 },
 
@@ -905,12 +844,6 @@ a:[
 "知道也沒關係，但不需要查看。",
 "如果彼此願意可以交換。",
 "我比較重視信任，而不是密碼。"
-],
-f:[
-"信任不一定需要密碼證明。",
-"知道和使用是兩件不同的事情。",
-"重要的是雙方都願意。",
-"你比較在意關係本身。"
 ]
 },
 
@@ -921,12 +854,6 @@ a:[
 "問問是不是發生了什麼。",
 "會有一點失望。",
 "看取消的理由。"
-],
-f:[
-"你比較能接受計畫改變。",
-"你會想理解事情背後的原因。",
-"失望並不代表不理解。",
-"你比較重視事情發生的原因。"
 ]
 },
 
@@ -937,12 +864,6 @@ a:[
 "過一陣子再看看。",
 "會稍微想一下是不是說錯了什麼。",
 "如果一直沒有回，會再問一次。"
-],
-f:[
-"一次已讀並不代表什麼。",
-"你比較習慣觀察一段時間。",
-"你會回頭檢查自己說過的話。",
-"你希望事情至少有一個明確回應。"
 ]
 },
 
@@ -953,12 +874,6 @@ a:[
 "等明天再看看。",
 "會覺得有一點奇怪。",
 "會傳一句「還好嗎？」"
-],
-f:[
-"六個小時其實也沒有那麼久。",
-"有些事情隔天再處理也可以。",
-"和平常不同，確實容易讓人注意。",
-"有時候一句簡單確認就夠了。"
 ]
 },
 
@@ -969,12 +884,6 @@ a:[
 "應該有自己的事情。",
 "會有點疑惑。",
 "會想知道他是不是故意不回。"
-],
-f:[
-"手機有電，不代表一定有時間。",
-"每個人都有不看手機的時候。",
-"你開始注意到一些細節了。",
-"「故意」其實很難判斷。"
 ]
 },
 
@@ -985,12 +894,6 @@ a:[
 "明天再說。",
 "可能會再看一次手機。",
 "希望至少知道他沒事。"
-],
-f:[
-"很晚了，睡著很正常。",
-"有些問題留到明天也沒關係。",
-"……你剛才是不是看過一次了？",
-"希望對方沒事，是很自然的想法。"
 ]
 },
 
@@ -1001,60 +904,95 @@ a:[
 "不會特別在意。",
 "會覺得有一點奇怪。",
 "會想問他昨天為什麼那麼晚還醒著。"
-],
-f:[
-"在線上不代表一定看到了訊息。",
-"你沒有必要把每件事都聯想到自己。",
-"……你記得時間嗎？",
-"也許真的只是睡不著。"
 ]
 },
 
 {
-q:"如果你突然發現，剛才有一題的答案和你記得的不太一樣，你會？",
+q:"如果對方臨時改變原本的計畫，你通常會？",
 a:[
-"應該是我記錯了。",
-"不太確定。",
-"會回想剛才選了什麼。",
-"我會想確認一下。"
-],
-f:[
-"記錯一個答案很正常。",
-"有時候注意力會讓記憶變得模糊。",
-"……你剛才確定是那個答案嗎？",
-"不用太在意。"
+"配合看看。",
+"先問原因。",
+"會有一點失望。",
+"希望下次可以早點說。"
 ]
 },
 
 {
-q:"如果你知道有人正在等你的回答，你會？",
+q:"你認為一段健康的關係最重要的是什麼？",
 a:[
-"有空再回。",
-"看到之後再說。",
-"會稍微有點壓力。",
-"會想知道他為什麼一直等。"
-],
-f:[
-"每個人都有自己的時間。",
-"不需要立刻回覆所有訊息。",
-"被等待確實會帶來一點壓力。",
-"……你也開始想知道了。"
+"信任。",
+"溝通。",
+"陪伴。",
+"彼此尊重。"
 ]
 },
 
 {
-q:"最後一題：如果你知道有人正在看著你回答，你會？",
+q:"如果你和喜歡的人意見不同，你通常會？",
 a:[
-"只要沒有惡意，我不會在意。",
-"應該只是心理作用。",
-"我會開始注意周圍。",
-"我會想知道……他在哪裡？"
-],
-f:[
-"這只是一個假設。",
-"不用把問題想得太複雜。",
-"……你現在是不是看了一下四周？",
-"那個問題沒有要求你找到答案。"
+"先聽對方怎麼想。",
+"一起找一個折衷的方法。",
+"表達自己的想法。",
+"等情緒平穩後再討論。"
+]
+}
+
+];
+
+
+/* =====================================================
+   後 5 題
+===================================================== */
+
+const supplementQuestions = [
+
+{
+q:"如果你的伴侶希望知道你每天去了哪裡，你會覺得？",
+a:[
+"這很正常，偶爾分享就好。",
+"可以說，但不需要事事交代。",
+"如果對方一直追問，我會有點不舒服。",
+"我會希望彼此保有自己的空間。"
+]
+},
+
+{
+q:"如果你沒有及時回覆訊息，對方一直問你去了哪裡，你會？",
+a:[
+"解釋自己剛才在做什麼。",
+"告訴對方自己現在有事情。",
+"覺得有點煩，但還是會回答。",
+"希望對方理解我不可能隨時在線。"
+]
+},
+
+{
+q:"如果對方說：「我只是想知道你現在在哪裡。」你會怎麼想？",
+a:[
+"他可能只是擔心我。",
+"我會直接告訴他。",
+"要看他用什麼方式問。",
+"如果這變成習慣，我會覺得不舒服。"
+]
+},
+
+{
+q:"如果你發現對方總能很快知道你今天去了哪些地方，你會？",
+a:[
+"覺得只是剛好。",
+"問問他怎麼知道的。",
+"開始注意這件事。",
+"覺得有點不舒服。"
+]
+},
+
+{
+q:"如果你正在做這份測驗，而你最在乎的人突然問你：「你現在一個人嗎？」",
+a:[
+"是。",
+"不是。",
+"我不知道。",
+"……為什麼問這個？"
 ]
 }
 
@@ -1065,17 +1003,19 @@ f:[
    狀態
 ===================================================== */
 
+let phase="normal";
+
 let current=0;
 
 let answers=[];
 
 let audioCtx=null;
 
-let threeQuestionUsed=false;
+let threeUsed=false;
 
 
 /* =====================================================
-   Audio
+   音效
 ===================================================== */
 
 function initAudio(){
@@ -1146,13 +1086,11 @@ function tone(
 }
 
 
-/* =====================================================
-   很少使用的雜訊
-===================================================== */
+/* 輕微電子雜訊 */
 
 function staticSound(
-    strength=.03,
-    duration=.2
+    strength=.025,
+    duration=.18
 ){
 
     if(!audioCtx)return;
@@ -1185,7 +1123,7 @@ function staticSound(
     const gain =
         audioCtx.createGain();
 
-    gain.gain.value=.7;
+    gain.gain.value=.65;
 
     source.buffer=buffer;
 
@@ -1199,9 +1137,7 @@ function staticSound(
 }
 
 
-/* =====================================================
-   低頻
-===================================================== */
+/* 低頻 */
 
 function lowHum(){
 
@@ -1220,13 +1156,13 @@ function lowHum(){
     gain.gain.value=.0001;
 
     gain.gain.exponentialRampToValueAtTime(
-        .025,
-        audioCtx.currentTime+.7
+        .022,
+        audioCtx.currentTime+.6
     );
 
     gain.gain.exponentialRampToValueAtTime(
         .0001,
-        audioCtx.currentTime+2.2
+        audioCtx.currentTime+2
     );
 
     osc.connect(gain);
@@ -1238,20 +1174,18 @@ function lowHum(){
     osc.start();
 
     osc.stop(
-        audioCtx.currentTime+2.3
+        audioCtx.currentTime+2.1
     );
 }
 
 
-/* =====================================================
-   敲門
-===================================================== */
+/* 敲門 */
 
-function knock(volume=.25){
+function knock(volume=.2){
 
     tone(
-        80,
-        .2,
+        78,
+        .18,
         volume,
         "sine"
     );
@@ -1259,19 +1193,19 @@ function knock(volume=.25){
     setTimeout(
         ()=>{
             tone(
-                65,
-                .13,
-                volume*.3,
+                61,
+                .12,
+                volume*.32,
                 "sine"
             );
         },
-        75
+        70
     );
 }
 
 
 /* =====================================================
-   視覺效果
+   視覺
 ===================================================== */
 
 function noiseFlash(){
@@ -1285,17 +1219,13 @@ function noiseFlash(){
 
     noise.classList.add("active");
 
-    /*
-       只有真正重要的時候才播放一點雜訊。
-    */
-
-    staticSound(.055,.5);
+    staticSound(.04,.4);
 
     setTimeout(
         ()=>{
             noise.classList.remove("active");
         },
-        1100
+        800
     );
 }
 
@@ -1312,7 +1242,7 @@ function shake(){
         ()=>{
             document.body.classList.remove("shake");
         },
-        700
+        600
     );
 }
 
@@ -1393,18 +1323,20 @@ home();
 
 
 /* =====================================================
-   開始
+   開始正式測驗
 ===================================================== */
 
 function startTest(){
 
     initAudio();
 
+    phase="normal";
+
     current=0;
 
     answers=[];
 
-    threeQuestionUsed=false;
+    threeUsed=false;
 
     document.body.className="";
 
@@ -1418,21 +1350,36 @@ function startTest(){
 
 function showQuestion(){
 
-    if(current>=questions.length){
+    const list =
+        phase==="normal"
+        ? normalQuestions
+        : supplementQuestions;
 
-        showResult();
+    if(current>=list.length){
+
+        if(phase==="normal"){
+
+            showNormalResult();
+
+        }else{
+
+            finalEnding();
+
+        }
 
         return;
     }
 
 
-    const q=
-        questions[current];
+    const q=list[current];
+
+
+    const total=list.length;
 
 
     const percent=
         current/
-        questions.length*
+        total*
         100;
 
 
@@ -1442,8 +1389,9 @@ function showQuestion(){
 
         <div class="question-number">
 
-            第 ${current+1} 題 /
-            共 ${questions.length} 題
+            ${phase==="normal"
+                ? "第 "+(current+1)+" 題 / 共 15 題"
+                : "補充問題 "+(current+1)+" / 5"}
 
         </div>
 
@@ -1494,9 +1442,7 @@ function showQuestion(){
             button.className="option";
 
             button.textContent=
-                String.fromCharCode(
-                    65+index
-                )
+                String.fromCharCode(65+index)
                 +". "
                 +text;
 
@@ -1519,10 +1465,6 @@ function showQuestion(){
 function choose(index){
 
     answers.push(index);
-
-
-    const q=
-        questions[current];
 
 
     const buttons=
@@ -1550,11 +1492,9 @@ function choose(index){
 
                 setTimeout(
                     ()=>{
-                        b.classList.add(
-                            "fade"
-                        );
+                        b.classList.add("fade");
                     },
-                    120
+                    100
                 );
 
             }
@@ -1563,182 +1503,513 @@ function choose(index){
     );
 
 
-    document.getElementById(
-        "feedback"
-    ).textContent=
-        q.f[index];
+    /* =========================
+       正常測驗
+    ========================= */
+
+    if(phase==="normal"){
+
+        /*
+           前 15 題完全正常，
+           只有少數題出現網站異常。
+        */
+
+        if(
+            current===2 ||
+            current===5 ||
+            current===8 ||
+            current===13
+        ){
+
+            setTimeout(
+                ()=>{
+                    noiseFlash();
+                },
+                350
+            );
+
+        }
 
 
-    /*
-       第 8 題後開始慢慢改變氣氛
-    */
+        /*
+           第 9 題：
+           很短的低頻。
+        */
 
-    if(current===7){
+        if(current===8){
 
-        document.body.classList.add(
-            "late"
-        );
+            setTimeout(
+                ()=>{
+                    lowHum();
+                },
+                500
+            );
 
-    }
+        }
 
 
-    /*
-       第 9 題
-    */
+        /*
+           第 15 題結束後
+        */
 
-    if(current===8){
+        current++;
 
         setTimeout(
             ()=>{
-                lowHum();
+                showQuestion();
             },
             550
         );
 
+        return;
     }
 
 
-    /*
-       第 10 題
-    */
+    /* =========================
+       補充問題
+    ========================= */
 
-    if(current===9){
+    if(phase==="supplement"){
+
+        /* 第一題 */
+
+        if(current===0){
+
+            setTimeout(
+                ()=>{
+                    knock(.13);
+                },
+                850
+            );
+
+        }
+
+
+        /* 第二題 */
+
+        if(current===1){
+
+            setTimeout(
+                ()=>{
+                    whisper(
+                        "已經知道了。"
+                    );
+                },
+                900
+            );
+
+            setTimeout(
+                ()=>{
+                    knock(.17);
+                },
+                2300
+            );
+
+            setTimeout(
+                ()=>{
+                    knock(.17);
+                },
+                2450
+            );
+
+        }
+
+
+        /* 第三題 */
+
+        if(current===2){
+
+            setTimeout(
+                ()=>{
+                    whisper(
+                        "你不用回答得這麼仔細。"
+                    );
+                },
+                750
+            );
+
+        }
+
+
+        /* 第四題 */
+
+        if(current===3){
+
+            setTimeout(
+                ()=>{
+                    whisper(
+                        "正在確認……"
+                    );
+                },
+                600
+            );
+
+            setTimeout(
+                ()=>{
+                    knock(.23);
+                },
+                1900
+            );
+
+            setTimeout(
+                ()=>{
+                    knock(.23);
+                },
+                3300
+            );
+
+            setTimeout(
+                ()=>{
+                    knock(.23);
+                },
+                4700
+            );
+
+        }
+
+
+        /* 第五題 */
+
+        if(current===4){
+
+            setTimeout(
+                ()=>{
+                    whisper(
+                        "好的。"
+                    );
+                },
+                600
+            );
+
+            setTimeout(
+                ()=>{
+                    whisper(
+                        "那就繼續吧。"
+                    );
+                },
+                2400
+            );
+
+        }
+
+
+        current++;
+
 
         setTimeout(
             ()=>{
-                whisper(
-                    "……你還在看嗎？"
-                );
-            },
-            800
-        );
-
-    }
-
-
-    /*
-       第 11 題
-    */
-
-    if(current===10){
-
-        setTimeout(
-            ()=>{
-                noiseFlash();
-            },
-            700
-        );
-
-    }
-
-
-    /*
-       第 12 題
-       只在這裡出現一次
-    */
-
-    if(
-        current===11 &&
-        !threeQuestionUsed
-    ){
-
-        threeQuestionUsed=true;
-
-        setTimeout(
-            ()=>{
-                showThreeSecondQuestion();
-            },
-            650
-        );
-
-    }
-
-
-    /*
-       第 13 題
-    */
-
-    if(current===12){
-
-        document.body.classList.add(
-            "red"
-        );
-
-        setTimeout(
-            ()=>{
-                knock(.18);
-            },
-            850
-        );
-
-    }
-
-
-    /*
-       第 14 題
-    */
-
-    if(current===13){
-
-        setTimeout(
-            ()=>{
-                whisper(
-                    "你剛才選的是這個。"
-                );
+                showQuestion();
             },
             750
         );
 
     }
 
+}
+
+
+/* =====================================================
+   正常結果
+===================================================== */
+
+function showNormalResult(){
+
+    document.body.className="";
+
+    document.getElementById("app").innerHTML=`
+
+    <div class="card">
+
+        <h1>
+        測驗完成
+        </h1>
+
+        <div class="subtitle">
+        ANALYSIS COMPLETE
+        </div>
+
+        <div class="description">
+
+            <p>
+            你的回答已經完成分析。
+            </p>
+
+            <p>
+            根據你的回答，
+            你傾向於重視信任、陪伴以及彼此的空間。
+            </p>
+
+            <p style="
+                margin-top:25px;
+                font-size:22px;
+                text-align:center;
+                color:#67534d;
+            ">
+                穩定陪伴型
+            </p>
+
+            <p style="
+                font-size:12px;
+                color:#aaa;
+                text-align:center;
+            ">
+                你的正式結果已經產生。
+            </p>
+
+        </div>
+
+        <button
+            class="start-btn"
+            onclick="showSupplementNotice()"
+        >
+            完成
+        </button>
+
+    </div>
+
+    `;
+}
+
+
+/* =====================================================
+   補充通知
+===================================================== */
+
+function showSupplementNotice(){
+
+    document.getElementById("app").innerHTML=`
+
+    <div class="card">
+
+        <h1>
+        測驗完成
+        </h1>
+
+        <div class="description"
+             style="text-align:center;">
+
+            <p>
+            你的結果已經分析完成。
+            </p>
+
+            <p>
+            感謝你的參與。
+            </p>
+
+            <p style="
+                margin-top:30px;
+                color:#777;
+            ">
+            ……
+            </p>
+
+        </div>
+
+    </div>
+
+    `;
+
 
     /*
-       第 15 題
+       給玩家一個真正結束的錯覺。
     */
-
-    if(current===14){
-
-        setTimeout(
-            ()=>{
-                knock(.25);
-            },
-            850
-        );
-
-    }
-
-
-    current++;
-
-
-    let delay=600;
-
-
-    if(current>=9){
-
-        delay=700;
-
-    }
-
-
-    if(current>=12){
-
-        delay=780;
-
-    }
-
 
     setTimeout(
         ()=>{
-            showQuestion();
+            beginSupplement();
         },
-        delay
+        2500
     );
 }
 
 
 /* =====================================================
-   三秒恐怖問題
+   開始補充
+===================================================== */
+
+function beginSupplement(){
+
+    phase="supplement";
+
+    current=0;
+
+
+    document.body.classList.add("red");
+
+
+    document.getElementById("app").innerHTML=`
+
+    <div class="card">
+
+        <h1>
+        補充確認
+        </h1>
+
+        <div class="description">
+
+            <p>
+            還有 5 項資料需要補充確認。
+            </p>
+
+            <p>
+            這些問題不會影響你的原始結果。
+            </p>
+
+            <p style="
+                color:#9a756e;
+                margin-top:25px;
+            ">
+            請繼續回答。
+            </p>
+
+        </div>
+
+        <button
+            class="start-btn"
+            onclick="showQuestion()"
+        >
+            繼續
+        </button>
+
+    </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   敲門確認
+===================================================== */
+
+function knockConfirmation(){
+
+    document.body.classList.add("red");
+
+    document.getElementById("app").innerHTML=`
+
+    <div class="card">
+
+        <h1>
+        補充確認
+        </h1>
+
+        <div class="question"
+             style="text-align:center;">
+
+            剛才的聲音，你有聽見嗎？
+
+        </div>
+
+        <div class="options">
+
+            <button
+                class="option"
+                onclick="finishKnockCheck()"
+            >
+                A. 沒有
+            </button>
+
+            <button
+                class="option"
+                onclick="finishKnockCheck()"
+            >
+                B. 好像有
+            </button>
+
+            <button
+                class="option"
+                onclick="finishKnockCheck()"
+            >
+                C. 有
+            </button>
+
+            <button
+                class="option"
+                onclick="finishKnockCheck()"
+            >
+                D. 我不確定
+            </button>
+
+        </div>
+
+    </div>
+
+    `;
+}
+
+
+function finishKnockCheck(){
+
+    document.getElementById(
+        "app"
+    ).innerHTML=`
+
+    <div class="card">
+
+        <h1>
+        補充確認
+        </h1>
+
+        <div class="description"
+             style="text-align:center;">
+
+            <p>
+            ……
+            </p>
+
+        </div>
+
+    </div>
+
+    `;
+
+
+    setTimeout(
+        ()=>{
+            whisper(
+                "那應該不是你的錯覺。"
+            );
+        },
+        900
+    );
+
+
+    setTimeout(
+        ()=>{
+            knock(.28);
+        },
+        1900
+    );
+
+
+    setTimeout(
+        ()=>{
+            knock(.28);
+        },
+        2800
+    );
+
+
+    setTimeout(
+        ()=>{
+            knock(.28);
+        },
+        3700
+    );
+
+
+    setTimeout(
+        ()=>{
+            showThreeSecondQuestion();
+        },
+        4700
+    );
+}
+
+
+/* =====================================================
+   3 秒問題
 ===================================================== */
 
 function showThreeSecondQuestion(){
@@ -1748,16 +2019,7 @@ function showThreeSecondQuestion(){
             "threeSecondQuestion"
         );
 
-
     popup.classList.add("show");
-
-
-    /*
-       只有三秒。
-
-       不播放大聲音，
-       只留一個很低的聲音。
-    */
 
     lowHum();
 
@@ -1773,16 +2035,18 @@ function showThreeSecondQuestion(){
 
 function threeAnswer(){
 
-    /*
-       玩家按下任何選項都會立即消失。
-
-       不告訴玩家答案對不對。
-    */
-
     hideThreeQuestion();
 
     whisper(
-        "……你選得很快。"
+        "你選得很快。"
+    );
+
+
+    setTimeout(
+        ()=>{
+            finalEnding();
+        },
+        1300
     );
 }
 
@@ -1794,123 +2058,56 @@ function hideThreeQuestion(){
             "threeSecondQuestion"
         );
 
-    popup.classList.remove(
-        "show"
+    popup.classList.remove("show");
+}
+
+
+/* =====================================================
+   最後結尾
+===================================================== */
+
+function finalEnding(){
+
+    document.body.className="red";
+
+
+    document.getElementById("app").innerHTML=`
+
+    <div class="card">
+
+        <h1>
+        補充資料完成
+        </h1>
+
+        <div class="description"
+             style="text-align:center;">
+
+            <p>
+            所有問題均已完成。
+            </p>
+
+            <p>
+            感謝你的參與。
+            </p>
+
+        </div>
+
+    </div>
+
+    `;
+
+
+    setTimeout(
+        ()=>{
+            oldEnding();
+        },
+        2500
     );
 }
 
 
 /* =====================================================
-   測驗完成
-===================================================== */
-
-function showResult(){
-
-    document.body.className="";
-
-    document.getElementById("app").innerHTML=`
-
-    <div class="card">
-
-        <h1>
-        測驗完成
-        </h1>
-
-        <div class="description">
-
-            <p>
-            你的回答已經完成分析。
-            </p>
-
-            <p>
-            正在整理你的親密關係傾向……
-            </p>
-
-            <p style="
-                font-size:12px;
-                color:#aaa;
-                margin-top:28px;
-            ">
-                分析完成。
-            </p>
-
-        </div>
-
-        <button
-            class="start-btn"
-            onclick="resultPage()"
-        >
-            查看完整結果
-        </button>
-
-    </div>
-
-    `;
-}
-
-
-/* =====================================================
-   結果
-===================================================== */
-
-function resultPage(){
-
-    document.body.className="";
-
-    document.getElementById("app").innerHTML=`
-
-    <div class="card">
-
-        <h1>
-        穩定陪伴型
-        </h1>
-
-        <div class="subtitle">
-        YOUR RELATIONSHIP STYLE
-        </div>
-
-        <div class="description">
-
-            <p>
-            你通常願意相信自己在乎的人。
-            </p>
-
-            <p>
-            你不會因為短暫的沉默，
-            就立刻否定一段關係。
-            </p>
-
-            <p>
-            你重視陪伴，
-            也願意尊重對方的空間。
-            </p>
-
-            <p style="
-                margin-top:28px;
-                font-size:13px;
-                color:#958984;
-            ">
-            不過，你似乎比自己想像中，
-            更容易注意到一些細節。
-            </p>
-
-        </div>
-
-        <button
-            class="start-btn"
-            onclick="oldEnding()"
-        >
-            結束測驗
-        </button>
-
-    </div>
-
-    `;
-}
-
-
-/* =====================================================
-   第一階段結尾
+   上一版結尾
 ===================================================== */
 
 function oldEnding(){
@@ -1954,28 +2151,20 @@ function oldEnding(){
     `;
 
 
-    /*
-       故意等很久。
-    */
-
     setTimeout(
         ()=>{
-            oldEndingGlitch();
+            endingGlitch();
         },
-        4000
+        4200
     );
 }
 
 
 /* =====================================================
-   結尾異常
+   最後異常
 ===================================================== */
 
-function oldEndingGlitch(){
-
-    /*
-       很輕的異常。
-    */
+function endingGlitch(){
 
     whisper("……");
 
@@ -1988,45 +2177,33 @@ function oldEndingGlitch(){
     );
 
 
-    /*
-       不馬上雪花。
-    */
-
     setTimeout(
         ()=>{
-            knock(.23);
+            knock(.22);
         },
         2200
     );
 
 
-    /*
-       第二次敲門
-    */
-
     setTimeout(
         ()=>{
-            knock(.28);
+            knock(.27);
         },
         3900
     );
 
 
-    /*
-       最後才雪花
-    */
-
     setTimeout(
         ()=>{
             finalStatic();
         },
-        5600
+        5500
     );
 }
 
 
 /* =====================================================
-   最後雪花
+   最終雪花
 ===================================================== */
 
 function finalStatic(){
@@ -2038,7 +2215,7 @@ function finalStatic(){
         ()=>{
             shake();
         },
-        300
+        350
     );
 
 
@@ -2046,7 +2223,7 @@ function finalStatic(){
         ()=>{
             noiseFlash();
         },
-        900
+        1000
     );
 
 
@@ -2054,7 +2231,7 @@ function finalStatic(){
         ()=>{
             returnToRetest();
         },
-        2000
+        2100
     );
 }
 
@@ -2118,22 +2295,22 @@ function returnToRetest(){
 
 
 /* =====================================================
-   真正 404
+   404
 ===================================================== */
 
 function go404(){
 
     /*
-       原網站：
+       你的首頁：
 
        /20260707/
 
-       新網址：
+       這裡故意導向：
 
        /20260707/retest/
 
-       看起來像同一個網站，
-       但這個頁面並不存在。
+       GitHub Pages 找不到，
+       就會顯示 404。
     */
 
     window.location.href=
@@ -2143,4 +2320,5 @@ function go404(){
 </script>
 
 </body>
+
 </html>
