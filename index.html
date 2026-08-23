@@ -1,119 +1,225 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
 <title>親密關係傾向測驗</title>
 
+
 <style>
+
+/* =====================================================
+   基本
+===================================================== */
+
 *{
     box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
     margin:0;
     min-height:100%;
 }
 
 body{
+
     min-height:100vh;
-    font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
-    background:#f1eeeb;
-    color:#393535;
+
+    font-family:
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        sans-serif;
+
+    background:#f2efed;
+
+    color:#403b39;
+
     transition:
         background 2.5s ease,
         color 2.5s ease;
+
     overflow-x:hidden;
 }
 
+
 #app{
+
     min-height:100vh;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     padding:25px;
+
+    transition:
+        transform .2s;
 }
+
+
+/* =====================================================
+   卡片
+===================================================== */
 
 .card{
+
     width:680px;
+
     max-width:94vw;
+
     padding:42px;
-    background:rgba(255,255,255,.96);
-    border:1px solid #ddd7d3;
-    box-shadow:0 15px 45px rgba(50,35,30,.08);
+
+    background:
+        rgba(255,255,255,.97);
+
+    border:
+        1px solid #ddd7d3;
+
+    box-shadow:
+        0 15px 45px
+        rgba(50,35,30,.08);
+
     transition:
-        background 1.5s,
-        border 1.5s,
-        box-shadow 1.5s;
+        background 2s,
+        border 2s,
+        box-shadow 2s;
 }
 
+
 h1{
+
     margin:0 0 8px;
+
     text-align:center;
+
     font-size:27px;
+
     font-weight:400;
+
     letter-spacing:3px;
 }
 
+
 .subtitle{
+
     text-align:center;
+
     color:#aaa19d;
+
     font-size:12px;
+
     letter-spacing:1px;
+
     margin-bottom:34px;
 }
 
+
 .description{
+
     color:#696360;
+
     font-size:15px;
+
     line-height:2;
 }
 
+
 .start-btn{
+
     display:block;
+
     margin:34px auto 0;
+
     padding:12px 42px;
+
     background:#fff;
+
     color:#514a47;
-    border:1px solid #aaa29d;
+
+    border:
+        1px solid #aaa29d;
+
     cursor:pointer;
+
     font-family:inherit;
+
     transition:.25s;
 }
 
+
 .start-btn:hover{
+
     background:#eee8e4;
+
     border-color:#866b63;
 }
 
+
+/* =====================================================
+   題目
+===================================================== */
+
 .question-number{
+
     color:#aaa19d;
+
     font-size:12px;
+
     margin-bottom:23px;
+
     letter-spacing:1px;
 }
 
+
 .question{
+
     font-size:20px;
+
     line-height:1.8;
+
     margin-bottom:25px;
 }
 
+
 .options{
+
     display:flex;
+
     flex-direction:column;
+
     gap:8px;
 }
 
+
 .option{
+
     width:100%;
+
     padding:14px 16px;
+
     text-align:left;
+
     background:#fff;
+
     color:#403b39;
-    border:1px solid #d8d2cf;
+
+    border:
+        1px solid #d8d2cf;
+
     cursor:pointer;
+
     font-family:inherit;
+
     transition:
         background .2s,
         border .2s,
@@ -121,203 +227,501 @@ h1{
         transform .15s;
 }
 
+
 .option:hover{
+
     background:#f5efec;
+
     border-color:#a98b82;
 }
 
+
 .option:active{
+
     transform:scale(.995);
 }
 
+
 .option.selected{
+
     background:#eee6e2;
+
     border-color:#97736a;
 }
 
+
 .option:disabled{
+
     cursor:default;
 }
 
+
 .option.fade{
+
     opacity:0;
+
     pointer-events:none;
 }
 
+
 .feedback{
+
     min-height:25px;
+
     margin-top:18px;
+
     color:#8d8581;
+
     font-size:13px;
+
     line-height:1.7;
 }
 
+
 .progress{
+
     height:2px;
+
     margin-top:28px;
+
     background:#e6dfdc;
 }
 
+
 .progress-bar{
+
     height:100%;
+
     background:#99786f;
+
     transition:width .45s;
 }
 
 
-/* ===== 後段 ===== */
+/* =====================================================
+   中段
+===================================================== */
 
 body.late{
-    background:#d8ceca;
+
+    background:#ddd2ce;
 }
 
+
 body.late .card{
+
     border-color:#bea69e;
 }
 
 
-/* ===== 深色 ===== */
+/* =====================================================
+   紅色氣氛
+===================================================== */
 
-body.dark{
+body.red{
+
     background:
+
         radial-gradient(
-            circle at 50% 35%,
-            #51322f,
-            #261716 65%,
-            #100909
+            circle at 50% 40%,
+            #4c2927,
+            #291716 65%,
+            #120909
         );
 
-    color:#ddd0cc;
+    color:#ded0cc;
 }
 
-body.dark .card{
-    background:rgba(29,17,16,.95);
-    border-color:#68423c;
-    box-shadow:0 25px 90px rgba(0,0,0,.55);
+
+body.red .card{
+
+    background:
+        rgba(30,16,15,.96);
+
+    border-color:#67423d;
+
+    box-shadow:
+        0 25px 90px
+        rgba(0,0,0,.55);
 }
 
-body.dark h1,
-body.dark .question{
+
+body.red h1,
+body.red .question{
+
     color:#dcc9c4;
 }
 
-body.dark .question-number{
-    color:#96736d;
+
+body.red .question-number{
+
+    color:#99736d;
 }
 
-body.dark .option{
-    background:#271716;
+
+body.red .option{
+
+    background:#281716;
+
     color:#d3c1bd;
+
     border-color:#67423d;
 }
 
-body.dark .option:hover{
-    background:#3a211f;
+
+body.red .option:hover{
+
+    background:#38201e;
 }
 
-body.dark .feedback{
-    color:#a68a84;
+
+body.red .feedback{
+
+    color:#aa8982;
 }
 
 
-/* ===== 雪花 ===== */
+/* =====================================================
+   雪花屏
+===================================================== */
 
 #noise{
+
     position:fixed;
+
     inset:0;
+
     z-index:9999;
+
     pointer-events:none;
+
     opacity:0;
+
     background:
+
         repeating-linear-gradient(
             0deg,
-            rgba(255,255,255,.22) 0px,
-            rgba(255,255,255,.22) 1px,
-            rgba(0,0,0,.22) 1px,
-            rgba(0,0,0,.22) 3px
+            rgba(255,255,255,.18) 0px,
+            rgba(255,255,255,.18) 1px,
+            rgba(0,0,0,.18) 1px,
+            rgba(0,0,0,.18) 3px
         );
+
     mix-blend-mode:screen;
 }
 
+
 #noise.active{
-    animation:staticBurst 1s steps(9);
+
+    animation:
+        staticBurst 1.1s steps(8);
 }
+
 
 @keyframes staticBurst{
-    0%{opacity:0}
-    8%{opacity:.7}
-    16%{opacity:.15}
-    25%{opacity:.85}
-    34%{opacity:.12}
-    43%{opacity:.65}
-    52%{opacity:.1}
-    63%{opacity:.8}
-    73%{opacity:.18}
-    84%{opacity:.6}
-    100%{opacity:0}
+
+    0%{
+        opacity:0;
+    }
+
+    12%{
+        opacity:.45;
+    }
+
+    25%{
+        opacity:.12;
+    }
+
+    38%{
+        opacity:.55;
+    }
+
+    52%{
+        opacity:.08;
+    }
+
+    67%{
+        opacity:.4;
+    }
+
+    82%{
+        opacity:.13;
+    }
+
+    100%{
+        opacity:0;
+    }
 }
 
 
-/* ===== 輕微畫面晃動 ===== */
+/* =====================================================
+   畫面晃動
+===================================================== */
 
 body.shake #app{
-    animation:screenShake .55s;
+
+    animation:
+        screenShake .65s;
 }
+
 
 @keyframes screenShake{
-    0%{transform:translate(0,0)}
-    15%{transform:translate(-3px,1px)}
-    30%{transform:translate(3px,-1px)}
-    45%{transform:translate(-2px,2px)}
-    60%{transform:translate(2px,-2px)}
-    75%{transform:translate(-1px,1px)}
-    100%{transform:translate(0,0)}
+
+    0%{
+        transform:translate(0,0);
+    }
+
+    15%{
+        transform:translate(-2px,1px);
+    }
+
+    30%{
+        transform:translate(2px,-1px);
+    }
+
+    45%{
+        transform:translate(-2px,1px);
+    }
+
+    60%{
+        transform:translate(1px,-1px);
+    }
+
+    75%{
+        transform:translate(-1px,1px);
+    }
+
+    100%{
+        transform:translate(0,0);
+    }
 }
 
 
-/* ===== 小文字 ===== */
+/* =====================================================
+   微小文字
+===================================================== */
 
 #whisper{
+
     position:fixed;
+
     left:50%;
-    bottom:9%;
-    transform:translateX(-50%);
+
+    bottom:10%;
+
+    transform:
+        translateX(-50%);
+
     z-index:100;
-    color:#74423c;
+
+    color:#79433c;
+
     font-size:12px;
+
     letter-spacing:3px;
+
     opacity:0;
+
     pointer-events:none;
 }
 
+
 #whisper.show{
-    animation:whisperAppear 4s forwards;
+
+    animation:
+        whisperAppear 4s forwards;
 }
+
 
 @keyframes whisperAppear{
-    0%{opacity:0}
-    20%{opacity:.65}
-    42%{opacity:.15}
-    62%{opacity:.5}
-    100%{opacity:0}
+
+    0%{
+        opacity:0;
+    }
+
+    20%{
+        opacity:.65;
+    }
+
+    42%{
+        opacity:.12;
+    }
+
+    62%{
+        opacity:.5;
+    }
+
+    100%{
+        opacity:0;
+    }
 }
 
 
-/* ===== 正常恢復 ===== */
+/* =====================================================
+   三秒恐怖問題
+===================================================== */
+
+#threeSecondQuestion{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:5000;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+        rgba(8,5,5,.92);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:opacity .4s;
+}
+
+
+#threeSecondQuestion.show{
+
+    opacity:1;
+
+    pointer-events:auto;
+}
+
+
+.three-box{
+
+    width:650px;
+
+    max-width:90vw;
+
+    text-align:center;
+
+    color:#e0cfca;
+}
+
+
+.three-small{
+
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    color:#92736e;
+
+    margin-bottom:28px;
+}
+
+
+.three-title{
+
+    font-size:22px;
+
+    line-height:2;
+
+    margin-bottom:28px;
+}
+
+
+.three-option{
+
+    display:block;
+
+    width:100%;
+
+    max-width:420px;
+
+    margin:8px auto;
+
+    padding:12px;
+
+    color:#cdbab5;
+
+    background:
+        rgba(50,25,23,.65);
+
+    border:
+        1px solid #67413c;
+
+    font-family:inherit;
+
+    cursor:pointer;
+}
+
+
+.three-timer{
+
+    width:100%;
+
+    max-width:420px;
+
+    height:2px;
+
+    margin:25px auto 0;
+
+    background:#3c2826;
+
+}
+
+
+.three-timer-bar{
+
+    width:100%;
+
+    height:100%;
+
+    background:#95635c;
+
+    animation:
+        threeTimer 3s linear forwards;
+}
+
+
+@keyframes threeTimer{
+
+    from{
+        width:100%;
+    }
+
+    to{
+        width:0%;
+    }
+}
+
+
+/* =====================================================
+   正常恢復
+===================================================== */
 
 body.normal-again{
-    background:#f1eeeb;
-    color:#393535;
+
+    background:#f2efed;
+
+    color:#403b39;
 }
+
 
 body.normal-again .card{
-    background:rgba(255,255,255,.97);
+
+    background:
+        rgba(255,255,255,.97);
+
     border-color:#ddd7d3;
-    box-shadow:0 15px 45px rgba(50,35,30,.07);
+
+    box-shadow:
+        0 15px 45px
+        rgba(50,35,30,.07);
 }
 
 
-/* ===== 手機 ===== */
+/* =====================================================
+   手機
+===================================================== */
 
 @media(max-width:600px){
 
@@ -337,19 +741,76 @@ body.normal-again .card{
         font-size:23px;
     }
 }
+
 </style>
+
 </head>
 
 
 <body>
 
+
 <div id="noise"></div>
+
 <div id="whisper"></div>
+
+<div id="threeSecondQuestion">
+
+    <div class="three-box">
+
+        <div class="three-small">
+            請立即回答
+        </div>
+
+        <div class="three-title">
+            如果你現在回頭，<br>
+            你覺得房間裡會多出什麼？
+        </div>
+
+        <button
+            class="three-option"
+            onclick="threeAnswer()"
+        >
+            一個人
+        </button>
+
+        <button
+            class="three-option"
+            onclick="threeAnswer()"
+        >
+            一個影子
+        </button>
+
+        <button
+            class="three-option"
+            onclick="threeAnswer()"
+        >
+            什麼都沒有
+        </button>
+
+        <button
+            class="three-option"
+            onclick="threeAnswer()"
+        >
+            我不想回頭看
+        </button>
+
+        <div class="three-timer">
+
+            <div class="three-timer-bar"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
 
 <div id="app"></div>
 
 
 <script>
+
 
 /* =====================================================
    題目
@@ -604,9 +1065,13 @@ f:[
    狀態
 ===================================================== */
 
-let current = 0;
-let answers = [];
-let audioCtx = null;
+let current=0;
+
+let answers=[];
+
+let audioCtx=null;
+
+let threeQuestionUsed=false;
 
 
 /* =====================================================
@@ -618,20 +1083,27 @@ function initAudio(){
     if(!audioCtx){
 
         audioCtx =
-        new(
-            window.AudioContext ||
-            window.webkitAudioContext
-        )();
+            new(
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
 
     }
 
-    if(audioCtx.state === "suspended"){
+    if(audioCtx.state==="suspended"){
+
         audioCtx.resume();
+
     }
 }
 
 
-function tone(freq,duration,volume,type="sine"){
+function tone(
+    freq,
+    duration,
+    volume,
+    type="sine"
+){
 
     if(!audioCtx)return;
 
@@ -641,8 +1113,9 @@ function tone(freq,duration,volume,type="sine"){
     const gain =
         audioCtx.createGain();
 
-    osc.type = type;
-    osc.frequency.value = freq;
+    osc.type=type;
+
+    osc.frequency.value=freq;
 
     gain.gain.setValueAtTime(
         .001,
@@ -660,6 +1133,7 @@ function tone(freq,duration,volume,type="sine"){
     );
 
     osc.connect(gain);
+
     gain.connect(audioCtx.destination);
 
     osc.start();
@@ -672,43 +1146,14 @@ function tone(freq,duration,volume,type="sine"){
 }
 
 
-function lowHum(){
+/* =====================================================
+   很少使用的雜訊
+===================================================== */
 
-    if(!audioCtx)return;
-
-    const osc =
-        audioCtx.createOscillator();
-
-    const gain =
-        audioCtx.createGain();
-
-    osc.type="sine";
-    osc.frequency.value=48;
-
-    gain.gain.value=.0001;
-
-    gain.gain.exponentialRampToValueAtTime(
-        .035,
-        audioCtx.currentTime+1
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-        .0001,
-        audioCtx.currentTime+3
-    );
-
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-
-    osc.start();
-
-    osc.stop(
-        audioCtx.currentTime+3.1
-    );
-}
-
-
-function staticSound(strength=.035,duration=.3){
+function staticSound(
+    strength=.03,
+    duration=.2
+){
 
     if(!audioCtx)return;
 
@@ -722,9 +1167,13 @@ function staticSound(strength=.035,duration=.3){
     const data =
         buffer.getChannelData(0);
 
-    for(let i=0;i<data.length;i++){
+    for(
+        let i=0;
+        i<data.length;
+        i++
+    ){
 
-        data[i] =
+        data[i]=
             (Math.random()*2-1)
             *strength;
 
@@ -741,17 +1190,68 @@ function staticSound(strength=.035,duration=.3){
     source.buffer=buffer;
 
     source.connect(gain);
-    gain.connect(audioCtx.destination);
+
+    gain.connect(
+        audioCtx.destination
+    );
 
     source.start();
 }
 
 
-function knock(volume=.3){
+/* =====================================================
+   低頻
+===================================================== */
+
+function lowHum(){
+
+    if(!audioCtx)return;
+
+    const osc =
+        audioCtx.createOscillator();
+
+    const gain =
+        audioCtx.createGain();
+
+    osc.type="sine";
+
+    osc.frequency.value=47;
+
+    gain.gain.value=.0001;
+
+    gain.gain.exponentialRampToValueAtTime(
+        .025,
+        audioCtx.currentTime+.7
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .0001,
+        audioCtx.currentTime+2.2
+    );
+
+    osc.connect(gain);
+
+    gain.connect(
+        audioCtx.destination
+    );
+
+    osc.start();
+
+    osc.stop(
+        audioCtx.currentTime+2.3
+    );
+}
+
+
+/* =====================================================
+   敲門
+===================================================== */
+
+function knock(volume=.25){
 
     tone(
-        84,
-        .23,
+        80,
+        .2,
         volume,
         "sine"
     );
@@ -759,39 +1259,43 @@ function knock(volume=.3){
     setTimeout(
         ()=>{
             tone(
-                67,
-                .15,
-                volume*.35,
+                65,
+                .13,
+                volume*.3,
                 "sine"
             );
         },
-        80
+        75
     );
 }
 
 
 /* =====================================================
-   Visual effects
+   視覺效果
 ===================================================== */
 
 function noiseFlash(){
 
-    const n =
+    const noise =
         document.getElementById("noise");
 
-    n.classList.remove("active");
+    noise.classList.remove("active");
 
-    void n.offsetWidth;
+    void noise.offsetWidth;
 
-    n.classList.add("active");
+    noise.classList.add("active");
 
-    staticSound(.085,.8);
+    /*
+       只有真正重要的時候才播放一點雜訊。
+    */
+
+    staticSound(.055,.5);
 
     setTimeout(
         ()=>{
-            n.classList.remove("active");
+            noise.classList.remove("active");
         },
-        1000
+        1100
     );
 }
 
@@ -808,7 +1312,7 @@ function shake(){
         ()=>{
             document.body.classList.remove("shake");
         },
-        600
+        700
     );
 }
 
@@ -829,65 +1333,67 @@ function whisper(text){
 
 
 /* =====================================================
-   Home
+   首頁
 ===================================================== */
 
 function home(){
 
-document.getElementById("app").innerHTML=`
+    document.getElementById("app").innerHTML=`
 
-<div class="card">
+    <div class="card">
 
-<h1>親密關係傾向測驗</h1>
+        <h1>
+        親密關係傾向測驗
+        </h1>
 
-<div class="subtitle">
-RELATIONSHIP & ATTACHMENT TEST
-</div>
+        <div class="subtitle">
+        RELATIONSHIP & ATTACHMENT TEST
+        </div>
 
-<div class="description">
+        <div class="description">
 
-<p>
-歡迎參與本次匿名情感傾向測驗。
-</p>
+            <p>
+            歡迎參與本次匿名情感傾向測驗。
+            </p>
 
-<p>
-以下問題沒有標準答案，
-請依照第一直覺回答。
-</p>
+            <p>
+            以下問題沒有標準答案，
+            請依照第一直覺回答。
+            </p>
 
-<p>
-測驗約需 3～5 分鐘。
-</p>
+            <p>
+            測驗約需 3～5 分鐘。
+            </p>
 
-<p style="
-font-size:12px;
-color:#aaa;
-margin-top:24px;
-">
-本測驗僅供娛樂使用，
-不代表正式心理評估。
-</p>
+            <p style="
+                font-size:12px;
+                color:#aaa;
+                margin-top:24px;
+            ">
+            本測驗僅供娛樂使用，
+            不代表正式心理評估。
+            </p>
 
-</div>
+        </div>
 
-<button
-class="start-btn"
-onclick="startTest()"
->
-開始測驗
-</button>
+        <button
+            class="start-btn"
+            onclick="startTest()"
+        >
+            開始測驗
+        </button>
 
-</div>
+    </div>
 
-`;
-
+    `;
 }
+
 
 home();
 
 
 /* =====================================================
-   Start
+   開始
 ===================================================== */
 
 function startTest(){
@@ -895,11 +1401,12 @@ function startTest(){
     initAudio();
 
     current=0;
+
     answers=[];
 
-    document.body.className="";
+    threeQuestionUsed=false;
 
-    lowHum();
+    document.body.className="";
 
     showQuestion();
 }
@@ -918,73 +1425,87 @@ function showQuestion(){
         return;
     }
 
-    const q=questions[current];
 
-    const percent =
+    const q=
+        questions[current];
+
+
+    const percent=
         current/
         questions.length*
         100;
 
+
     document.getElementById("app").innerHTML=`
 
-<div class="card">
+    <div class="card">
 
-<div class="question-number">
+        <div class="question-number">
 
-第 ${current+1} 題 /
-共 ${questions.length} 題
+            第 ${current+1} 題 /
+            共 ${questions.length} 題
 
-</div>
+        </div>
 
-<div class="question">
-${q.q}
-</div>
+        <div class="question">
 
-<div
-class="options"
-id="options"
-></div>
+            ${q.q}
 
-<div
-class="feedback"
-id="feedback"
-></div>
+        </div>
 
-<div class="progress">
+        <div
+            class="options"
+            id="options"
+        ></div>
 
-<div
-class="progress-bar"
-style="width:${percent}%"
-></div>
+        <div
+            class="feedback"
+            id="feedback"
+        ></div>
 
-</div>
+        <div class="progress">
 
-</div>
+            <div
+                class="progress-bar"
+                style="width:${percent}%"
+            ></div>
 
-`;
+        </div>
 
-    const box =
-        document.getElementById("options");
+    </div>
+
+    `;
+
+
+    const box=
+        document.getElementById(
+            "options"
+        );
+
 
     q.a.forEach(
         (text,index)=>{
 
-            const btn =
-                document.createElement("button");
+            const button=
+                document.createElement(
+                    "button"
+                );
 
-            btn.className="option";
+            button.className="option";
 
-            btn.textContent =
-                String.fromCharCode(65+index)
-                + ". "
-                + text;
+            button.textContent=
+                String.fromCharCode(
+                    65+index
+                )
+                +". "
+                +text;
 
-            btn.onclick =
+            button.onclick=
                 ()=>{
                     choose(index);
                 };
 
-            box.appendChild(btn);
+            box.appendChild(button);
 
         }
     );
@@ -992,24 +1513,35 @@ style="width:${percent}%"
 
 
 /* =====================================================
-   Answer
+   回答
 ===================================================== */
 
 function choose(index){
 
     answers.push(index);
 
-    const q=questions[current];
 
-    const buttons =
-        document.querySelectorAll(".option");
+    const q=
+        questions[current];
+
+
+    const buttons=
+        document.querySelectorAll(
+            ".option"
+        );
+
 
     buttons.forEach(
-        b=>b.disabled=true
+        b=>{
+            b.disabled=true;
+        }
     );
 
+
     buttons[index]
-        .classList.add("selected");
+        .classList
+        .add("selected");
+
 
     buttons.forEach(
         (b,i)=>{
@@ -1018,9 +1550,11 @@ function choose(index){
 
                 setTimeout(
                     ()=>{
-                        b.classList.add("fade");
+                        b.classList.add(
+                            "fade"
+                        );
                     },
-                    150
+                    120
                 );
 
             }
@@ -1028,79 +1562,63 @@ function choose(index){
         }
     );
 
+
     document.getElementById(
         "feedback"
-    ).textContent=q.f[index];
+    ).textContent=
+        q.f[index];
 
 
-    /* ===== 第 6 題：極輕微 ===== */
+    /*
+       第 8 題後開始慢慢改變氣氛
+    */
 
-    if(current===5){
+    if(current===7){
 
-        if(index===1){
-
-            setTimeout(
-                ()=>{
-                    staticSound(.025,.12);
-                },
-                450
-            );
-
-        }
+        document.body.classList.add(
+            "late"
+        );
 
     }
 
 
-    /* ===== 第 8 題 ===== */
+    /*
+       第 9 題
+    */
 
-    if(current===7){
+    if(current===8){
 
         setTimeout(
             ()=>{
                 lowHum();
             },
-            350
+            550
         );
 
     }
 
 
-    /* ===== 第 9 題 ===== */
-
-    if(current===8){
-
-        document.body.classList.add("late");
-
-        setTimeout(
-            ()=>{
-                staticSound(.04,.18);
-            },
-            600
-        );
-
-    }
-
-
-    /* ===== 第 10 題 ===== */
+    /*
+       第 10 題
+    */
 
     if(current===9){
 
         setTimeout(
             ()=>{
-                tone(
-                    61,
-                    .5,
-                    .05,
-                    "sine"
+                whisper(
+                    "……你還在看嗎？"
                 );
             },
-            650
+            800
         );
 
     }
 
 
-    /* ===== 第 11 題 ===== */
+    /*
+       第 11 題
+    */
 
     if(current===10){
 
@@ -1108,81 +1626,81 @@ function choose(index){
             ()=>{
                 noiseFlash();
             },
+            700
+        );
+
+    }
+
+
+    /*
+       第 12 題
+       只在這裡出現一次
+    */
+
+    if(
+        current===11 &&
+        !threeQuestionUsed
+    ){
+
+        threeQuestionUsed=true;
+
+        setTimeout(
+            ()=>{
+                showThreeSecondQuestion();
+            },
             650
         );
 
     }
 
 
-    /* ===== 第 12 題 ===== */
-
-    if(current===11){
-
-        setTimeout(
-            ()=>{
-                whisper("你剛才看過手機。");
-            },
-            900
-        );
-
-    }
-
-
-    /* ===== 第 13 題 ===== */
+    /*
+       第 13 題
+    */
 
     if(current===12){
 
-        document.body.classList.add("dark");
-
-        setTimeout(
-            ()=>{
-                lowHum();
-            },
-            300
+        document.body.classList.add(
+            "red"
         );
 
         setTimeout(
             ()=>{
-                strangeMetal();
+                knock(.18);
             },
-            1000
+            850
         );
 
     }
 
 
-    /* ===== 第 14 題 ===== */
+    /*
+       第 14 題
+    */
 
     if(current===13){
 
         setTimeout(
             ()=>{
-                staticSound(.045,.2);
+                whisper(
+                    "你剛才選的是這個。"
+                );
             },
-            600
+            750
         );
-
-        if(index===2){
-
-            setTimeout(
-                ()=>{
-                    whisper("你還記得嗎？");
-                },
-                1100
-            );
-
-        }
 
     }
 
 
-    /* ===== 第 15 題 ===== */
+    /*
+       第 15 題
+    */
 
     if(current===14){
 
         setTimeout(
             ()=>{
-                knock(.24);
+                knock(.25);
             },
             850
         );
@@ -1192,15 +1710,23 @@ function choose(index){
 
     current++;
 
-    let delay=520;
+
+    let delay=600;
+
 
     if(current>=9){
-        delay=650;
+
+        delay=700;
+
     }
 
+
     if(current>=12){
-        delay=720;
+
+        delay=780;
+
     }
+
 
     setTimeout(
         ()=>{
@@ -1212,7 +1738,70 @@ function choose(index){
 
 
 /* =====================================================
-   Result
+   三秒恐怖問題
+===================================================== */
+
+function showThreeSecondQuestion(){
+
+    const popup=
+        document.getElementById(
+            "threeSecondQuestion"
+        );
+
+
+    popup.classList.add("show");
+
+
+    /*
+       只有三秒。
+
+       不播放大聲音，
+       只留一個很低的聲音。
+    */
+
+    lowHum();
+
+
+    setTimeout(
+        ()=>{
+            hideThreeQuestion();
+        },
+        3000
+    );
+}
+
+
+function threeAnswer(){
+
+    /*
+       玩家按下任何選項都會立即消失。
+
+       不告訴玩家答案對不對。
+    */
+
+    hideThreeQuestion();
+
+    whisper(
+        "……你選得很快。"
+    );
+}
+
+
+function hideThreeQuestion(){
+
+    const popup=
+        document.getElementById(
+            "threeSecondQuestion"
+        );
+
+    popup.classList.remove(
+        "show"
+    );
+}
+
+
+/* =====================================================
+   測驗完成
 ===================================================== */
 
 function showResult(){
@@ -1221,51 +1810,47 @@ function showResult(){
 
     document.getElementById("app").innerHTML=`
 
-<div class="card">
+    <div class="card">
 
-<h1>測驗完成</h1>
+        <h1>
+        測驗完成
+        </h1>
 
-<div class="description">
+        <div class="description">
 
-<p>
-你的回答已經完成分析。
-</p>
+            <p>
+            你的回答已經完成分析。
+            </p>
 
-<p>
-你在親密關係中相當重視信任、
-穩定與回應。
-</p>
+            <p>
+            正在整理你的親密關係傾向……
+            </p>
 
-<p>
-你也會注意到對方行為上的細微變化。
-</p>
+            <p style="
+                font-size:12px;
+                color:#aaa;
+                margin-top:28px;
+            ">
+                分析完成。
+            </p>
 
-<p style="
-font-size:12px;
-color:#aaa;
-margin-top:25px;
-">
-分析完成。
-</p>
+        </div>
 
-</div>
+        <button
+            class="start-btn"
+            onclick="resultPage()"
+        >
+            查看完整結果
+        </button>
 
-<button
-class="start-btn"
-onclick="resultPage()"
->
-查看完整結果
-</button>
+    </div>
 
-</div>
-
-`;
-
+    `;
 }
 
 
 /* =====================================================
-   Result page
+   結果
 ===================================================== */
 
 function resultPage(){
@@ -1274,187 +1859,285 @@ function resultPage(){
 
     document.getElementById("app").innerHTML=`
 
-<div class="card">
+    <div class="card">
 
-<h1>穩定陪伴型</h1>
+        <h1>
+        穩定陪伴型
+        </h1>
 
-<div class="description">
+        <div class="subtitle">
+        YOUR RELATIONSHIP STYLE
+        </div>
 
-<p>
-你通常願意相信自己在乎的人。
-</p>
+        <div class="description">
 
-<p>
-你不會因為短暫的沉默，
-就立刻否定一段關係。
-</p>
+            <p>
+            你通常願意相信自己在乎的人。
+            </p>
 
-<p>
-你重視陪伴，
-也願意尊重對方的空間。
-</p>
+            <p>
+            你不會因為短暫的沉默，
+            就立刻否定一段關係。
+            </p>
 
-</div>
+            <p>
+            你重視陪伴，
+            也願意尊重對方的空間。
+            </p>
 
-<button
-class="start-btn"
-onclick="fakeEnding()"
->
-結束測驗
-</button>
+            <p style="
+                margin-top:28px;
+                font-size:13px;
+                color:#958984;
+            ">
+            不過，你似乎比自己想像中，
+            更容易注意到一些細節。
+            </p>
 
-</div>
+        </div>
 
-`;
+        <button
+            class="start-btn"
+            onclick="oldEnding()"
+        >
+            結束測驗
+        </button>
 
+    </div>
+
+    `;
 }
 
 
 /* =====================================================
-   Ending
+   第一階段結尾
 ===================================================== */
 
-function fakeEnding(){
+function oldEnding(){
 
-    document.body.className="normal-again";
+    document.body.className=
+        "normal-again";
 
-    document.getElementById("app").innerHTML=`
 
-<div class="card">
+    document.getElementById(
+        "app"
+    ).innerHTML=`
 
-<h1>測驗結束</h1>
+    <div class="card">
 
-<div class="description">
+        <h1>
+        測驗結束
+        </h1>
 
-<p>
-感謝你的參與。
-</p>
+        <div class="description">
 
-<p>
-你現在可以關閉這個頁面。
-</p>
+            <p>
+            感謝你的參與。
+            </p>
 
-</div>
+            <p>
+            本次測驗已經完成。
+            </p>
 
-</div>
+            <p style="
+                font-size:12px;
+                color:#aaa;
+                margin-top:25px;
+            ">
+            你可以關閉這個頁面了。
+            </p>
 
-`;
+        </div>
+
+    </div>
+
+    `;
 
 
     /*
-       不要立刻嚇玩家。
-       讓他真的以為結束。
+       故意等很久。
     */
 
     setTimeout(
         ()=>{
-            firstEndingEvent();
+            oldEndingGlitch();
         },
-        4200
+        4000
     );
 }
 
 
 /* =====================================================
-   第一段結尾異常
+   結尾異常
 ===================================================== */
 
-function firstEndingEvent(){
+function oldEndingGlitch(){
 
-    staticSound(.035,.18);
+    /*
+       很輕的異常。
+    */
 
-    setTimeout(
-        ()=>{
-            noiseFlash();
-        },
-        850
-    );
+    whisper("……");
+
 
     setTimeout(
         ()=>{
-            shake();
+            lowHum();
         },
-        1450
+        900
     );
+
+
+    /*
+       不馬上雪花。
+    */
+
+    setTimeout(
+        ()=>{
+            knock(.23);
+        },
+        2200
+    );
+
+
+    /*
+       第二次敲門
+    */
 
     setTimeout(
         ()=>{
             knock(.28);
         },
-        2200
+        3900
     );
+
+
+    /*
+       最後才雪花
+    */
+
+    setTimeout(
+        ()=>{
+            finalStatic();
+        },
+        5600
+    );
+}
+
+
+/* =====================================================
+   最後雪花
+===================================================== */
+
+function finalStatic(){
+
+    noiseFlash();
+
+
+    setTimeout(
+        ()=>{
+            shake();
+        },
+        300
+    );
+
+
+    setTimeout(
+        ()=>{
+            noiseFlash();
+        },
+        900
+    );
+
 
     setTimeout(
         ()=>{
             returnToRetest();
         },
-        3500
+        2000
     );
 }
 
 
 /* =====================================================
-   再次測試
+   恢復正常
 ===================================================== */
 
 function returnToRetest(){
 
-    document.body.className="normal-again";
+    document.body.className=
+        "normal-again";
 
-    document.getElementById("app").innerHTML=`
 
-<div class="card">
+    document.getElementById(
+        "app"
+    ).innerHTML=`
 
-<h1>
-親密關係傾向測驗
-</h1>
+    <div class="card">
 
-<div class="subtitle">
-RELATIONSHIP & ATTACHMENT TEST
-</div>
+        <h1>
+        親密關係傾向測驗
+        </h1>
 
-<div class="description">
+        <div class="subtitle">
+        RELATIONSHIP & ATTACHMENT TEST
+        </div>
 
-<p>
-歡迎再次進行測驗。
-</p>
+        <div class="description">
 
-<p>
-如果剛才的結果不符合你的想法，
-可以重新測試一次。
-</p>
+            <p>
+            歡迎再次進行測驗。
+            </p>
 
-</div>
+            <p>
+            如果剛才的結果不符合你的想法，
+            可以重新測試一次。
+            </p>
 
-<button
-class="start-btn"
-onclick="go404()"
->
-再次測試
-</button>
+            <p style="
+                font-size:12px;
+                color:#aaa;
+                margin-top:26px;
+            ">
+            系統已準備完成。
+            </p>
 
-</div>
+        </div>
 
-`;
+        <button
+            class="start-btn"
+            onclick="go404()"
+        >
+            再次測試
+        </button>
 
+    </div>
+
+    `;
 }
 
 
 /* =====================================================
-   404
+   真正 404
 ===================================================== */
 
 function go404(){
 
     /*
-       使用和原網址非常接近的不存在路徑。
-       不要自己做假的 404。
-       直接交給 GitHub Pages。
+       原網站：
+
+       /20260707/
+
+       新網址：
+
+       /20260707/retest/
+
+       看起來像同一個網站，
+       但這個頁面並不存在。
     */
 
-    window.location.href =
+    window.location.href=
         "/20260707/retest/";
-
 }
 
 </script>
