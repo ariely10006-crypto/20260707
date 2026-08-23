@@ -3,430 +3,936 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dora Soccer Drone</title>
+<title>親密關係傾向調查</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Microsoft JhengHei",sans-serif;
+* {
+    box-sizing: border-box;
 }
 
-body{
-    background:#f4f8fb;
-    color:#333;
+html, body {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+    background: #eeeae4;
+    font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    color: #252525;
+    transition: background 3s, color 3s;
 }
 
-header{
-    background:linear-gradient(135deg,#0099ff,#66ccff);
-    color:white;
-    text-align:center;
-    padding:80px 20px;
+body.dark {
+    background: #090909;
+    color: #cfcfcf;
 }
 
-.drone{
-    font-size:80px;
-    animation:fly 3s infinite ease-in-out;
+body.red {
+    background: #100607;
+    color: #9d7777;
 }
 
-@keyframes fly{
-    0%{transform:translateY(0);}
-    50%{transform:translateY(-20px);}
-    100%{transform:translateY(0);}
+#app {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-header h1{
-    font-size:3rem;
-    margin:20px 0;
+.card {
+    width: min(650px, 94vw);
+    background: rgba(255,255,255,.96);
+    border: 1px solid #ddd8d0;
+    padding: 32px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.06);
+    transition: .8s;
 }
 
-header p{
-    font-size:1.2rem;
-    margin-bottom:20px;
+.dark .card {
+    background: #111;
+    border-color: #292929;
+    box-shadow: 0 0 50px rgba(0,0,0,.7);
 }
 
-.btn{
-    display:inline-block;
-    background:#ff4d4d;
-    color:white;
-    padding:15px 30px;
-    border-radius:30px;
-    text-decoration:none;
-    transition:0.3s;
+.red .card {
+    background: #150909;
+    border-color: #3b1616;
 }
 
-.btn:hover{
-    transform:scale(1.1);
+.title {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 28px;
 }
 
-section{
-    padding:70px 10%;
+.subtitle {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 16px;
 }
 
-h2{
-    text-align:center;
-    margin-bottom:40px;
-    color:#0099ff;
+.question {
+    font-size: 20px;
+    line-height: 1.7;
+    margin-bottom: 22px;
 }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
+.option {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin: 8px 0;
+    border: 1px solid #d8d3cc;
+    background: white;
+    color: #333;
+    text-align: left;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .25s;
 }
 
-.card{
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    text-align:center;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-    transition:.3s;
+.option:hover {
+    background: #f3f0ec;
+    transform: translateX(3px);
 }
 
-.card:hover{
-    transform:translateY(-10px);
+.dark .option {
+    background: #151515;
+    border-color: #333;
+    color: #bbb;
 }
 
-.card span{
-    font-size:50px;
+.red .option {
+    background: #180a0a;
+    border-color: #481919;
+    color: #a97878;
 }
 
-.ai{
-    background:#eaf8ff;
-    border-radius:20px;
-    text-align:center;
+.feedback {
+    min-height: 30px;
+    margin-top: 20px;
+    color: #777;
+    line-height: 1.7;
 }
 
-.ai ul{
-    list-style:none;
-    margin-top:20px;
+.dark .feedback {
+    color: #888;
 }
 
-.ai li{
-    padding:10px;
-    font-size:18px;
+.warning {
+    color: #8a5555;
 }
 
-.battery{
-    background:white;
-    border-radius:20px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+.center {
+    text-align: center;
 }
 
-.battery-info{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:20px;
-    margin-top:30px;
+.start {
+    text-align: center;
+    padding: 14px 30px;
+    border: 1px solid #aaa;
+    background: white;
+    cursor: pointer;
 }
 
-.info-box{
-    background:#eaf8ff;
-    padding:20px;
-    border-radius:15px;
-    text-align:center;
+.glitch {
+    animation: glitch .15s infinite;
 }
 
-.knowledge{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+@keyframes glitch {
+    0% { transform: translate(0); }
+    25% { transform: translate(1px,-1px); }
+    50% { transform: translate(-1px,1px); }
+    75% { transform: translate(1px,1px); }
+    100% { transform: translate(0); }
 }
 
-.tip{
-    background:white;
-    border-radius:15px;
-    padding:20px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+.fade {
+    animation: fade .8s;
 }
 
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-th,td{
-    border:1px solid #ddd;
-    padding:15px;
-    text-align:center;
+#message {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    color: #777;
+    opacity: 0;
+    pointer-events: none;
+    transition: 1s;
+    z-index: 20;
 }
 
-th{
-    background:#0099ff;
-    color:white;
+#message.show {
+    opacity: 1;
 }
 
-footer{
-    background:#0099ff;
-    color:white;
-    text-align:center;
-    padding:25px;
-    margin-top:50px;
+#cursor {
+    position: fixed;
+    pointer-events: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(100,100,100,.15);
+    z-index: 999;
 }
 
-.counter{
-    font-size:40px;
-    color:#0099ff;
-    font-weight:bold;
+.hidden {
+    display: none;
 }
 
-.stats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:20px;
-    text-align:center;
+.small {
+    font-size: 13px;
+    color: #888;
 }
 
-.stat-box{
-    background:white;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+.result {
+    line-height: 2;
+}
+
+.result h2 {
+    font-weight: normal;
+}
+
+.ending {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+}
+
+@media(max-width:600px) {
+    .card {
+        padding: 22px;
+    }
+
+    .question {
+        font-size: 18px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="drone">🚁⚽</div>
+<div id="cursor"></div>
+<div id="message"></div>
 
-<h1>Dora Soccer Drone</h1>
-
-<p>來自未來的足球助手</p>
-
-<p>智慧追蹤｜AI分析｜穩定飛行</p>
-
-<a href="#features" class="btn">開始探索</a>
-</header>
-
-<section>
-<h2>🚁 無人機介紹</h2>
-
-<p style="text-align:center;font-size:18px;">
-Dora Soccer Drone 是一款結合 AI 與足球訓練的智慧無人機，
-能夠自動追蹤足球、分析球員動作並進行高畫質錄影，
-協助球員提升訓練效率。
-</p>
-</section>
-
-<section id="features">
-<h2>⚽ 功能介紹</h2>
-
-<div class="cards">
-
-<div class="card">
-<span>🚁</span>
-<h3>自動追蹤</h3>
-<p>AI辨識足球位置並自動跟隨。</p>
+<div id="app">
+    <div class="card fade" id="card">
+        <div id="content"></div>
+    </div>
 </div>
-
-<div class="card">
-<span>⚽</span>
-<h3>射門分析</h3>
-<p>分析速度、角度與命中率。</p>
-</div>
-
-<div class="card">
-<span>📷</span>
-<h3>4K錄影</h3>
-<p>即時記錄比賽與訓練過程。</p>
-</div>
-
-<div class="card">
-<span>🎮</span>
-<h3>手機控制</h3>
-<p>透過 App 即可遠端操控。</p>
-</div>
-
-</div>
-</section>
-
-<section class="ai">
-<h2>🤖 AI智慧系統</h2>
-
-<ul>
-<li>✅ 即時辨識足球</li>
-<li>✅ 自動追蹤球員</li>
-<li>✅ 分析射門成功率</li>
-<li>✅ 智慧飛行路徑規劃</li>
-<li>✅ 即時資料回傳</li>
-</ul>
-</section>
-
-<section>
-<h2>📊 系統數據</h2>
-
-<div class="stats">
-
-<div class="stat-box">
-<div class="counter" data-target="35">0</div>
-<p>分鐘續航</p>
-</div>
-
-<div class="stat-box">
-<div class="counter" data-target="500">0</div>
-<p>公尺控制距離</p>
-</div>
-
-<div class="stat-box">
-<div class="counter" data-target="40">0</div>
-<p>km/h速度</p>
-</div>
-
-</div>
-</section>
-
-<section class="battery">
-
-<h2>🔋 電池介紹</h2>
-
-<p>
-本無人機採用高效能鋰電池，
-兼具高能量密度、重量輕及長續航等特性。
-</p>
-
-<div class="battery-info">
-
-<div class="info-box">
-<h3>🔋 容量</h3>
-<p>5000mAh</p>
-</div>
-
-<div class="info-box">
-<h3>⚡ 電壓</h3>
-<p>11.1V</p>
-</div>
-
-<div class="info-box">
-<h3>⏰ 飛行時間</h3>
-<p>35分鐘</p>
-</div>
-
-<div class="info-box">
-<h3>🔌 充電時間</h3>
-<p>60分鐘</p>
-</div>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>💡 電池小知識</h2>
-
-<div class="knowledge">
-
-<div class="tip">
-<h3>高能量密度</h3>
-<p>在相同重量下提供更多電力。</p>
-</div>
-
-<div class="tip">
-<h3>重量較輕</h3>
-<p>提升飛行效率與機動性。</p>
-</div>
-
-<div class="tip">
-<h3>可重複充電</h3>
-<p>循環壽命可達數百次以上。</p>
-</div>
-
-<div class="tip">
-<h3>安全使用</h3>
-<p>避免高溫、碰撞與過度充放電。</p>
-</div>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>📋 規格表</h2>
-
-<table>
-
-<tr>
-<th>項目</th>
-<th>規格</th>
-</tr>
-
-<tr>
-<td>重量</td>
-<td>680g</td>
-</tr>
-
-<tr>
-<td>飛行時間</td>
-<td>35分鐘</td>
-</tr>
-
-<tr>
-<td>最大速度</td>
-<td>40km/h</td>
-</tr>
-
-<tr>
-<td>控制距離</td>
-<td>500公尺</td>
-</tr>
-
-<tr>
-<td>電池</td>
-<td>11.1V 鋰電池</td>
-</tr>
-
-<tr>
-<td>相機</td>
-<td>4K UHD</td>
-</tr>
-
-</table>
-
-</section>
-
-<footer>
-
-<h3>Dora Soccer Drone</h3>
-
-<p>未來足球訓練系統</p>
-
-<p>© 2026 All Rights Reserved</p>
-
-</footer>
 
 <script>
 
-const counters=document.querySelectorAll('.counter');
+const questions = [
 
-counters.forEach(counter=>{
+{
+    q:"當您情緒低落時，您最希望戀人怎麼做？",
+    a:[
+        ["A","陪我聊天",0],
+        ["B","給我一些空間",0],
+        ["C","安慰我",1],
+        ["D","一直陪著我",2]
+    ]
+},
 
-const update=()=>{
+{
+    q:"您認為戀人之間應該分享彼此的位置嗎？",
+    a:[
+        ["A","完全不需要",0],
+        ["B","偶爾可以",1],
+        ["C","應該隨時分享",2],
+        ["D","當然，這樣比較安心",3]
+    ]
+},
 
-const target=+counter.getAttribute('data-target');
-const current=+counter.innerText;
+{
+    q:"如果戀人一整天沒有回覆訊息，您會？",
+    a:[
+        ["A","等他回覆",0],
+        ["B","傳訊息關心",1],
+        ["C","打電話確認",2],
+        ["D","去找他",3]
+    ]
+},
 
-const increment=target/100;
+{
+    q:"如果戀人突然和一個您不認識的人變得很親近，您會？",
+    a:[
+        ["A","覺得很正常",0],
+        ["B","有一點在意",1],
+        ["C","想知道那個人是誰",2],
+        ["D","想知道他們到底聊了什麼",3]
+    ]
+},
 
-if(current<target){
-counter.innerText=Math.ceil(current+increment);
-setTimeout(update,20);
+{
+    q:"您覺得戀人之間應該有自己的秘密嗎？",
+    a:[
+        ["A","當然應該有",0],
+        ["B","小事情可以",1],
+        ["C","太多秘密會讓我不安",2],
+        ["D","如果是戀人，就不應該有我不知道的事",3]
+    ]
+},
+
+{
+    q:"如果戀人突然說：「我今天想一個人待著。」",
+    a:[
+        ["A","尊重他的決定",0],
+        ["B","有點失落，但不打擾",1],
+        ["C","問他是不是發生了什麼",2],
+        ["D","我會想知道他到底去哪裡",3]
+    ]
+},
+
+{
+    q:"如果他已讀了你的訊息，卻沒有回覆，你第一個想法是？",
+    a:[
+        ["A","可能在忙",0],
+        ["B","是不是沒看到",1],
+        ["C","是不是不想理我",2],
+        ["D","他正在跟誰聊天？",3]
+    ]
+},
+
+{
+    q:"如果你發現戀人刪掉了一則訊息，你會？",
+    a:[
+        ["A","不在意",0],
+        ["B","問他刪了什麼",1],
+        ["C","會一直想這件事",2],
+        ["D","一定要知道內容",3]
+    ]
+},
+
+{
+    q:"戀人說：「你不用知道我的所有事情。」",
+    a:[
+        ["A","我能理解",0],
+        ["B","會有點難過",1],
+        ["C","會問為什麼",2],
+        ["D","我會覺得他在隱瞞我",3]
+    ]
+},
+
+{
+    q:"如果戀人一整天沒有出現在任何社群平台上，你會？",
+    a:[
+        ["A","完全不在意",0],
+        ["B","覺得有點奇怪",1],
+        ["C","開始想知道他在哪",2],
+        ["D","想辦法確認他現在的位置",3]
+    ]
+},
+
+{
+    q:"如果你知道戀人現在就在你家附近，你會？",
+    a:[
+        ["A","覺得很驚喜",0],
+        ["B","很開心",1],
+        ["C","想問他為什麼沒告訴我",2],
+        ["D","他怎麼知道我在家？",3]
+    ]
+},
+
+{
+    q:"如果戀人說：「即使沒有你，我也可以過得很好。」",
+    a:[
+        ["A","替他高興",0],
+        ["B","聽了有一點失落",1],
+        ["C","開始懷疑自己對他的重要性",2],
+        ["D","我不喜歡這句話",3]
+    ]
+},
+
+{
+    q:"如果戀人把手機螢幕轉向另一邊，你會？",
+    a:[
+        ["A","尊重他的隱私",0],
+        ["B","稍微注意一下",1],
+        ["C","開始好奇",2],
+        ["D","想知道他在藏什麼",3]
+    ]
+},
+
+{
+    q:"如果戀人突然說：「我們需要一點距離。」",
+    a:[
+        ["A","尊重他的決定",0],
+        ["B","問問原因",1],
+        ["C","害怕他離開",2],
+        ["D","我不接受",3]
+    ]
+},
+
+{
+    q:"你最害怕戀人做什麼？",
+    a:[
+        ["A","不再喜歡我",1],
+        ["B","慢慢疏遠我",2],
+        ["C","找到比我更重要的人",3],
+        ["D","有一天突然不需要我了",4]
+    ]
+},
+
+{
+    q:"如果戀人說：「你真的不用一直看著我。」",
+    a:[
+        ["A","抱歉，我會注意",0],
+        ["B","我只是有點擔心",1],
+        ["C","可是我很在乎你",2],
+        ["D","我沒有一直看著你啊",3]
+    ]
+},
+
+{
+    q:"現在，如果有人問你：「你確定他現在在哪裡嗎？」",
+    a:[
+        ["A","不知道",0],
+        ["B","應該知道吧",1],
+        ["C","我可以去確認",2],
+        ["D","……為什麼你問這個？",3]
+    ]
+},
+
+{
+    q:"最後一題。你覺得這份測驗真的只是在分析你的戀愛傾向嗎？",
+    a:[
+        ["A","當然是",0],
+        ["B","應該是吧",1],
+        ["C","我不知道",2],
+        ["D","不是。",4]
+    ]
 }
-else{
-counter.innerText=target;
+
+];
+
+let current = 0;
+let score = 0;
+let stage = 0;
+let name = "";
+
+const content = document.getElementById("content");
+const card = document.getElementById("card");
+const message = document.getElementById("message");
+
+function typeText(element,text,speed=28,callback){
+
+    element.innerHTML="";
+    let i=0;
+
+    const timer=setInterval(()=>{
+
+        element.innerHTML += text.charAt(i);
+        i++;
+
+        if(i>=text.length){
+            clearInterval(timer);
+            if(callback) callback();
+        }
+
+    },speed);
 }
 
-};
+function showMessage(text,duration=1600){
 
-update();
+    message.innerText=text;
+    message.classList.add("show");
+
+    setTimeout(()=>{
+        message.classList.remove("show");
+    },duration);
+}
+
+function start(){
+
+    name = prompt("請輸入一個稱呼。") || "匿名";
+
+    current=0;
+    score=0;
+
+    content.innerHTML=`
+        <div class="title">《親密關係傾向調查》</div>
+
+        <p>
+        歡迎參與本次匿名情感依附測驗。
+        </p>
+
+        <p>
+        本測驗將分析您在親密關係中的安全感來源、
+        依戀模式與情緒回應傾向。
+        </p>
+
+        <p class="small">
+        ※ 不同回答可能導致不同題目。
+        </p>
+
+        <br>
+
+        <div class="center">
+            <button class="start" onclick="nextQuestion()">
+                〖開始測驗〗
+            </button>
+        </div>
+    `;
+}
+
+function nextQuestion(){
+
+    if(current>=questions.length){
+        ending();
+        return;
+    }
+
+    const q=questions[current];
+
+    content.innerHTML=`
+        <div class="subtitle">
+            第 ${current+1} 題 / 共 ${questions.length} 題
+        </div>
+
+        <div class="question" id="question"></div>
+
+        <div id="options"></div>
+
+        <div class="feedback" id="feedback"></div>
+    `;
+
+    typeText(
+        document.getElementById("question"),
+        q.q,
+        current>8 ? 35 : 20
+    );
+
+    const options=document.getElementById("options");
+
+    q.a.forEach((item,index)=>{
+
+        const button=document.createElement("button");
+
+        button.className="option";
+        button.innerText=item[0]+". "+item[1];
+
+        button.onclick=()=>choose(item);
+
+        options.appendChild(button);
+    });
+
+    // 從第 6 題開始慢慢改變環境
+    if(current===5){
+        document.body.classList.add("dark");
+        showMessage("測驗將繼續。",1500);
+    }
+
+    if(current===9){
+        document.body.classList.add("red");
+        showMessage("資料同步中……",1800);
+    }
+
+    if(current===13){
+        showMessage("請不要離開畫面。",2000);
+    }
+
+    if(current===16){
+        showMessage("……",2500);
+    }
+}
+
+function choose(item){
+
+    const buttons=document.querySelectorAll(".option");
+
+    buttons.forEach(b=>b.disabled=true);
+
+    score += item[2];
+
+    const feedback=document.getElementById("feedback");
+
+    let text="";
+
+    if(current<4){
+
+        const texts=[
+            "這是一個常見的回答。",
+            "我們已經記錄下來了。",
+            "這個答案很有意思。",
+            "了解。"
+        ];
+
+        text=texts[Math.min(item[2],3)];
+
+    }else if(current<8){
+
+        const texts=[
+            "有些距離，反而能讓關係維持舒適。",
+            "適度的了解，通常會讓人比較安心。",
+            "你似乎很在意對方的反應。",
+            "你真的很在意他。"
+        ];
+
+        text=texts[Math.min(item[2],3)];
+
+    }else if(current<11){
+
+        const texts=[
+            "已記錄。",
+            "我們注意到了。",
+            "這個答案和前面的回答有些相似。",
+            "你似乎比自己想像中更在意。"
+        ];
+
+        text=texts[Math.min(item[2],3)];
+
+    }else if(current<14){
+
+        const texts=[
+            "沒關係。",
+            "不用緊張。",
+            "我們只是想了解你。",
+            "你不需要解釋。"
+        ];
+
+        text=texts[Math.min(item[2],3)];
+
+    }else{
+
+        const texts=[
+            "嗯。",
+            "知道了。",
+            "原來如此。",
+            "我知道你會這樣選。"
+        ];
+
+        text=texts[Math.min(item[2],3)];
+
+    }
+
+    typeText(feedback,text,35);
+
+    // 特殊恐怖事件
+    if(current===4 && item[2]>=3){
+
+        setTimeout(()=>{
+            showMessage("已記錄。",1500);
+        },600);
+
+    }
+
+    if(current===7){
+
+        setTimeout(()=>{
+
+            if(item[2]>=2){
+                showMessage("「你想知道的事情，比你說出來的多。」",2500);
+            }
+
+        },800);
+
+    }
+
+    if(current===10){
+
+        setTimeout(()=>{
+
+            showMessage(
+                "系統：偵測到高度依附傾向。",
+                2200
+            );
+
+        },800);
+
+    }
+
+    if(current===12){
+
+        setTimeout(()=>{
+
+            document.title="你還在嗎？";
+
+            showMessage(
+                "請不要關閉這個頁面。",
+                2500
+            );
+
+        },700);
+
+    }
+
+    if(current===15){
+
+        setTimeout(()=>{
+
+            showMessage(
+                "……你剛才看了一下旁邊。",
+                2800
+            );
+
+        },900);
+
+    }
+
+    if(current===16){
+
+        setTimeout(()=>{
+
+            showMessage(
+                "我知道。",
+                2500
+            );
+
+        },1000);
+
+    }
+
+    if(current===17){
+
+        setTimeout(ending,3200);
+
+    }else{
+
+        setTimeout(()=>{
+
+            current++;
+            nextQuestion();
+
+        },1800);
+
+    }
+}
+
+function ending(){
+
+    document.body.classList.add("red");
+
+    let result;
+
+    if(score<=15){
+
+        result={
+            title:"安全型依附",
+            text:"你仍然能夠在親密與界線之間找到平衡。"
+        };
+
+    }else if(score<=28){
+
+        result={
+            title:"不安型依附",
+            text:"你很重視關係，也很害怕自己被忽略。"
+        };
+
+    }else if(score<=40){
+
+        result={
+            title:"高度依附",
+            text:"你很容易把「在乎」與「確認」混在一起。"
+        };
+
+    }else{
+
+        result={
+            title:"無法判定",
+            text:"你的回答出現了太多矛盾。"
+        };
+
+    }
+
+    content.innerHTML=`
+        <div class="title">測驗完成</div>
+
+        <div class="result">
+
+            <p>受測者：${escapeHTML(name)}</p>
+
+            <p>
+                依附傾向：
+                <strong>${result.title}</strong>
+            </p>
+
+            <p>
+                ${result.text}
+            </p>
+
+            <div class="ending" id="ending"></div>
+
+        </div>
+    `;
+
+    const endingBox=document.getElementById("ending");
+
+    setTimeout(()=>{
+
+        typeText(
+            endingBox,
+            "不過，有一件事情我們需要更正。",
+            55,
+            ()=>{
+
+                setTimeout(()=>{
+
+                    typeText(
+                        endingBox,
+                        "這份測驗從來不是在分析你。",
+                        65,
+                        ()=>{
+
+                            setTimeout(()=>{
+
+                                typeText(
+                                    endingBox,
+                                    "它一直在觀察你的回答。",
+                                    65,
+                                    ()=>{
+
+                                        setTimeout(()=>{
+
+                                            typeText(
+                                                endingBox,
+                                                "而且我們現在知道，你會怎麼選。",
+                                                65,
+                                                ()=>{
+
+                                                    setTimeout(()=>{
+
+                                                        typeText(
+                                                            endingBox,
+                                                            "所以最後一個問題不是測驗題。",
+                                                            65,
+                                                            ()=>{
+
+                                                                setTimeout(()=>{
+
+                                                                    typeText(
+                                                                        endingBox,
+                                                                        "你確定你現在是一個人在看這個畫面嗎？",
+                                                                        70
+                                                                    );
+
+                                                                },1600);
+
+                                                    });
+
+                                                });
+
+                                        },1800);
+
+                                    });
+
+                            },1800);
+
+                        });
+
+                },1800);
+
+            }
+        );
+
+    },1200);
+
+}
+
+function escapeHTML(str){
+
+    return str.replace(/[&<>"']/g,function(m){
+
+        return {
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            '"':"&quot;",
+            "'":"&#039;"
+
+        }[m];
+
+    });
+
+}
+
+
+// -------------------------
+// 游標微拖影
+// -------------------------
+
+let cursor=document.getElementById("cursor");
+
+let trail=[];
+
+document.addEventListener("mousemove",e=>{
+
+    cursor.style.left=e.clientX+"px";
+    cursor.style.top=e.clientY+"px";
+
+    if(document.body.classList.contains("dark") ||
+       document.body.classList.contains("red")){
+
+        const dot=document.createElement("div");
+
+        dot.style.position="fixed";
+        dot.style.left=e.clientX+"px";
+        dot.style.top=e.clientY+"px";
+        dot.style.width="4px";
+        dot.style.height="4px";
+        dot.style.background="rgba(100,100,100,.15)";
+        dot.style.borderRadius="50%";
+        dot.style.pointerEvents="none";
+        dot.style.zIndex="998";
+
+        document.body.appendChild(dot);
+
+        setTimeout(()=>{
+            dot.remove();
+        },180);
+
+    }
 
 });
+
+
+// -------------------------
+// 閒置時的微妙文字
+// -------------------------
+
+let idleTimer;
+
+function resetIdle(){
+
+    clearTimeout(idleTimer);
+
+    idleTimer=setTimeout(()=>{
+
+        if(current>=5 && current<17){
+
+            const messages=[
+                "你還在看嗎？",
+                "不用急。",
+                "我們有時間。",
+                "請繼續。",
+                "……",
+                "你剛剛停頓了。"
+            ];
+
+            showMessage(
+                messages[Math.floor(Math.random()*messages.length)],
+                1600
+            );
+
+        }
+
+    },12000);
+
+}
+
+document.addEventListener("mousemove",resetIdle);
+document.addEventListener("click",resetIdle);
+
+resetIdle();
+
+start();
 
 </script>
 
