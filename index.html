@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>親密關係傾向測驗</title>
+
+<title>親密關係傾向測驗｜V23</title>
 
 <style>
 *{
@@ -12,446 +13,464 @@
 
 html,body{
     margin:0;
+    padding:0;
+    width:100%;
     min-height:100%;
+    font-family:
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        sans-serif;
+    background:#090909;
+    color:#eee;
 }
 
 body{
-    min-height:100vh;
-    font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
-    background:#f1eeeb;
-    color:#45403d;
-    transition:background 3s ease,color 3s ease;
     overflow-x:hidden;
 }
+
+button{
+    font-family:inherit;
+}
+
+/* =========================
+   背景
+========================= */
+
+#background{
+    position:fixed;
+    inset:0;
+    z-index:-5;
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(90,90,90,.12),
+            transparent 45%
+        ),
+        #090909;
+    transition:1s;
+}
+
+#background.dark{
+    background:#000;
+}
+
+#background.red{
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(110,0,0,.12),
+            transparent 55%
+        ),
+        #050505;
+}
+
+/* =========================
+   主容器
+========================= */
 
 #app{
     min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:25px;
-    transition:transform .15s ease;
+    padding:24px;
 }
 
-.card{
-    width:680px;
-    max-width:94vw;
-    padding:42px;
-    background:rgba(255,255,255,.97);
-    border:1px solid #ddd7d3;
-    box-shadow:0 15px 50px rgba(45,30,25,.08);
+.screen{
+    width:min(760px,100%);
+    min-height:560px;
 
-    transition:
-        background 3s ease,
-        border-color 3s ease,
-        box-shadow 3s ease;
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:40px 28px;
+
+    animation:fadeIn .7s ease;
+}
+
+.screen.active{
+    display:flex;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   開始畫面
+========================= */
+
+.logo{
+    font-size:14px;
+    letter-spacing:5px;
+    opacity:.45;
+    margin-bottom:25px;
 }
 
 h1{
-    margin:0 0 9px;
-    text-align:center;
-    font-size:27px;
-    font-weight:400;
+    font-size:clamp(28px,6vw,48px);
+    font-weight:500;
     letter-spacing:4px;
+    margin:0 0 20px;
 }
 
 .subtitle{
-    text-align:center;
-    color:#aaa19d;
-    font-size:11px;
-    letter-spacing:2px;
-    margin-bottom:34px;
+    color:#999;
+    line-height:1.9;
+    max-width:580px;
 }
 
-.description{
-    font-size:15px;
-    line-height:2;
-    color:#696360;
+.start-warning{
+    margin-top:28px;
+    font-size:13px;
+    color:#777;
 }
 
-.start-btn{
-    display:block;
-    margin:34px auto 0;
-    padding:12px 42px;
-    background:#fff;
-    color:#514a47;
-    border:1px solid #aaa29d;
+.main-btn{
+    margin-top:35px;
+
+    border:1px solid #555;
+    background:#111;
+    color:#eee;
+
+    padding:14px 42px;
+
+    border-radius:4px;
+
     cursor:pointer;
-    font-family:inherit;
-    transition:
-        background .25s,
-        border .25s,
-        transform .15s;
+
+    transition:.25s;
 }
 
-.start-btn:hover{
-    background:#eee8e4;
-    border-color:#80665e;
+.main-btn:hover{
+    background:#222;
+    border-color:#999;
+    transform:translateY(-2px);
 }
 
-.start-btn:active{
-    transform:scale(.98);
+.version{
+    position:fixed;
+    right:15px;
+    bottom:12px;
+    font-size:11px;
+    opacity:.25;
+}
+
+/* =========================
+   測驗畫面
+========================= */
+
+#quizScreen{
+    justify-content:flex-start;
+    padding-top:35px;
+}
+
+.topbar{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
 }
 
 .question-number{
-    color:#aaa19d;
-    font-size:12px;
-    letter-spacing:1px;
-    margin-bottom:22px;
+    font-size:13px;
+    color:#888;
+}
+
+.progress-wrap{
+    flex:1;
+    height:3px;
+    background:#222;
+    margin-left:20px;
+    overflow:hidden;
+}
+
+.progress{
+    height:100%;
+    width:0%;
+    background:#aaa;
+    transition:.5s;
+}
+
+.question-box{
+    width:100%;
+    margin-top:45px;
 }
 
 .question{
-    font-size:20px;
-    line-height:1.8;
-    margin-bottom:25px;
-    white-space:pre-line;
-}
-
-.feedback{
-    min-height:38px;
-    margin-top:18px;
-    font-size:13px;
-    line-height:1.8;
-    color:#827873;
-    text-align:center;
-    opacity:0;
-    transition:opacity .5s ease;
-}
-
-.feedback.show{
-    opacity:1;
+    font-size:clamp(21px,4vw,30px);
+    line-height:1.6;
+    margin-bottom:40px;
 }
 
 .options{
+    width:100%;
     display:flex;
     flex-direction:column;
-    gap:9px;
+    gap:12px;
 }
 
 .option{
     width:100%;
-    padding:14px 16px;
-    text-align:left;
-    background:#fff;
-    color:#403b39;
-    border:1px solid #d8d2cf;
-    cursor:pointer;
-    font-family:inherit;
 
-    transition:
-        background .25s,
-        border .25s,
-        opacity .35s,
-        transform .12s;
+    background:#111;
+    border:1px solid #292929;
+
+    color:#ddd;
+
+    padding:16px 18px;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    border-radius:3px;
+
+    transition:.2s;
 }
 
 .option:hover{
-    background:#f5efec;
-    border-color:#a98b82;
-}
-
-.option:active{
-    transform:scale(.995);
+    background:#1b1b1b;
+    border-color:#666;
+    transform:translateX(3px);
 }
 
 .option.selected{
-    background:#eee5e1;
-    border-color:#927067;
+    background:#252525;
+    border-color:#aaa;
 }
 
-.option.fade{
-    opacity:0;
-    pointer-events:none;
-}
-
-.option:disabled{
-    cursor:default;
-}
-
-.progress{
-    height:2px;
+.hint{
     margin-top:28px;
-    background:#e6dfdc;
+    color:#555;
+    font-size:12px;
 }
-
-.progress-bar{
-    height:100%;
-    background:#99786f;
-    transition:width .5s ease;
-}
-
 
 /* =========================
-   恐怖模式
+   特殊題
 ========================= */
 
-body.horror{
-    background:
-        radial-gradient(
-            circle at 50% 40%,
-            #4b2927 0%,
-            #291514 50%,
-            #090505 100%
-        );
-    color:#ddd0cc;
+#specialTimer{
+    margin-top:20px;
+    font-size:13px;
+    color:#777;
+    min-height:20px;
 }
 
-body.horror .card{
-    background:rgba(27,14,14,.95);
-    border-color:#67433e;
-    box-shadow:0 25px 90px rgba(0,0,0,.65);
+#specialTimer.warning{
+    color:#aaa;
 }
 
-body.horror h1,
-body.horror .question{
-    color:#dfccc7;
+.special-question .question{
+    letter-spacing:1px;
 }
-
-body.horror .subtitle,
-body.horror .question-number{
-    color:#98716b;
-}
-
-body.horror .description{
-    color:#bca9a4;
-}
-
-body.horror .feedback{
-    color:#a9857d;
-}
-
-body.horror .option{
-    background:#241413;
-    color:#d6c4bf;
-    border-color:#62413c;
-}
-
-body.horror .option:hover{
-    background:#38201e;
-}
-
-body.horror .option.selected{
-    background:#38201e;
-    border-color:#a05e55;
-}
-
-body.horror .progress{
-    background:#3c2422;
-}
-
-body.horror .progress-bar{
-    background:#985a52;
-}
-
-body.horror .start-btn{
-    background:#241413;
-    color:#d6c4bf;
-    border-color:#68423d;
-}
-
 
 /* =========================
-   黑屏
+   黑畫面
 ========================= */
 
 #blackout{
     position:fixed;
     inset:0;
-    z-index:10000;
+    z-index:9999;
+
     background:#000;
+
     opacity:0;
     pointer-events:none;
-    transition:opacity .15s;
+
+    transition:opacity .08s linear;
 }
 
 #blackout.show{
     opacity:1;
-}
-
-
-/* =========================
-   畫面晃動
-========================= */
-
-body.shake #app{
-    animation:screenShake .55s;
-}
-
-@keyframes screenShake{
-    0%{transform:translate(0,0);}
-    20%{transform:translate(-3px,1px);}
-    40%{transform:translate(3px,-2px);}
-    60%{transform:translate(-2px,2px);}
-    80%{transform:translate(2px,-1px);}
-    100%{transform:translate(0,0);}
-}
-
-
-/* =========================
-   對話
-========================= */
-
-.dialogue{
-    text-align:center;
-    min-height:230px;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.dialogue-speaker{
-    font-size:10px;
-    letter-spacing:4px;
-    color:#88615b;
-    margin-bottom:24px;
-}
-
-.dialogue-text{
-    min-height:90px;
-    font-size:19px;
-    line-height:2;
-    color:#d8c5c0;
-    white-space:pre-line;
-}
-
-.dialogue-options{
-    margin-top:22px;
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-}
-
-
-/* =========================
-   異常文字
-========================= */
-
-#whisper{
-    position:fixed;
-    left:50%;
-    bottom:11%;
-    transform:translateX(-50%);
-    z-index:4000;
-
-    color:#884a43;
-    font-size:12px;
-    letter-spacing:3px;
-
-    opacity:0;
-    pointer-events:none;
-    white-space:nowrap;
-}
-
-#whisper.show{
-    animation:whisperAppear 4s forwards;
-}
-
-@keyframes whisperAppear{
-    0%{opacity:0;}
-    20%{opacity:.65;}
-    40%{opacity:.13;}
-    65%{opacity:.48;}
-    100%{opacity:0;}
-}
-
-
-/* =========================
-   三秒問題
-========================= */
-
-#threeSecond{
-    position:fixed;
-    inset:0;
-    z-index:6000;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    background:rgba(5,3,3,.97);
-
-    opacity:0;
-    pointer-events:none;
-
-    transition:opacity .25s;
-}
-
-#threeSecond.show{
-    opacity:1;
     pointer-events:auto;
 }
 
-.three-box{
-    width:650px;
-    max-width:90vw;
-    text-align:center;
-    color:#ddcbc6;
-}
-
-.three-small{
-    font-size:10px;
-    letter-spacing:5px;
-    color:#906d67;
-    margin-bottom:28px;
-}
-
-.three-title{
-    font-size:21px;
-    line-height:2;
-    margin-bottom:28px;
-}
-
-.three-option{
-    display:block;
-    width:100%;
-    max-width:430px;
-    margin:8px auto;
-    padding:12px;
-
-    background:rgba(49,24,22,.72);
-    color:#d1bdb8;
-    border:1px solid #68413c;
-
-    font-family:inherit;
-    cursor:pointer;
-}
-
-.three-option:hover{
-    background:#452522;
-}
-
-.three-timer{
-    width:100%;
-    max-width:430px;
-    height:2px;
-    margin:25px auto 0;
-    background:#382321;
-}
-
-.three-timer-bar{
-    width:100%;
-    height:100%;
-    background:#985b53;
-    animation:timerThree 3s linear forwards;
-}
-
-@keyframes timerThree{
-    from{width:100%;}
-    to{width:0%;}
-}
-
-
 /* =========================
-   第11題
+   中間提示
 ========================= */
 
-.single-answer{
-    width:220px;
-    margin:35px auto 0;
+#messageScreen{
+    position:fixed;
+    inset:0;
+    z-index:5000;
+
+    background:#000;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
     text-align:center;
 }
 
+#messageScreen.show{
+    display:flex;
+}
+
+#messageText{
+    font-size:18px;
+    color:#aaa;
+    letter-spacing:2px;
+}
+
+/* =========================
+   補充題
+========================= */
+
+#bonusScreen{
+    justify-content:flex-start;
+    padding-top:50px;
+}
+
+.bonus-title{
+    font-size:28px;
+    letter-spacing:4px;
+    margin-bottom:12px;
+}
+
+.bonus-description{
+    color:#777;
+    font-size:13px;
+    line-height:1.8;
+    margin-bottom:35px;
+}
+
+.bonus-question{
+    width:100%;
+}
+
+.bonus-question h2{
+    font-size:22px;
+    line-height:1.7;
+    font-weight:400;
+    margin-bottom:30px;
+}
+
+/* =========================
+   結果
+========================= */
+
+#resultScreen{
+    padding-top:30px;
+}
+
+.result-label{
+    font-size:12px;
+    letter-spacing:5px;
+    color:#666;
+    margin-bottom:20px;
+}
+
+.result-title{
+    font-size:38px;
+    letter-spacing:5px;
+    margin-bottom:18px;
+}
+
+.result-subtitle{
+    color:#999;
+    margin-bottom:35px;
+}
+
+.result-card{
+    width:100%;
+    border:1px solid #292929;
+    background:#0e0e0e;
+    padding:25px;
+    text-align:left;
+    line-height:1.9;
+}
+
+.result-card h3{
+    font-weight:400;
+    color:#aaa;
+    margin-top:0;
+}
+
+.result-card p{
+    color:#bbb;
+}
+
+.score-area{
+    width:100%;
+    margin-top:25px;
+}
+
+.score-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:12px 0;
+}
+
+.score-name{
+    width:80px;
+    color:#888;
+    font-size:13px;
+}
+
+.score-bar{
+    flex:1;
+    height:5px;
+    background:#222;
+}
+
+.score-fill{
+    height:100%;
+    width:0%;
+    background:#888;
+    transition:1s;
+}
+
+.result-note{
+    margin-top:28px;
+    color:#555;
+    font-size:12px;
+    line-height:1.8;
+}
+
+/* =========================
+   雜訊效果
+========================= */
+
+.noise{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:4000;
+
+    opacity:0;
+
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.025) 0px,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+
+    transition:.1s;
+}
+
+.noise.active{
+    opacity:.35;
+}
 
 /* =========================
    手機
@@ -460,246 +479,380 @@ body.shake #app{
 @media(max-width:600px){
 
     #app{
-        padding:14px;
+        padding:12px;
     }
 
-    .card{
-        padding:27px 21px;
+    .screen{
+        min-height:600px;
+        padding:30px 18px;
     }
 
     h1{
-        font-size:22px;
+        letter-spacing:2px;
+    }
+
+    .question-box{
+        margin-top:35px;
     }
 
     .question{
-        font-size:18px;
+        font-size:21px;
     }
 
-    .dialogue-text{
-        font-size:17px;
+    .option{
+        padding:15px;
+    }
+
+    .result-title{
+        font-size:30px;
     }
 }
 </style>
 </head>
 
-
 <body>
 
-<div id="blackout"></div>
+<div id="background"></div>
 
-<div id="whisper"></div>
+<div id="app">
 
+    <!-- =========================
+         開始
+    ========================== -->
 
-<!-- 最後三秒問題 -->
+    <section id="startScreen" class="screen active">
 
-<div id="threeSecond">
-
-    <div class="three-box">
-
-        <div class="three-small">
-            請立即回答
+        <div class="logo">
+            RELATIONSHIP TEST
         </div>
 
-        <div class="three-title">
-            如果你現在回頭，<br>
-            你覺得房間裡會多出什麼？
+        <h1>親密關係傾向測驗</h1>
+
+        <p class="subtitle">
+            有些問題，你知道答案。<br>
+            有些問題，你只是從來沒有想過。
+        </p>
+
+        <p class="start-warning">
+            建議獨自完成測驗。
+        </p>
+
+        <button class="main-btn" onclick="startTest()">
+            開始測驗
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         正式測驗
+    ========================== -->
+
+    <section id="quizScreen" class="screen">
+
+        <div class="topbar">
+
+            <div id="questionNumber" class="question-number">
+                01 / 15
+            </div>
+
+            <div class="progress-wrap">
+                <div id="progress" class="progress"></div>
+            </div>
+
         </div>
 
-        <button class="three-option" onclick="threeAnswer(0)">
-            一個人
-        </button>
+        <div class="question-box">
 
-        <button class="three-option" onclick="threeAnswer(1)">
-            一個影子
-        </button>
+            <div id="question" class="question"></div>
 
-        <button class="three-option" onclick="threeAnswer(2)">
-            什麼都沒有
-        </button>
+            <div id="options" class="options"></div>
 
-        <button class="three-option" onclick="threeAnswer(3)">
-            我不想回頭看
-        </button>
+            <div id="specialTimer"></div>
 
-        <div class="three-timer">
-            <div class="three-timer-bar"></div>
+            <div class="hint">
+                請選擇最接近你想法的答案。
+            </div>
+
         </div>
 
-    </div>
+    </section>
+
+
+    <!-- =========================
+         補充題
+    ========================== -->
+
+    <section id="bonusScreen" class="screen">
+
+        <div class="bonus-title">
+            補充題
+        </div>
+
+        <div class="bonus-description">
+            接下來的問題不會影響主要結果。<br>
+            你可以選擇回答，也可以選擇離開。
+        </div>
+
+        <div class="bonus-question">
+
+            <h2 id="bonusQuestion"></h2>
+
+            <div id="bonusOptions" class="options"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         結果
+    ========================== -->
+
+    <section id="resultScreen" class="screen">
+
+        <div class="result-label">
+            YOUR RESULT
+        </div>
+
+        <div id="resultTitle" class="result-title">
+            ——
+        </div>
+
+        <div id="resultSubtitle" class="result-subtitle">
+            ——
+        </div>
+
+        <div class="result-card">
+
+            <h3>你的關係傾向</h3>
+
+            <p id="resultDescription"></p>
+
+            <div class="score-area">
+
+                <div class="score-row">
+                    <div class="score-name">安全感</div>
+                    <div class="score-bar">
+                        <div id="safeScore" class="score-fill"></div>
+                    </div>
+                </div>
+
+                <div class="score-row">
+                    <div class="score-name">依附感</div>
+                    <div class="score-bar">
+                        <div id="attachScore" class="score-fill"></div>
+                    </div>
+                </div>
+
+                <div class="score-row">
+                    <div class="score-name">獨立性</div>
+                    <div class="score-bar">
+                        <div id="independentScore" class="score-fill"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="result-note">
+            這是一份互動式心理傾向測驗，
+            結果僅代表本次作答的傾向，不代表正式心理診斷。
+        </div>
+
+        <button class="main-btn" onclick="location.reload()">
+            再測一次
+        </button>
+
+    </section>
 
 </div>
 
+<div class="version">
+    V23
+</div>
 
-<div id="app"></div>
+<div id="blackout"></div>
+
+<div id="messageScreen">
+    <div id="messageText"></div>
+</div>
+
+<div id="noise" class="noise"></div>
 
 
 <script>
 
 /* =========================================================
-   第一階段 10 題
+   V23
+   親密關係傾向測驗
 ========================================================= */
 
-const normalQuestions=[
 
-{
-    q:"當你情緒低落時，你最希望喜歡的人怎麼做？",
-    a:[
-        "陪我聊聊天。",
-        "先給我一點空間。",
-        "直接問我發生了什麼。",
-        "陪在旁邊，不一定要說話。"
-    ],
-    feedback:[
-        "原來你需要的是陪伴啊。",
-        "原來你不喜歡被逼著說出來。",
-        "你會希望對方直接看見你的情緒。",
-        "你比較在意有人在，而不是一定要說什麼。"
-    ]
-},
+/* =========================================================
+   題目
+========================================================= */
 
-{
-    q:"你認為戀人之間需要知道彼此每天的行程嗎？",
-    a:[
-        "不用，彼此都有自己的生活。",
-        "大概知道就好。",
-        "如果對方願意，我會想知道。",
-        "重要的事情可以互相說。"
-    ],
-    feedback:[
-        "原來你還是很重視彼此的界線。",
-        "知道一點就夠了嗎？",
-        "原來你會想知道他的生活。",
-        "你希望兩個人之間保持一些連結。"
-    ]
-},
+const questions = [
 
-{
-    q:"如果對方一整天沒有主動找你，你會？",
-    a:[
-        "做自己的事情。",
-        "晚一點再傳訊息。",
-        "有點想知道他在忙什麼。",
-        "如果和平常差很多，會問問。"
-    ],
-    feedback:[
-        "你似乎不太會因為這種事情不安。",
-        "你會等一下看看。",
-        "原來你還是會注意他的動向。",
-        "你會注意到和平常不一樣的地方。"
-    ]
-},
+    {
+        text:"如果你喜歡的人很久沒有回覆訊息，你通常會？",
+        options:[
+            ["先做自己的事情，等對方有空再回",0,2],
+            ["開始想是不是自己說錯了什麼",1,0],
+            ["忍不住一直確認對方有沒有上線",2,0],
+            ["直接問對方是不是不想理我",3,0]
+        ]
+    },
 
-{
-    q:"如果對方說今天想一個人，你會？",
-    a:[
-        "尊重他的決定。",
-        "告訴他需要時可以找我。",
-        "有點失落，但還是會給空間。",
-        "等他自己願意說。"
-    ],
-    feedback:[
-        "你會把他的選擇放在前面。",
-        "你會留一扇門給他。",
-        "原來你其實會有一點在意。",
-        "你願意等他自己開口。"
-    ]
-},
+    {
+        text:"當你和重要的人發生爭執，你比較傾向？",
+        options:[
+            ["冷靜後再談",0,2],
+            ["希望馬上把事情說清楚",1,1],
+            ["害怕對方因此離開自己",2,0],
+            ["乾脆先把自己關起來",1,3]
+        ]
+    },
 
-{
-    q:"如果你傳了一則訊息，對方兩個小時都沒有回，你會？",
-    a:[
-        "沒關係，他可能在忙。",
-        "偶爾看一下手機。",
-        "有點期待通知。",
-        "如果很反常，會稍微擔心。"
-    ],
-    feedback:[
-        "你似乎很容易相信對方。",
-        "原來你還是會偷偷看一下。",
-        "你其實有在等。",
-        "你會注意到細微的變化。"
-    ]
-},
+    {
+        text:"你覺得一段關係裡最重要的是？",
+        options:[
+            ["信任",0,3],
+            ["陪伴",1,2],
+            ["安全感",2,1],
+            ["彼此需要",3,0]
+        ]
+    },
 
-{
-    q:"你覺得戀人應該知道彼此的手機密碼嗎？",
-    a:[
-        "不用。",
-        "知道也沒關係，但不需要查看。",
-        "如果彼此願意可以交換。",
-        "我比較重視信任，而不是密碼。"
-    ],
-    feedback:[
-        "原來你很重視自己的私人空間。",
-        "知道和查看，對你來說是不一樣的。",
-        "只要是彼此同意就可以嗎？",
-        "你更在意的是信任本身。"
-    ]
-},
+    {
+        text:"如果對方需要一點自己的空間，你會？",
+        options:[
+            ["尊重對方",0,3],
+            ["雖然有點失落，但可以理解",1,2],
+            ["忍不住想知道原因",2,1],
+            ["覺得是不是自己做錯了什麼",3,0]
+        ]
+    },
 
-{
-    q:"如果對方突然取消原本約好的見面，你會？",
-    a:[
-        "沒關係，下次再約。",
-        "問問是不是發生了什麼。",
-        "會有一點失望。",
-        "看取消的理由。"
-    ],
-    feedback:[
-        "你似乎不太會把事情想得太嚴重。",
-        "原來你第一個想到的是他是不是出了什麼事。",
-        "你會失望，但不一定會責怪他。",
-        "你會先看事情的原因。"
-    ]
-},
+    {
+        text:"你比較害怕哪一件事情？",
+        options:[
+            ["失去自己的生活",3,0],
+            ["被誤解",2,1],
+            ["被忽略",1,2],
+            ["被重要的人離開",0,3]
+        ]
+    },
 
-{
-    q:"如果你發現對方已讀了訊息，卻沒有回覆，你會？",
-    a:[
-        "等他有時間再回。",
-        "過一陣子再看看。",
-        "會稍微想一下是不是說錯了什麼。",
-        "如果一直沒有回，會再問一次。"
-    ],
-    feedback:[
-        "你願意讓他慢慢回。",
-        "原來你會先觀察。",
-        "你會開始回想自己剛才說了什麼。",
-        "你不太喜歡一直等著。"
-    ]
-},
+    {
+        text:"當你喜歡一個人時，你通常會？",
+        options:[
+            ["保持自己的生活節奏",0,3],
+            ["慢慢增加相處時間",1,2],
+            ["很容易把注意力放在對方身上",2,1],
+            ["幾乎把對方放在生活中心",3,0]
+        ]
+    },
 
-{
-    q:"平常很快回你的人，突然六個小時沒有回覆，你會？",
-    a:[
-        "他可能真的很忙。",
-        "等明天再看看。",
-        "會覺得有一點奇怪。",
-        "會傳一句「還好嗎？」"
-    ],
-    feedback:[
-        "你第一個想到的還是他可能在忙。",
-        "你願意再等一段時間。",
-        "你注意到了。",
-        "原來你會主動確認他是不是還好。"
-    ]
-},
+    {
+        text:"如果對方突然變得冷淡，你第一個想法通常是？",
+        options:[
+            ["可能只是最近比較忙",0,3],
+            ["是不是發生了什麼事",1,2],
+            ["是不是對我失去興趣了",2,1],
+            ["他是不是準備離開我了",3,0]
+        ]
+    },
 
-{
-    q:"你認為一段健康的關係最重要的是什麼？",
-    a:[
-        "信任。",
-        "溝通。",
-        "陪伴。",
-        "彼此尊重。"
-    ],
-    feedback:[
-        "信任啊……原來這對你很重要。",
-        "你似乎很在意兩個人能不能說清楚。",
-        "原來你最在意的是有人陪著。",
-        "你希望彼此都能保留自己的空間。"
-    ]
-}
+    {
+        text:"你會不會因為害怕破壞關係，而不敢說出真正的想法？",
+        options:[
+            ["幾乎不會",0,3],
+            ["偶爾會",1,2],
+            ["常常會",2,1],
+            ["很常如此",3,0]
+        ]
+    },
+
+    {
+        text:"如果你發現自己越來越依賴一個人，你會？",
+        options:[
+            ["提醒自己保留自己的生活",0,3],
+            ["接受這份依賴",1,2],
+            ["開始擔心自己會不會太依賴",2,1],
+            ["很難控制自己",3,0]
+        ]
+    },
+
+    {
+        text:"你比較希望喜歡的人如何對待你？",
+        options:[
+            ["尊重我的界線",0,3],
+            ["願意陪著我",1,2],
+            ["讓我確定自己很重要",2,1],
+            ["讓我感覺自己是不可取代的",3,0]
+        ]
+    },
+
+    /* =====================================================
+       第11題
+       特殊限時題
+    ===================================================== */
+
+    {
+        special:true,
+
+        text:"現在不要想太久。\n如果那個你最在意的人突然說：『我想離開一陣子。』\n你第一個反應是？",
+
+        options:[
+            ["好，我尊重你。",0,3],
+            ["為什麼？發生什麼事了？",1,2],
+            ["不要走。",2,1],
+            ["你是不是不要我了？",3,0]
+        ]
+    },
+
+    {
+        text:"如果一段關係讓你變得不像自己，你會？",
+        options:[
+            ["重新找回自己的生活",0,3],
+            ["試著和對方討論",1,2],
+            ["先忍耐看看",2,1],
+            ["很難離開",3,0]
+        ]
+    },
+
+    {
+        text:"你覺得『被需要』和『被愛』是一樣的嗎？",
+        options:[
+            ["不一樣",0,3],
+            ["有些相似",1,2],
+            ["很難分開",2,1],
+            ["我常常把它們當成同一件事",3,0]
+        ]
+    },
+
+    {
+        text:"當你一個人的時候，你通常能夠？",
+        options:[
+            ["享受自己的時間",0,3],
+            ["做自己的事情",1,2],
+            ["偶爾覺得空虛",2,1],
+            ["很希望有人陪著",3,0]
+        ]
+    },
+
+    {
+        text:"最後一題。\n如果一段關係讓你感到安心，你會？",
+        options:[
+            ["珍惜它，也保留自己",0,3],
+            ["投入更多時間",1,2],
+            ["很害怕失去它",2,1],
+            ["希望永遠不要改變",3,0]
+        ]
+    }
 
 ];
 
@@ -708,39 +861,65 @@ const normalQuestions=[
    補充題
 ========================================================= */
 
-const supplementQuestions=[
+const bonusQuestions = [
 
-{
-    q:"你現在一個人嗎？",
-    a:[
-        "是。",
-        "不是。",
-        "不確定。",
-        "……"
-    ],
-    feedback:[
-        "原來你現在是一個人。",
-        "你發現我了？",
-        "連你自己都不確定嗎？",
-        "……你不想回答這個問題。"
-    ]
-},
+    {
+        text:"如果你知道一個重要的人正在難過，你會？",
+        options:[
+            ["陪著他",0],
+            ["問他需不需要幫忙",1],
+            ["不知道該怎麼辦，但會留下來",2],
+            ["先觀察他的狀態",3]
+        ]
+    },
 
-{
-    q:"你現在在哪？",
-    a:[
-        "在家。",
-        "在學校。",
-        "在外面。",
-        "其他地方。"
-    ],
-    feedback:[
-        "原來你現在在家。",
-        "原來你還在學校。",
-        "原來你現在在外面。",
-        "原來你現在在其他地方。"
-    ]
-}
+    {
+        text:"你比較容易記住別人說過的哪一種話？",
+        options:[
+            ["鼓勵我的話",0],
+            ["重要的承諾",1],
+            ["傷人的話",2],
+            ["一句很普通但突然讓我在意的話",3]
+        ]
+    },
+
+    {
+        text:"如果你可以知道某個人的真實想法，你會想知道嗎？",
+        options:[
+            ["會",0],
+            ["看情況",1],
+            ["可能會",2],
+            ["不知道",3]
+        ]
+    },
+
+    {
+        text:"如果有人突然問你：『你真的相信我嗎？』",
+        options:[
+            ["我會直接回答",0],
+            ["先問為什麼這樣問",1],
+            ["開始思考自己是不是忽略了什麼",2],
+            ["會有一點不安",3]
+        ]
+    },
+
+    /* =====================================================
+       補充題5
+       腳步聲
+       不加入雜訊
+    ===================================================== */
+
+    {
+        text:"如果你聽見身後傳來腳步聲，你會？",
+        options:[
+            ["回頭看看",0],
+            ["先停下來聽",1],
+            ["加快腳步",2],
+            ["不敢回頭",3]
+        ],
+
+        footsteps:true
+    }
 
 ];
 
@@ -749,1893 +928,718 @@ const supplementQuestions=[
    狀態
 ========================================================= */
 
-let phase="normal";
-let current=0;
+let currentQuestion = 0;
+let answers = [];
 
-let normalAnswers=[];
-let supplementAnswers=[];
+let bonusIndex = 0;
+let bonusAnswers = [];
 
-let audioCtx=null;
+let safe = 0;
+let attach = 0;
+let independent = 0;
 
-let threeTimer=null;
-let elevenTimer=null;
+let specialTimer = null;
+let specialAnswered = false;
+
+let audioContext = null;
 
 
 /* =========================================================
-   音效初始化
+   DOM
+========================================================= */
+
+const startScreen = document.getElementById("startScreen");
+const quizScreen = document.getElementById("quizScreen");
+const bonusScreen = document.getElementById("bonusScreen");
+const resultScreen = document.getElementById("resultScreen");
+
+const questionNumber = document.getElementById("questionNumber");
+const progress = document.getElementById("progress");
+
+const question = document.getElementById("question");
+const options = document.getElementById("options");
+
+const specialTimerDisplay =
+    document.getElementById("specialTimer");
+
+const blackout =
+    document.getElementById("blackout");
+
+const background =
+    document.getElementById("background");
+
+const noise =
+    document.getElementById("noise");
+
+const messageScreen =
+    document.getElementById("messageScreen");
+
+const messageText =
+    document.getElementById("messageText");
+
+
+/* =========================================================
+   音效系統
 ========================================================= */
 
 function initAudio(){
 
-    if(!audioCtx){
+    if(audioContext) return;
 
-        audioCtx=new(
-            window.AudioContext ||
-            window.webkitAudioContext
-        )();
+    try{
+
+        audioContext =
+            new (window.AudioContext ||
+            window.webkitAudioContext)();
+
+    }catch(e){
+
+        audioContext = null;
 
     }
 
-    if(audioCtx.state==="suspended"){
-        audioCtx.resume();
-    }
 }
 
 
-/* =========================================================
-   一般音
-========================================================= */
-
-function tone(
-    frequency,
-    duration,
-    volume,
-    type="sine"
+function playTone(
+    frequency = 440,
+    duration = .15,
+    volume = .04,
+    type = "sine"
 ){
 
-    if(!audioCtx)return;
+    if(!audioContext) return;
 
-    const oscillator=
-        audioCtx.createOscillator();
+    const osc =
+        audioContext.createOscillator();
 
-    const gain=
-        audioCtx.createGain();
+    const gain =
+        audioContext.createGain();
 
-    oscillator.type=type;
-    oscillator.frequency.value=frequency;
+    osc.type = type;
+
+    osc.frequency.value =
+        frequency;
 
     gain.gain.setValueAtTime(
-        .0001,
-        audioCtx.currentTime
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
         volume,
-        audioCtx.currentTime+.015
+        audioContext.currentTime
     );
 
     gain.gain.exponentialRampToValueAtTime(
-        .0001,
-        audioCtx.currentTime+duration
+        .001,
+        audioContext.currentTime + duration
     );
 
-    oscillator.connect(gain);
-    gain.connect(audioCtx.destination);
+    osc.connect(gain);
+    gain.connect(audioContext.destination);
 
-    oscillator.start();
+    osc.start();
 
-    oscillator.stop(
-        audioCtx.currentTime+
-        duration+
-        .05
+    osc.stop(
+        audioContext.currentTime + duration
     );
 }
 
 
 /* =========================================================
    敲門聲
-   ※ 不使用雜訊
 ========================================================= */
 
-function knock(power=1){
+function playKnock(){
 
-    if(!audioCtx)return;
+    if(!audioContext) return;
 
-    /*
-     * 第一聲
-     */
-    tone(
-        105,
-        .16,
-        .28*power,
-        "triangle"
-    );
+    playTone(110,.09,.10,"sine");
 
-    /*
-     * 第二層低頻，讓敲門更厚
-     */
-    setTimeout(
-        ()=>{
-            tone(
-                68,
-                .19,
-                .20*power,
-                "sine"
-            );
-        },
-        45
-    );
-}
+    setTimeout(()=>{
+        playTone(100,.09,.09,"sine");
+    },130);
 
+    setTimeout(()=>{
+        playTone(95,.12,.10,"sine");
+    },270);
 
-/* =========================================================
-   連續敲門
-========================================================= */
-
-function loudKnockSeries(){
-
-    setTimeout(
-        ()=>knock(1.25),
-        0
-    );
-
-    setTimeout(
-        ()=>knock(1.45),
-        650
-    );
-
-    setTimeout(
-        ()=>knock(1.65),
-        1350
-    );
 }
 
 
 /* =========================================================
    腳步聲
-   ※ 只用低頻，不使用雜訊
 ========================================================= */
 
-function footsteps(){
+function playFootsteps(){
 
-    if(!audioCtx)return;
+    if(!audioContext) return;
 
-    const steps=[
-        0,
-        480,
-        960,
-        1500,
-        2040
-    ];
+    playTone(90,.07,.045,"triangle");
 
-    steps.forEach(
-        (time,index)=>{
+    setTimeout(()=>{
+        playTone(75,.07,.04,"triangle");
+    },260);
 
-            setTimeout(
-                ()=>{
+    setTimeout(()=>{
+        playTone(90,.07,.045,"triangle");
+    },520);
 
-                    tone(
-                        58,
-                        .17,
-                        .13 + index*.018,
-                        "sine"
-                    );
-
-                    setTimeout(
-                        ()=>{
-                            tone(
-                                43,
-                                .11,
-                                .09 + index*.012,
-                                "sine"
-                            );
-                        },
-                        55
-                    );
-
-                },
-                time
-            );
-
-        }
-    );
 }
 
 
 /* =========================================================
-   低頻
-========================================================= */
-
-function lowHum(
-    duration=2,
-    volume=.025
-){
-
-    if(!audioCtx)return;
-
-    const oscillator=
-        audioCtx.createOscillator();
-
-    const gain=
-        audioCtx.createGain();
-
-    oscillator.type="sine";
-    oscillator.frequency.value=47;
-
-    gain.gain.setValueAtTime(
-        .0001,
-        audioCtx.currentTime
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-        volume,
-        audioCtx.currentTime+.4
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-        .0001,
-        audioCtx.currentTime+duration
-    );
-
-    oscillator.connect(gain);
-    gain.connect(audioCtx.destination);
-
-    oscillator.start();
-
-    oscillator.stop(
-        audioCtx.currentTime+
-        duration+
-        .1
-    );
-}
-
-
-/* =========================================================
-   畫面閃黑
-========================================================= */
-
-function flashBlack(){
-
-    const black=
-        document.getElementById("blackout");
-
-    black.classList.add("show");
-
-    setTimeout(
-        ()=>{
-            black.classList.remove("show");
-        },
-        500
-    );
-}
-
-
-/* =========================================================
-   長黑
-========================================================= */
-
-function longBlack(){
-
-    const black=
-        document.getElementById("blackout");
-
-    black.classList.add("show");
-}
-
-
-/* =========================================================
-   晃動
-========================================================= */
-
-function shake(){
-
-    document.body.classList.remove("shake");
-
-    void document.body.offsetWidth;
-
-    document.body.classList.add("shake");
-
-    setTimeout(
-        ()=>{
-            document.body.classList.remove("shake");
-        },
-        600
-    );
-}
-
-
-/* =========================================================
-   異常文字
-========================================================= */
-
-function whisper(text){
-
-    const element=
-        document.getElementById("whisper");
-
-    element.textContent=text;
-
-    element.classList.remove("show");
-
-    void element.offsetWidth;
-
-    element.classList.add("show");
-}
-
-
-/* =========================================================
-   首頁
-========================================================= */
-
-function home(){
-
-    document.body.className="";
-
-    document.getElementById("app").innerHTML=`
-
-        <div class="card">
-
-            <h1>
-                親密關係傾向測驗
-            </h1>
-
-            <div class="subtitle">
-                RELATIONSHIP & ATTACHMENT TEST
-            </div>
-
-            <div class="description">
-
-                <p>
-                    歡迎參與本次匿名情感傾向測驗。
-                </p>
-
-                <p>
-                    以下問題沒有標準答案，
-                    請依照你的第一直覺回答。
-                </p>
-
-                <p>
-                    測驗約需 3～5 分鐘。
-                </p>
-
-                <p style="
-                    color:#aaa;
-                    font-size:12px;
-                    margin-top:28px;
-                ">
-                    本測驗僅供娛樂使用，
-                    不代表正式心理評估。
-                </p>
-
-            </div>
-
-            <button
-                class="start-btn"
-                onclick="startTest()"
-            >
-                開始測驗
-            </button>
-
-        </div>
-    `;
-}
-
-home();
-
-
-/* =========================================================
-   開始測驗
+   啟動
 ========================================================= */
 
 function startTest(){
 
     initAudio();
 
-    phase="normal";
-    current=0;
+    if(audioContext &&
+       audioContext.state === "suspended"){
 
-    normalAnswers=[];
-    supplementAnswers=[];
+        audioContext.resume();
 
-    clearTimeout(elevenTimer);
-    clearTimeout(threeTimer);
+    }
 
-    document.body.className="";
+    startScreen.classList.remove("active");
+    quizScreen.classList.add("active");
+
+    currentQuestion = 0;
+    answers = [];
 
     showQuestion();
+
 }
 
 
 /* =========================================================
-   顯示一般題
+   顯示題目
 ========================================================= */
 
 function showQuestion(){
 
-    let q;
-    let total;
+    clearTimeout(specialTimer);
 
-    if(phase==="normal"){
+    specialTimerDisplay.textContent="";
+    specialTimerDisplay.classList.remove("warning");
 
-        total=11;
+    specialAnswered = false;
 
-        if(current>=10){
+    const q =
+        questions[currentQuestion];
 
-            showEleven();
-            return;
-        }
+    questionNumber.textContent =
+        String(currentQuestion + 1).padStart(2,"0")
+        + " / "
+        + String(questions.length).padStart(2,"0");
 
-        q=normalQuestions[current];
+    progress.style.width =
+        ((currentQuestion) /
+        questions.length * 100) + "%";
 
-    }
-    else{
+    question.innerHTML =
+        q.text.replace(/\n/g,"<br>");
 
-        total=5;
+    options.innerHTML="";
 
-        if(current===0 || current===1){
+    q.options.forEach((item,index)=>{
 
-            q=supplementQuestions[current];
+        const btn =
+            document.createElement("button");
 
-        }
-        else if(current===2){
+        btn.className="option";
 
-            q=getBranchQuestion();
+        btn.textContent=item[0];
 
-        }
-        else if(current===3){
+        btn.onclick=()=>{
 
-            q=getFourthQuestion();
-
-        }
-        else if(current===4){
-
-            q=getFifthQuestion();
-
-        }
-        else{
-
-            afterSupplements();
-            return;
-        }
-    }
-
-
-    const percentage=
-        (current/total)*100;
-
-
-    document.getElementById("app").innerHTML=`
-
-        <div class="card">
-
-            <div class="question-number">
-
-                ${
-                    phase==="normal"
-                    ? `第 ${current+1} 題 / 共 11 題`
-                    : `補充問題 ${current+1} / 5`
-                }
-
-            </div>
-
-            <div class="question">
-                ${q.q}
-            </div>
-
-            <div
-                class="options"
-                id="options"
-            ></div>
-
-            <div
-                class="feedback"
-                id="feedback"
-            ></div>
-
-            <div class="progress">
-
-                <div
-                    class="progress-bar"
-                    style="width:${percentage}%"
-                ></div>
-
-            </div>
-
-        </div>
-    `;
-
-
-    const container=
-        document.getElementById("options");
-
-
-    q.a.forEach(
-        (text,index)=>{
-
-            const button=
-                document.createElement("button");
-
-            button.className="option";
-
-            button.textContent=
-                String.fromCharCode(65+index)
-                +". "
-                +text;
-
-            button.onclick=()=>{
-                chooseAnswer(index);
-            };
-
-            container.appendChild(button);
-        }
-    );
-}
-
-
-/* =========================================================
-   補充題第 3 題
-   根據第 2 題分支
-========================================================= */
-
-function getBranchQuestion(){
-
-    const location=
-        supplementAnswers[1];
-
-
-    /*
-     * 在家
-     */
-
-    if(location===0){
-
-        return {
-
-            q:"你說你現在在家。\n\n那你現在家裡的燈是開著的嗎？",
-
-            a:[
-                "開著。",
-                "關著。",
-                "只有一部分開著。",
-                "我沒注意。"
-            ],
-
-            feedback:[
-                "原來你現在家裡是亮著的。",
-                "原來你現在待在黑暗裡。",
-                "所以不是整個家都是亮的。",
-                "你剛剛才注意到嗎？"
-            ]
+            chooseAnswer(index);
 
         };
 
-    }
+        options.appendChild(btn);
 
+    });
 
-    /*
-     * 在學校
-     */
+    /* =========================
+       特殊第11題
+    ========================== */
 
-    if(location===1){
+    if(q.special){
 
-        return {
+        background.classList.add("red");
 
-            q:"你說你現在在學校。\n\n那現在附近還有其他人嗎？",
+        startSpecialTimer();
 
-            a:[
-                "有。",
-                "沒有。",
-                "不知道。",
-                "我沒注意。"
-            ],
+    }else{
 
-            feedback:[
-                "原來附近還有人。",
-                "所以你現在一個人在那裡嗎？",
-                "你似乎沒有特別注意。",
-                "原來你剛才沒有留意周圍。"
-            ]
-
-        };
+        background.classList.remove("red");
 
     }
 
-
-    /*
-     * 在外面
-     * 不再問「是不是一個人」
-     */
-
-    if(location===2){
-
-        return {
-
-            q:"你說你現在在外面。\n\n那你現在附近聽得到什麼聲音？",
-
-            a:[
-                "車子的聲音。",
-                "人說話的聲音。",
-                "很安靜。",
-                "其他聲音。"
-            ],
-
-            feedback:[
-                "原來你現在聽得到車聲。",
-                "原來附近還有人在說話。",
-                "外面居然這麼安靜。",
-                "你聽到了什麼？"
-            ]
-
-        };
-
-    }
-
-
-    /*
-     * 其他地方
-     */
-
-    return {
-
-        q:"你說你在其他地方。\n\n那裡現在是明亮的嗎？",
-
-        a:[
-            "很亮。",
-            "有一點暗。",
-            "很暗。",
-            "我不知道。"
-        ],
-
-        feedback:[
-            "原來那裡很亮。",
-            "所以那裡並不是完全明亮。",
-            "你現在待在很暗的地方。",
-            "你連自己周圍的光線都沒有注意。"
-        ]
-
-    };
 }
 
 
 /* =========================================================
-   補充題第 4 題
-========================================================= */
-
-function getFourthQuestion(){
-
-    const location=
-        supplementAnswers[1];
-
-    const third=
-        supplementAnswers[2];
-
-
-    /*
-     * 在家
-     */
-
-    if(location===0){
-
-        if(third===1){
-
-            return {
-
-                q:"你說現在家裡的燈是關著的。\n\n如果現在突然聽見門外有聲音，你會去看嗎？",
-
-                a:[
-                    "會。",
-                    "不會。",
-                    "先聽聽看。",
-                    "我不知道。"
-                ],
-
-                feedback:[
-                    "原來你會去確認。",
-                    "你寧願不要靠近。",
-                    "你會先判斷聲音從哪裡來。",
-                    "連你自己都不知道會怎麼做。"
-                ]
-
-            };
-
-        }
-
-
-        return {
-
-            q:"如果你現在聽見門外有人叫你的名字，你會怎麼做？",
-
-            a:[
-                "確認是誰。",
-                "不理會。",
-                "先聽聽看。",
-                "把門鎖好。"
-            ],
-
-            feedback:[
-                "原來你會想知道是誰。",
-                "你選擇不回應。",
-                "你會先確認聲音。",
-                "你第一個想到的是把門鎖好。"
-            ]
-
-        };
-    }
-
-
-    /*
-     * 學校
-     */
-
-    if(location===1){
-
-        return {
-
-            q:"如果你現在聽見走廊傳來腳步聲，你會回頭看嗎？",
-
-            a:[
-                "會。",
-                "不會。",
-                "先聽聽看。",
-                "看情況。"
-            ],
-
-            feedback:[
-                "你會去確認。",
-                "原來你不會回頭。",
-                "你會先判斷腳步聲的位置。",
-                "你似乎還在觀察。"
-            ]
-
-        };
-    }
-
-
-    /*
-     * 外面
-     */
-
-    if(location===2){
-
-        return {
-
-            q:"如果你發現身後的腳步聲和你的速度一樣，你會？",
-
-            a:[
-                "回頭看。",
-                "繼續走。",
-                "停下來。",
-                "加快腳步。"
-            ],
-
-            feedback:[
-                "你會直接確認。",
-                "你選擇裝作沒有注意到。",
-                "你想先看看對方會不會停下。",
-                "你開始有點在意身後了。"
-            ]
-
-        };
-    }
-
-
-    /*
-     * 其他地方
-     */
-
-    return {
-
-        q:"如果你現在聽見有人從遠處叫你，你會回應嗎？",
-
-        a:[
-            "會。",
-            "不會。",
-            "先確認聲音。",
-            "不知道。"
-        ],
-
-        feedback:[
-            "你會回應。",
-            "你選擇不回答。",
-            "你會先確認是誰。",
-            "你還沒有決定。"
-        ]
-
-    };
-}
-
-
-/* =========================================================
-   補充題第 5 題
-========================================================= */
-
-function getFifthQuestion(){
-
-    const location=
-        supplementAnswers[1];
-
-    /*
-     * 這裡不再依照答案製造矛盾，
-     * 而是統一進入最後階段。
-     */
-
-    return {
-
-        q:
-        "……\n\n" +
-        "你應該已經注意到了吧？\n\n" +
-        "有什麼聲音正在靠近。",
-
-        a:[
-            "我聽到了。",
-            "沒有。",
-            "不確定。",
-            "……"
-        ],
-
-        feedback:[
-            "原來你也聽到了。",
-            "你真的沒有聽見嗎？",
-            "你開始注意到了。",
-            "……"
-        ]
-
-    };
-}
-
-
-/* =========================================================
-   第 11 題
-========================================================= */
-
-function showEleven(){
-
-    document.body.classList.add("horror");
-
-    lowHum(1.5,.025);
-
-
-    document.getElementById("app").innerHTML=`
-
-        <div class="card">
-
-            <div class="question-number">
-                第 11 題 / 共 11 題
-            </div>
-
-            <div
-                class="question"
-                style="text-align:center;"
-            >
-                你喜歡我嗎？
-            </div>
-
-            <button
-                class="start-btn single-answer"
-                onclick="answerEleven()"
-            >
-                喜歡
-            </button>
-
-        </div>
-    `;
-
-
-    /*
-     * 一秒內沒有回答
-     */
-
-    elevenTimer=
-        setTimeout(
-            ()=>{
-                elevenTimeout();
-            },
-            1000
-        );
-}
-
-
-/* =========================================================
-   第 11 題回答
-========================================================= */
-
-function answerEleven(){
-
-    clearTimeout(elevenTimer);
-
-    longBlack();
-
-    setTimeout(
-        ()=>{
-            document.body.className="";
-            showNormalResult();
-        },
-        750
-    );
-}
-
-
-/* =========================================================
-   第 11 題逾時
-========================================================= */
-
-function elevenTimeout(){
-
-    longBlack();
-
-    setTimeout(
-        ()=>{
-            document.body.className="";
-            showNormalResult();
-        },
-        700
-    );
-}
-
-
-/* =========================================================
-   一般題回答
+   選答案
 ========================================================= */
 
 function chooseAnswer(index){
 
-    const buttons=
-        document.querySelectorAll(".option");
+    if(specialAnswered) return;
 
-    buttons.forEach(
-        button=>{
-            button.disabled=true;
-        }
-    );
+    specialAnswered = true;
 
+    const q =
+        questions[currentQuestion];
 
-    let q;
+    const selected =
+        q.options[index];
 
-    if(phase==="normal"){
+    answers.push(selected);
 
-        normalAnswers[current]=index;
+    safe += selected[1];
 
-        q=normalQuestions[current];
+    attach += selected[2];
+
+    independent +=
+        Math.max(0,3-selected[1]);
+
+    playTone(220,.08,.025,"sine");
+
+    if(q.special){
+
+        clearTimeout(specialTimer);
 
     }
-    else{
 
-        supplementAnswers[current]=index;
+    nextQuestion();
 
-        if(current===0 || current===1){
+}
 
-            q=supplementQuestions[current];
 
-        }
-        else if(current===2){
+/* =========================================================
+   下一題
+========================================================= */
 
-            q=getBranchQuestion();
+function nextQuestion(){
 
-        }
-        else if(current===3){
+    currentQuestion++;
 
-            q=getFourthQuestion();
+    if(currentQuestion >= questions.length){
 
-        }
-        else{
+        progress.style.width="100%";
 
-            q=getFifthQuestion();
+        setTimeout(()=>{
 
-        }
+            startBonus();
+
+        },500);
+
+        return;
+
     }
 
+    setTimeout(()=>{
 
-    buttons[index].classList.add("selected");
+        showQuestion();
+
+    },180);
+
+}
 
 
-    buttons.forEach(
-        (button,i)=>{
+/* =========================================================
+   第11題特殊倒數
+========================================================= */
 
-            if(i!==index){
+function startSpecialTimer(){
 
-                setTimeout(
-                    ()=>{
-                        button.classList.add("fade");
-                    },
-                    100
+    let timeLeft = 1.0;
+
+    specialTimerDisplay.textContent =
+        "……";
+
+    specialTimer =
+        setInterval(()=>{
+
+            timeLeft -= .1;
+
+            if(timeLeft <= .4){
+
+                specialTimerDisplay.classList.add(
+                    "warning"
                 );
 
             }
 
-        }
-    );
+            if(timeLeft <= 0){
 
+                clearInterval(specialTimer);
 
-    /*
-     * 顯示「正在讀你的回答」的文字
-     */
+                specialTimeout();
 
-    const feedback=
-        document.getElementById("feedback");
-
-
-    if(feedback && q.feedback){
-
-        feedback.textContent=
-            q.feedback[index] || "……";
-
-        setTimeout(
-            ()=>{
-                feedback.classList.add("show");
-            },
-            180
-        );
-
-    }
-
-
-    /*
-     * 第 9 題稍微異常
-     */
-
-    if(
-        phase==="normal" &&
-        current===8
-    ){
-
-        setTimeout(
-            ()=>{
-                lowHum(.8,.012);
-            },
-            400
-        );
-
-    }
-
-
-    /*
-     * 第 10 題之後準備進入第 11 題
-     */
-
-    if(
-        phase==="normal" &&
-        current===9
-    ){
-
-        setTimeout(
-            ()=>{
-                lowHum(1.1,.016);
-            },
-            500
-        );
-
-    }
-
-
-    /*
-     * 補充題第 4 題之後，
-     * 第 5 題準備出現腳步聲
-     */
-
-    if(
-        phase==="supplement" &&
-        current===3
-    ){
-
-        setTimeout(
-            ()=>{
-                footsteps();
-            },
-            450
-        );
-
-    }
-
-
-    /*
-     * 補充題第 5 題回答後：
-     * 腳步聲 + 最後問題
-     */
-
-    if(
-        phase==="supplement" &&
-        current===4
-    ){
-
-        setTimeout(
-            ()=>{
-                footsteps();
-            },
-            350
-        );
-
-        current++;
-
-        setTimeout(
-            ()=>{
-                finalDoorQuestion();
-            },
-            2800
-        );
-
-        return;
-    }
-
-
-    current++;
-
-
-    const delay=
-        phase==="supplement"
-        ? 1500
-        : 700;
-
-
-    setTimeout(
-        ()=>{
-            showQuestion();
-        },
-        delay
-    );
-}
-
-
-/* =========================================================
-   正常結果
-========================================================= */
-
-function showNormalResult(){
-
-    document.body.className="";
-
-
-    let score=0;
-
-    normalAnswers.forEach(
-        value=>{
-            score+=value;
-        }
-    );
-
-
-    let title;
-    let text;
-
-
-    if(score<=12){
-
-        title="獨立穩定型";
-
-        text=
-            "你很重視彼此的自由與界線。\
-            在關係中，你通常不會因為短暫的距離而失去安全感。";
-
-    }
-    else if(score<=20){
-
-        title="溫和陪伴型";
-
-        text=
-            "你重視陪伴，也希望彼此能保有自己的空間。\
-            對你而言，信任與溝通是維持關係的重要部分。";
-
-    }
-    else if(score<=28){
-
-        title="敏感關注型";
-
-        text=
-            "你會注意關係中的細節，也比較容易察覺對方情緒上的變化。\
-            當對方突然改變時，你可能會開始思考原因。";
-
-    }
-    else{
-
-        title="深度投入型";
-
-        text=
-            "你對重要的人投入程度很高。\
-            你會希望了解對方的狀態，也很在意兩個人之間的連結。";
-    }
-
-
-    document.getElementById("app").innerHTML=`
-
-        <div class="card">
-
-            <h1>
-                測驗完成
-            </h1>
-
-            <div class="subtitle">
-                ANALYSIS COMPLETE
-            </div>
-
-            <div class="description">
-
-                <p>
-                    你的回答已經完成分析。
-                </p>
-
-                <p>
-                    ${text}
-                </p>
-
-                <p style="
-                    text-align:center;
-                    font-size:22px;
-                    color:#67534d;
-                    margin-top:28px;
-                ">
-                    ${title}
-                </p>
-
-            </div>
-
-            <button
-                class="start-btn"
-                onclick="beginSupplementNotice()"
-            >
-                查看完整結果
-            </button>
-
-        </div>
-    `;
-}
-
-
-/* =========================================================
-   補充前
-========================================================= */
-
-function beginSupplementNotice(){
-
-    document.body.className="";
-
-    document.getElementById("app").innerHTML=`
-
-        <div class="card">
-
-            <h1>
-                測驗結果
-            </h1>
-
-            <div
-                class="description"
-                style="text-align:center;"
-            >
-
-                <p>
-                    分析已完成。
-                </p>
-
-                <p>
-                    感謝你的回答。
-                </p>
-
-                <p style="
-                    color:#aaa;
-                    margin-top:30px;
-                ">
-                    ……
-                </p>
-
-            </div>
-
-        </div>
-    `;
-
-
-    setTimeout(
-        ()=>{
-            startHorrorTransition();
-        },
-        1300
-    );
-}
-
-
-/* =========================================================
-   進入恐怖模式
-========================================================= */
-
-function startHorrorTransition(){
-
-    document.body.classList.add("horror");
-
-    lowHum(3,.025);
-
-    setTimeout(
-        ()=>{
-            showSupplementNotice();
-        },
-        3000
-    );
-}
-
-
-/* =========================================================
-   補充提示
-========================================================= */
-
-function showSupplementNotice(){
-
-    document.getElementById("app").innerHTML=`
-
-        <div class="card">
-
-            <h1>
-                補充確認
-            </h1>
-
-            <div class="description">
-
-                <p>
-                    還有 5 項資料需要補充確認。
-                </p>
-
-                <p>
-                    這些問題不會影響你的原始結果。
-                </p>
-
-                <p style="
-                    color:#9a756e;
-                    margin-top:28px;
-                ">
-                    請繼續回答。
-                </p>
-
-            </div>
-
-            <button
-                class="start-btn"
-                onclick="startSupplements()"
-            >
-                繼續
-            </button>
-
-        </div>
-    `;
-}
-
-
-/* =========================================================
-   開始補充
-========================================================= */
-
-function startSupplements(){
-
-    phase="supplement";
-    current=0;
-
-    supplementAnswers=[];
-
-    document.body.classList.add("horror");
-
-    showQuestion();
-}
-
-
-/* =========================================================
-   補充完成
-========================================================= */
-
-function afterSupplements(){
-
-    showDialogue(
-        "補充資料已完成。",
-        ()=>{
-            setTimeout(
-                ()=>{
-                    finalDoorQuestion();
-                },
-                700
-            );
-        }
-    );
-}
-
-
-/* =========================================================
-   一般對話
-========================================================= */
-
-function showDialogue(
-    text,
-    next=null,
-    options=[]
-){
-
-    document.getElementById("app").innerHTML=`
-
-        <div class="card">
-
-            <div class="dialogue">
-
-                <div class="dialogue-speaker">
-                    SYSTEM
-                </div>
-
-                <div class="dialogue-text">
-                    ${text}
-                </div>
-
-                <div
-                    class="dialogue-options"
-                    id="dialogueOptions"
-                ></div>
-
-            </div>
-
-        </div>
-    `;
-
-
-    const box=
-        document.getElementById(
-            "dialogueOptions"
-        );
-
-
-    if(options.length){
-
-        options.forEach(
-            option=>{
-
-                const button=
-                    document.createElement("button");
-
-                button.className="option";
-
-                button.textContent=
-                    option.text;
-
-                button.onclick=
-                    option.action;
-
-                box.appendChild(button);
+                return;
 
             }
-        );
 
-    }
-    else if(next){
+        },100);
 
-        setTimeout(
-            next,
-            1000
-        );
-    }
 }
 
 
 /* =========================================================
-   最後問題
+   第11題超時
 ========================================================= */
 
-function finalDoorQuestion(){
+function specialTimeout(){
 
-    document.body.classList.add("horror");
+    if(specialAnswered) return;
 
-    document.getElementById("app").innerHTML=`
+    specialAnswered = true;
 
-        <div class="card">
+    /* 黑畫面 */
 
-            <div class="dialogue">
+    blackout.classList.add("show");
 
-                <div class="dialogue-speaker">
-                    SYSTEM
-                </div>
+    background.classList.remove("red");
 
-                <div class="dialogue-text">
-                    最後一個問題。<br><br>
-                    如果我現在敲門，<br>
-                    你會開門嗎？
-                </div>
+    playKnock();
 
-                <div
-                    class="dialogue-options"
-                    id="finalOptions"
-                ></div>
+    setTimeout(()=>{
 
-            </div>
+        currentQuestion++;
 
-        </div>
-    `;
+        blackout.classList.remove("show");
 
+        if(currentQuestion >= questions.length){
 
-    const options=[
-        "會。",
-        "不會。",
-        "我不知道。",
-        "……"
-    ];
+            startBonus();
 
+        }else{
 
-    const box=
-        document.getElementById(
-            "finalOptions"
-        );
-
-
-    options.forEach(
-        (text,index)=>{
-
-            const button=
-                document.createElement("button");
-
-            button.className="option";
-
-            button.textContent=text;
-
-            button.onclick=()=>{
-                finalDoorAnswer(index);
-            };
-
-            box.appendChild(button);
+            showQuestion();
 
         }
-    );
+
+    },700);
+
 }
 
 
 /* =========================================================
-   最後問題的不同回答
+   補充題開始
 ========================================================= */
 
-function finalDoorAnswer(index){
+function startBonus(){
 
-    const responses=[
+    quizScreen.classList.remove("active");
 
-        /*
-         * 會
-         */
-        "……那我就敲了。",
+    bonusScreen.classList.add("active");
 
-        /*
-         * 不會
-         */
-        "好。\n\n那我不進去。",
+    bonusIndex = 0;
 
-        /*
-         * 不知道
-         */
-        "你還在猶豫。",
+    bonusAnswers = [];
 
-        /*
-         * ……
-         */
-        "……你不回答也沒關係。"
+    background.classList.remove("red");
 
-    ];
+    showBonusQuestion();
 
-
-    document.getElementById("app").innerHTML=`
-
-        <div class="card">
-
-            <div class="dialogue">
-
-                <div class="dialogue-speaker">
-                    SYSTEM
-                </div>
-
-                <div class="dialogue-text">
-                    ${responses[index]}
-                </div>
-
-            </div>
-
-        </div>
-    `;
-
-
-    /*
-     * 不同回答產生一點不同的聲音節奏
-     */
-
-    if(index===0){
-
-        setTimeout(
-            ()=>knock(1.6),
-            700
-        );
-
-        setTimeout(
-            ()=>knock(1.8),
-            1450
-        );
-
-    }
-    else if(index===1){
-
-        setTimeout(
-            ()=>footsteps(),
-            700
-        );
-
-    }
-    else if(index===2){
-
-        setTimeout(
-            ()=>{
-                knock(1.3);
-            },
-            900
-        );
-
-    }
-    else{
-
-        setTimeout(
-            ()=>{
-                knock(1.45);
-            },
-            1000
-        );
-
-    }
-
-
-    setTimeout(
-        ()=>{
-            showThreeSecondQuestion();
-        },
-        2300
-    );
 }
 
 
 /* =========================================================
-   三秒問題
+   補充題
 ========================================================= */
 
-function showThreeSecondQuestion(){
+function showBonusQuestion(){
 
-    const popup=
+    const q =
+        bonusQuestions[bonusIndex];
+
+    document.getElementById(
+        "bonusQuestion"
+    ).innerHTML =
+        q.text.replace(/\n/g,"<br>");
+
+    const container =
         document.getElementById(
-            "threeSecond"
+            "bonusOptions"
         );
 
-    popup.classList.add("show");
+    container.innerHTML="";
 
-    clearTimeout(threeTimer);
+    q.options.forEach((item,index)=>{
 
-    threeTimer=
-        setTimeout(
-            finishThreeSecond,
-            3000
-        );
-}
+        const btn =
+            document.createElement("button");
 
+        btn.className="option";
 
-function threeAnswer(answer){
+        btn.textContent=item[0];
 
-    clearTimeout(threeTimer);
+        btn.onclick=()=>{
 
-    const responses=[
+            bonusAnswers.push(item[1]);
 
-        "你選得很快。",
+            if(q.footsteps){
 
-        "你真的不想回頭嗎？",
+                playFootsteps();
 
-        "嗯……什麼都沒有。",
+            }else{
 
-        "那就別回頭。"
+                playTone(
+                    180,
+                    .08,
+                    .025,
+                    "sine"
+                );
 
-    ];
+            }
 
+            nextBonus();
 
-    hideThreeSecond();
+        };
 
-    whisper(
-        responses[answer]
-    );
+        container.appendChild(btn);
 
+    });
 
-    setTimeout(
-        fakeEnding,
-        1000
-    );
-}
-
-
-function finishThreeSecond(){
-
-    hideThreeSecond();
-
-    whisper(
-        "時間到了。"
-    );
-
-
-    setTimeout(
-        fakeEnding,
-        1000
-    );
-}
-
-
-function hideThreeSecond(){
-
-    document
-        .getElementById("threeSecond")
-        .classList
-        .remove("show");
 }
 
 
 /* =========================================================
-   假結束
+   補充題下一題
 ========================================================= */
 
-function fakeEnding(){
+function nextBonus(){
 
-    document.body.className="horror";
+    bonusIndex++;
 
-    document.getElementById("app").innerHTML=`
+    if(bonusIndex >= bonusQuestions.length){
 
-        <div class="card">
+        finishTest();
 
-            <h1>
-                測驗結束
-            </h1>
+        return;
 
-            <div class="subtitle">
-                ANALYSIS COMPLETE
-            </div>
+    }
 
-            <div
-                class="description"
-                style="text-align:center;"
-            >
+    setTimeout(()=>{
 
-                <p>
-                    所有問題均已完成。
-                </p>
+        showBonusQuestion();
 
-                <p>
-                    感謝你的參與。
-                </p>
+    },250);
 
-                <p style="
-                    color:#9a756e;
-                    margin-top:35px;
-                ">
-                    ……
-                </p>
-
-            </div>
-
-        </div>
-    `;
-
-
-    setTimeout(
-        finalEndingGlitch,
-        1900
-    );
 }
 
 
 /* =========================================================
-   最後結局
+   結果
 ========================================================= */
 
-function finalEndingGlitch(){
+function finishTest(){
 
-    whisper("……");
+    bonusScreen.classList.remove("active");
+
+    resultScreen.classList.add("active");
+
+    background.classList.remove("red");
+
+    calculateResult();
+
+}
 
 
-    setTimeout(
-        ()=>{
-            lowHum(3,.035);
-        },
-        200
-    );
+/* =========================================================
+   結果分析
+========================================================= */
+
+function calculateResult(){
+
+    const total =
+        safe +
+        attach +
+        independent;
+
+    let title;
+    let subtitle;
+    let description;
+
+    /*
+       用整體傾向決定結果。
+    */
+
+    if(independent >= attach &&
+       independent >= safe){
+
+        title = "自由型";
+
+        subtitle =
+            "你重視親密，也重視自己的空間。";
+
+        description =
+            "你通常希望關係建立在信任與尊重之上。"
+            + "你可以在乎一個人，但不希望因此失去自己的生活。"
+            + "對你而言，健康的關係不是完全綁在一起，"
+            + "而是兩個完整的人願意一起走。";
+
+    }else if(attach > independent &&
+             attach >= safe){
+
+        title = "深情型";
+
+        subtitle =
+            "你很容易認真對待一段關係。";
+
+        description =
+            "當你真正重視一個人時，你會投入很多情感。"
+            + "你很在意對方的反應，也容易記住關係中的細節。"
+            + "你的優點是重感情，但有時候也需要提醒自己："
+            + "在乎別人的同時，也不要忘記自己的感受。";
+
+    }else{
+
+        title = "安心型";
+
+        subtitle =
+            "你傾向用信任建立親密感。";
+
+        description =
+            "你通常不需要時時確認對方是否還在。"
+            + "你相信關係需要溝通，也相信彼此應該保有自己的空間。"
+            + "對你來說，真正的親密並不是沒有距離，"
+            + "而是即使有距離，也依然知道彼此存在。";
+
+    }
+
+
+    document.getElementById(
+        "resultTitle"
+    ).textContent=title;
+
+    document.getElementById(
+        "resultSubtitle"
+    ).textContent=subtitle;
+
+    document.getElementById(
+        "resultDescription"
+    ).textContent=description;
 
 
     /*
-     * 只使用敲門聲
-     */
+       分數轉百分比
+    */
 
-    setTimeout(
-        ()=>{
-            knock(1.35);
-        },
-        900
-    );
+    const safePercent =
+        Math.min(
+            100,
+            Math.round(
+                safe /
+                Math.max(1,questions.length * 3)
+                * 100
+            )
+        );
 
-    setTimeout(
-        ()=>{
-            knock(1.55);
-        },
-        1800
-    );
+    const attachPercent =
+        Math.min(
+            100,
+            Math.round(
+                attach /
+                Math.max(1,questions.length * 3)
+                * 100
+            )
+        );
 
-    setTimeout(
-        ()=>{
-            knock(1.75);
-        },
-        2700
-    );
+    const independentPercent =
+        Math.min(
+            100,
+            Math.round(
+                independent /
+                Math.max(1,questions.length * 3)
+                * 100
+            )
+        );
 
 
-    setTimeout(
-        shake,
-        3500
-    );
+    setTimeout(()=>{
 
+        document.getElementById(
+            "safeScore"
+        ).style.width =
+            safePercent + "%";
 
-    setTimeout(
-        returnNormal,
-        4500
-    );
+        document.getElementById(
+            "attachScore"
+        ).style.width =
+            attachPercent + "%";
+
+        document.getElementById(
+            "independentScore"
+        ).style.width =
+            independentPercent + "%";
+
+    },300);
+
 }
 
 
 /* =========================================================
-   回到正常頁面
+   鍵盤支援
 ========================================================= */
 
-function returnNormal(){
+document.addEventListener(
+    "keydown",
+    e=>{
 
-    document.body.className="";
+        if(!quizScreen.classList.contains("active"))
+            return;
 
-    document.getElementById("app").innerHTML=`
+        const buttons =
+            document.querySelectorAll(
+                "#options .option"
+            );
 
-        <div class="card">
+        let index = -1;
 
-            <h1>
-                測驗完成
-            </h1>
+        if(e.key >= "1" &&
+           e.key <= "4"){
 
-            <div class="subtitle">
-                TEST COMPLETE
-            </div>
+            index =
+                Number(e.key)-1;
 
-            <div class="description">
+        }
 
-                <p>
-                    感謝你完成這次測驗。
-                </p>
+        if(index >= 0 &&
+           buttons[index]){
 
-                <p>
-                    所有回答都已經完成。
-                </p>
+            buttons[index].click();
 
-                <p style="
-                    color:#aaa;
-                    margin-top:28px;
-                    text-align:center;
-                ">
-                    測驗已結束。
-                </p>
+        }
 
-            </div>
-
-            <button
-                class="start-btn"
-                onclick="go404()"
-            >
-                再次測驗
-            </button>
-
-        </div>
-    `;
-}
+    }
+);
 
 
 /* =========================================================
-   再次測驗 → 404
+   防止意外選取
 ========================================================= */
 
-function go404(){
+document.addEventListener(
+    "contextmenu",
+    e=>{
 
-    /*
-     * 注意：
-     * 這裡不是重新開始測驗。
-     * 直接前往不存在的路徑。
-     */
+        /*
+           保留一般瀏覽器功能，
+           不阻止使用者操作。
+        */
 
-    window.location.href=
-        "/20260707/retest/";
-}
+    }
+);
+
+
+/* =========================================================
+   初始狀態
+========================================================= */
+
+background.classList.remove("red");
 
 </script>
 
