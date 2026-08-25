@@ -2,981 +2,182 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>親密關係傾向測驗</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>親密關係傾向測驗｜第二十四版</title>
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%}
-body{
-    min-height:100vh;
-    font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
-    background:#f1eeeb;
-    color:#45403d;
-    transition:background 2.5s ease,color 2.5s ease;
-    overflow-x:hidden;
-}
-body.normal{background:#f1eeeb;color:#45403d}
-#app{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:25px;
-    transition:transform .15s ease;
-}
-.card{
-    width:680px;
-    max-width:94vw;
-    padding:42px;
-    background:rgba(255,255,255,.97);
-    border:1px solid #ddd7d3;
-    box-shadow:0 15px 50px rgba(45,30,25,.08);
-    transition:background 1.8s ease,border-color 1.8s ease,box-shadow 1.8s ease;
-}
-h1{
-    margin:0 0 9px;text-align:center;font-size:27px;font-weight:400;letter-spacing:4px
-}
-.subtitle{
-    text-align:center;color:#aaa19d;font-size:11px;letter-spacing:2px;margin-bottom:34px
-}
-.description{font-size:15px;line-height:2;color:#696360}
-.start-btn{
-    display:block;margin:34px auto 0;padding:12px 42px;background:#fff;color:#514a47;
-    border:1px solid #aaa29d;cursor:pointer;font-family:inherit;
-    transition:background .25s,border .25s,transform .15s
-}
-.start-btn:hover{background:#eee8e4;border-color:#80665e}
-.start-btn:active{transform:scale(.98)}
-.question-number{color:#aaa19d;font-size:12px;letter-spacing:1px;margin-bottom:22px}
-.question{font-size:20px;line-height:1.8;margin-bottom:25px}
-.feedback{min-height:28px;margin-top:18px;font-size:13px;line-height:1.8;color:#8c8581}
-.options{display:flex;flex-direction:column;gap:9px}
-.option{
-    width:100%;padding:14px 16px;text-align:left;background:#fff;color:#403b39;
-    border:1px solid #d8d2cf;cursor:pointer;font-family:inherit;
-    transition:background .25s,border .25s,opacity .35s,transform .12s
-}
-.option:hover{background:#f5efec;border-color:#a98b82}
-.option:active{transform:scale(.995)}
-.option.selected{background:#eee5e1;border-color:#927067}
-.option.fade{opacity:0;pointer-events:none}
-.option:disabled{cursor:default}
-.progress{height:2px;margin-top:28px;background:#e6dfdc}
-.progress-bar{height:100%;background:#99786f;transition:width .5s ease}
-
-body.horror{
-    background:radial-gradient(circle at 50% 40%,#4b2927 0%,#291514 50%,#090505 100%);
-    color:#ddd0cc
-}
-body.horror .card{
-    background:rgba(27,14,14,.95);
-    border-color:#67433e;
-    box-shadow:0 25px 90px rgba(0,0,0,.65)
-}
-body.horror h1,body.horror .question{color:#dfccc7}
-body.horror .subtitle,body.horror .question-number{color:#98716b}
-body.horror .description{color:#bca9a4}
-body.horror .option{background:#241413;color:#d6c4bf;border-color:#62413c}
-body.horror .option:hover{background:#38201e}
-body.horror .option.selected{background:#3b211f;border-color:#9b5d55}
-body.horror .progress{background:#3c2422}
-body.horror .progress-bar{background:#985a52}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%}
+body{min-height:100vh;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;background:#f1eeeb;color:#45403d;transition:background 5s,color 5s;overflow-x:hidden}
+#app{min-height:100vh;display:flex;justify-content:center;align-items:center;padding:25px}
+.card{width:680px;max-width:94vw;padding:42px;background:rgba(255,255,255,.97);border:1px solid #ddd7d3;box-shadow:0 15px 50px rgba(45,30,25,.08)}
+h1{text-align:center;font-size:27px;font-weight:400;letter-spacing:4px;margin:0 0 9px}
+.subtitle{text-align:center;color:#aaa19d;font-size:11px;letter-spacing:2px;margin-bottom:34px}
+.description{font-size:15px;line-height:2;color:#696360}.start-btn{display:block;margin:34px auto 0;padding:12px 42px;background:#fff;color:#514a47;border:1px solid #aaa29d;cursor:pointer;font-family:inherit}
+.question-number{color:#aaa19d;font-size:12px;letter-spacing:1px;margin-bottom:22px}.question{font-size:20px;line-height:1.8;margin-bottom:25px;white-space:pre-line}
+.options,.dialogue-options{display:flex;flex-direction:column;gap:9px}.option{width:100%;padding:14px 16px;text-align:left;background:#fff;color:#403b39;border:1px solid #d8d2cf;cursor:pointer;font-family:inherit;transition:.25s}
+.option:hover{background:#f5efec;border-color:#a98b82}.option.selected{background:#eee5e1;border-color:#927067}.option.fade{opacity:0;pointer-events:none}
+.feedback{min-height:58px;margin-top:18px;font-size:13px;line-height:1.8;color:#8c8581;opacity:0;transition:opacity .6s}.feedback.show{opacity:1}.feedback-title{font-size:10px;letter-spacing:2px;color:#aaa19d}
+.progress{height:2px;margin-top:28px;background:#e6dfdc}.progress-bar{height:100%;background:#99786f;transition:width .5s}
+body.horror{background:radial-gradient(circle at 50% 40%,#4b2927,#291514 50%,#090505);color:#ddd0cc}
+body.horror .card{background:rgba(27,14,14,.95);border-color:#67433e;box-shadow:0 25px 90px rgba(0,0,0,.65)}
+body.horror h1,body.horror .question{color:#dfccc7}body.horror .subtitle,body.horror .question-number{color:#98716b}
+body.horror .description,body.horror .feedback{color:#bca9a4}body.horror .feedback-title{color:#98716b}
+body.horror .option{background:#241413;color:#d6c4bf;border-color:#62413c}.horror .option:hover{background:#38201e}
+body.horror .progress{background:#3c2422}.horror .progress-bar{background:#985a52}
 body.horror .start-btn{background:#241413;color:#d6c4bf;border-color:#68423d}
-body.horror .feedback{color:#aa8b85}
-
-#noise{
-    position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0;
-    background:repeating-linear-gradient(0deg,rgba(255,255,255,.15) 0px,rgba(255,255,255,.15) 1px,rgba(0,0,0,.18) 1px,rgba(0,0,0,.18) 3px);
-    mix-blend-mode:screen
-}
-#noise.active{animation:staticBurst .7s steps(7)}
-@keyframes staticBurst{
-    0%{opacity:0}15%{opacity:.30}30%{opacity:.05}47%{opacity:.24}68%{opacity:.08}100%{opacity:0}
-}
-body.shake #app{animation:screenShake .55s}
-@keyframes screenShake{
-    0%{transform:translate(0,0)}20%{transform:translate(-3px,1px)}40%{transform:translate(3px,-2px)}
-    60%{transform:translate(-2px,2px)}80%{transform:translate(2px,-1px)}100%{transform:translate(0,0)}
-}
-#darkTransition{
-    position:fixed;inset:0;z-index:3000;pointer-events:none;opacity:0;
-    background:radial-gradient(circle,rgba(95,30,25,.02),rgba(8,3,3,.94));
-    transition:opacity 5s ease
-}
+#noise{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.15) 0 1px,rgba(0,0,0,.18) 1px 3px);mix-blend-mode:screen}
+#noise.active{animation:static .7s steps(7)}@keyframes static{0%{opacity:0}15%{opacity:.3}30%{opacity:.05}47%{opacity:.24}68%{opacity:.08}100%{opacity:0}}
+#darkTransition{position:fixed;inset:0;z-index:3000;pointer-events:none;opacity:0;background:radial-gradient(circle,rgba(95,30,25,.02),rgba(8,3,3,.94));transition:opacity 6s}
 #darkTransition.active{opacity:.58}
-.dialogue{
-    text-align:center;min-height:230px;display:flex;flex-direction:column;justify-content:center
-}
-.dialogue-speaker{font-size:10px;letter-spacing:4px;color:#88615b;margin-bottom:24px}
-.dialogue-text{min-height:90px;font-size:19px;line-height:2;color:#d8c5c0;white-space:pre-line}
-.dialogue-options{margin-top:22px;display:flex;flex-direction:column;gap:8px}
-#whisper{
-    position:fixed;left:50%;bottom:11%;transform:translateX(-50%);z-index:4000;
-    color:#884a43;font-size:12px;letter-spacing:3px;opacity:0;pointer-events:none;white-space:nowrap
-}
-#whisper.show{animation:whisperAppear 4s forwards}
-@keyframes whisperAppear{
-    0%{opacity:0}20%{opacity:.65}40%{opacity:.13}65%{opacity:.48}100%{opacity:0}
-}
-#threeSecond{
-    position:fixed;inset:0;z-index:6000;display:flex;justify-content:center;align-items:center;
-    background:rgba(5,3,3,.96);opacity:0;pointer-events:none;transition:opacity .35s
-}
-#threeSecond.show{opacity:1;pointer-events:auto}
-.three-box{width:650px;max-width:90vw;text-align:center;color:#ddcbc6}
-.three-small{font-size:10px;letter-spacing:5px;color:#906d67;margin-bottom:28px}
-.three-title{font-size:21px;line-height:2;margin-bottom:28px}
-.three-option{
-    display:block;width:100%;max-width:430px;margin:8px auto;padding:12px;
-    background:rgba(49,24,22,.72);color:#d1bdb8;border:1px solid #68413c;font-family:inherit;cursor:pointer
-}
-.three-timer{width:100%;max-width:430px;height:2px;margin:25px auto 0;background:#382321}
-.three-timer-bar{width:100%;height:100%;background:#985b53;animation:timerThree 3s linear forwards}
-@keyframes timerThree{from{width:100%}to{width:0%}}
-.single-answer{width:220px;margin:35px auto 0;text-align:center}
-.meta-note{
-    text-align:center;color:#9a756e;font-size:11px;letter-spacing:1px;min-height:18px;margin-top:18px
-}
-.ending-line{
-    margin-top:26px;text-align:center;color:#9a756e;font-size:13px;line-height:2;min-height:52px
-}
-.heart-option{text-align:center}
-.mini-hidden{font-size:10px;letter-spacing:2px;color:#8b6b66;text-align:center;margin-top:18px;opacity:.75}
-@media(max-width:600px){
-    #app{padding:14px}.card{padding:27px 21px}h1{font-size:22px}.question{font-size:18px}.dialogue-text{font-size:17px}
-}
+#whisper{position:fixed;left:50%;bottom:11%;transform:translateX(-50%);z-index:4000;color:#884a43;font-size:12px;letter-spacing:3px;opacity:0;pointer-events:none;white-space:nowrap}
+#whisper.show{animation:whisper 4s forwards}@keyframes whisper{0%{opacity:0}20%{opacity:.65}40%{opacity:.13}65%{opacity:.48}100%{opacity:0}}
+#threeSecond{position:fixed;inset:0;z-index:6000;display:flex;justify-content:center;align-items:center;background:rgba(5,3,3,.96);opacity:0;pointer-events:none;transition:.35s}
+#threeSecond.show{opacity:1;pointer-events:auto}.three-box{width:650px;max-width:90vw;text-align:center;color:#ddcbc6}
+.three-small{font-size:10px;letter-spacing:5px;color:#906d67;margin-bottom:28px}.three-title{font-size:21px;line-height:2;margin-bottom:28px}
+.three-option{display:block;width:100%;max-width:430px;margin:8px auto;padding:12px;background:rgba(49,24,22,.72);color:#d1bdb8;border:1px solid #68413c;font-family:inherit;cursor:pointer}
+.three-timer{height:2px;max-width:430px;margin:25px auto 0;background:#382321}.three-timer-bar{height:100%;background:#985b53;animation:timer 3s linear forwards}
+@keyframes timer{from{width:100%}to{width:0}}.dialogue{text-align:center;min-height:230px;display:flex;flex-direction:column;justify-content:center}
+.dialogue-speaker{font-size:10px;letter-spacing:4px;color:#88615b;margin-bottom:24px}.dialogue-text{min-height:90px;font-size:19px;line-height:2;color:#d8c5c0;white-space:pre-line}
+.error404{text-align:center;font-family:Arial,sans-serif}.error404-code{font-size:110px;font-weight:700;letter-spacing:5px;color:#555}.error404-text{color:#888}
+body.shake #app{animation:shake .55s}@keyframes shake{0%{transform:translate(0)}20%{transform:translate(-3px,1px)}40%{transform:translate(3px,-2px)}60%{transform:translate(-2px,2px)}80%{transform:translate(2px,-1px)}100%{transform:translate(0)}}
+@media(max-width:600px){#app{padding:14px}.card{padding:27px 21px}h1{font-size:22px}.question{font-size:18px}.dialogue-text{font-size:17px}.error404-code{font-size:80px}}
 </style>
 </head>
-
-<body class="normal">
-<div id="noise"></div>
-<div id="darkTransition"></div>
-<div id="whisper"></div>
-
-<div id="threeSecond">
-    <div class="three-box">
-        <div class="three-small">請立即回答</div>
-        <div class="three-title" id="threeTitle">如果你現在回頭，<br>你覺得房間裡會多出什麼？</div>
-        <button class="three-option" onclick="threeAnswer(0)">一個人</button>
-        <button class="three-option" onclick="threeAnswer(1)">一個影子</button>
-        <button class="three-option" onclick="threeAnswer(2)">什麼都沒有</button>
-        <button class="three-option" onclick="threeAnswer(3)">我不想回頭看</button>
-        <div class="three-timer"><div class="three-timer-bar" id="threeTimerBar"></div></div>
-    </div>
-</div>
-
-<div id="app"></div>
+<body>
+<div id="noise"></div><div id="darkTransition"></div><div id="whisper"></div>
+<div id="threeSecond"><div class="three-box"></div></div><div id="app"></div>
 
 <script>
-/* =========================================================
-   V24 狀態與資料
-========================================================= */
+/* ===================== 第二十四版 =====================
+   第22版骨架 + 前10題客觀評價
+   ===================================================== */
 
-const normalQuestions = [
-{q:"當你情緒低落時，你最希望喜歡的人怎麼做？",a:["陪我聊聊天。","先給我一點空間。","直接問我發生了什麼。","陪在旁邊，不一定要說話。"]},
-{q:"你認為戀人之間需要知道彼此每天的行程嗎？",a:["不用，彼此都有自己的生活。","大概知道就好。","如果對方願意，我會想知道。","重要的事情可以互相說。"]},
-{q:"如果對方一整天沒有主動找你，你會？",a:["做自己的事情。","晚一點再傳訊息。","有點想知道他在忙什麼。","如果和平常差很多，會問問。"]},
-{q:"如果對方說今天想一個人，你會？",a:["尊重他的決定。","告訴他需要時可以找我。","有點失落，但還是會給空間。","等他自己願意說。"]},
-{q:"如果你傳了一則訊息，對方兩個小時都沒有回，你會？",a:["沒關係，他可能在忙。","偶爾看一下手機。","有點期待通知。","如果很反常，會稍微擔心。"]},
-{q:"你覺得戀人應該知道彼此的手機密碼嗎？",a:["不用。","知道也沒關係，但不需要查看。","如果彼此願意可以交換。","我比較重視信任，而不是密碼。"]},
-{q:"如果對方突然取消原本約好的見面，你會？",a:["沒關係，下次再約。","問問是不是發生了什麼。","會有一點失望。","看取消的理由。"]},
-{q:"如果你發現對方已讀了訊息，卻沒有回覆，你會？",a:["等他有時間再回。","過一陣子再看看。","會稍微想一下是不是說錯了什麼。","如果一直沒有回，會再問一次。"]},
-{q:"平常很快回你的人，突然六個小時沒有回覆，你會？",a:["他可能真的很忙。","等明天再看看。","會覺得有一點奇怪。","會傳一句「還好嗎？」"]},
-{q:"你認為一段健康的關係最重要的是什麼？",a:["信任。","溝通。","陪伴。","彼此尊重。"]}
+const normalQuestions=[
+["當你情緒低落時，你最希望喜歡的人怎麼做？",
+["陪我聊聊天。","先給我一點空間。","直接問我發生了什麼。","陪在旁邊，不一定要說話。"],
+["你傾向透過交流獲得情緒支持。","你比較習慣保留空間，自己整理情緒。","你傾向直接溝通，希望問題能被理解與處理。","你重視陪伴本身，不一定需要大量言語。"]],
+["你認為戀人之間需要知道彼此每天的行程嗎？",
+["不用，彼此都有自己的生活。","大概知道就好。","如果對方願意，我會想知道。","重要的事情可以互相說。"],
+["你認為關係中仍需要保有自己的生活與界線。","你傾向適度了解彼此，而不是掌握所有細節。","你願意了解對方，同時重視對方的意願。","你認為重要資訊適合主動分享。"]],
+["如果對方一整天沒有主動找你，你會？",
+["做自己的事情。","晚一點再傳訊息。","有點想知道他在忙什麼。","如果和平常差很多，會問問。"],
+["你不容易因短時間沒有聯絡而影響自己的生活。","你會先維持自己的節奏，同時留意對方狀況。","你會比較注意對方的動態與聯絡變化。","你會根據平常狀況判斷，必要時主動確認。"]],
+["如果對方說今天想一個人，你會？",
+["尊重他的決定。","告訴他需要時可以找我。","有點失落，但還是會給空間。","等他自己願意說。"],
+["你能接受對方暫時需要自己的空間。","你會給予空間，同時讓對方知道你願意支持他。","你可能會有些失落，但仍會尊重對方的需求。","你傾向等待對方準備好後，再主動談自己的感受。"]],
+["如果你傳了一則訊息，對方兩個小時都沒有回，你會？",
+["沒關係，他可能在忙。","偶爾看一下手機。","有點期待通知。","如果很反常，會稍微擔心。"],
+["你通常不會因短時間沒有回覆而過度解讀。","你會留意訊息，但通常不會立即採取行動。","你會比較在意通知，也容易注意等待時間。","你會參考對方平常的習慣，再判斷是否需要擔心。"]],
+["你覺得戀人應該知道彼此的手機密碼嗎？",
+["不用。","知道也沒關係，但不需要查看。","如果彼此願意可以交換。","我比較重視信任，而不是密碼。"],
+["你認為信任不需要建立在交換私人資訊上。","你不排斥對方知道，但仍然重視使用上的界線。","你接受雙方自願的資訊共享。","你更重視彼此信任，而不是掌握私人資訊。"]],
+["如果對方突然取消原本約好的見面，你會？",
+["沒關係，下次再約。","問問是不是發生了什麼。","會有一點失望。","看取消的理由。"],
+["你通常能接受計畫改變，也比較有彈性。","你會先關心對方是否遇到了什麼事情。","你會感到失望，但不一定會因此責怪對方。","你傾向根據實際原因判斷自己的反應。"]],
+["如果你發現對方已讀了訊息，卻沒有回覆，你會？",
+["等他有時間再回。","過一陣子再看看。","會稍微想一下是不是說錯了什麼。","如果一直沒有回，會再問一次。"],
+["你傾向相信對方可能只是暫時沒有空。","你會稍微注意，但通常不會立即下結論。","你容易從自己的訊息開始檢視可能的原因。","如果等待時間過長，你會傾向主動確認。"]],
+["平常很快回你的人，突然六個小時沒有回覆，你會？",
+["他可能真的很忙。","等明天再看看。","會覺得有一點奇怪。","會傳一句「還好嗎？」"],
+["即使出現變化，你仍傾向先相信對方可能真的很忙。","你會先等待觀察，不急著做出判斷。","你會注意到和平常不同的地方。","你會透過簡單訊息確認對方是否平安。"]],
+["你認為一段健康的關係最重要的是什麼？",
+["信任。","溝通。","陪伴。","彼此尊重。"],
+["你認為穩定的關係需要建立在彼此信任上。","你認為問題需要透過交流與理解處理。","你認為共同經歷與陪伴是關係的重要基礎。","你重視雙方的界線、選擇與獨立性。"]]
 ];
 
-const supplementQuestions = [
-{q:"如果你的伴侶希望知道你每天去了哪裡，你會覺得？",a:["這很正常，偶爾分享就好。","可以說，但不需要事事交代。","如果對方一直追問，我會有點不舒服。","我會希望彼此保有自己的空間。"]},
-{q:"如果你沒有及時回覆訊息，對方一直問你去了哪裡，你會？",a:["解釋自己剛才在做什麼。","告訴對方自己現在有事情。","覺得有點煩，但還是會回答。","希望對方理解我不可能隨時在線。"]},
-{q:"你現在是一個人嗎？",a:["是。","不是。","我不知道。","……為什麼問？"]},
-{q:"如果你發現對方總能很快知道你今天去了哪些地方，你會？",a:["覺得只是剛好。","問問他怎麼知道的。","開始注意這件事。","覺得有點不舒服。"]},
-{q:"那你現在在哪裡？",a:["在家。","在房間。","在外面。","不告訴你。"]}
+const supplements=[
+{q:"你現在一個人嗎？",a:["是。","不是。","不確定。","……"]},
+{q:"你現在在哪？",a:["在家。","在學校。","在外面。","其他地方。"]}
 ];
 
-const normalFeedback = [
-["你似乎比較重視陪伴，而不是立即得到答案。","你會給對方空間。","你希望對方直接理解你的情緒。","你在意有人安靜地陪著你。"],
-["你重視自己的生活界線。","你願意分享，但不希望被要求交代。","你對彼此的生活有一定程度的好奇。","你傾向把重要的事情說清楚。"],
-["你不太容易被單次的沉默影響。","你會先觀察，再決定要不要聯絡。","你會注意對方的動向。","異常的改變會讓你想確認對方是否安好。"],
-["你願意尊重對方的獨處時間。","你會留下聯絡的可能。","你雖然失落，但仍會給空間。","你比較傾向等對方主動。"],
-["你會把沒有回覆理解成可能的忙碌。","你會留意手機，但不一定會追問。","你會期待通知。","你會根據平常的習慣判斷是否異常。"],
-["你把信任和界線分得很清楚。","你接受透明，但不認為查看是必要的。","你願意在雙方同意下分享。","你更看重互相信任。"],
-["你能接受計畫改變。","你會先確認原因。","你會感到失望，但不一定追究。","你會依照情況判斷。"],
-["你傾向給對方時間。","你會再觀察。","你可能會反思自己是不是說了什麼。","你會希望得到一個明確回覆。"],
-["你會先相信對方可能正在忙。","你願意等待。","你會注意和平常不同的地方。","你會主動確認狀況。"],
-["你把關係建立在多個因素上，而不是單一答案。","你很重視說清楚。","你在意彼此的陪伴。","你重視界線與尊重。"]
-];
+let phase="normal",current=0,normalAnswers=[],supplementAnswers=[],audioCtx=null,threeTimer=null,elevenTimer=null;
 
-/* =========================================================
-   狀態
-========================================================= */
+function initAudio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==="suspended")audioCtx.resume()}
+function tone(f,d,v,type="sine"){if(!audioCtx)return;let o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(.0001,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(v,audioCtx.currentTime+.025);g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+d);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+d+.04)}
+function knock(v=.8){tone(78,.2,v,"triangle");setTimeout(()=>tone(53,.16,v*.62),75)}
+function footstep(v=.3){tone(105,.13,v,"triangle");setTimeout(()=>tone(72,.1,v*.55),45)}
+function hum(d=2,v=.025){tone(47,d,v)}
+function noiseFlash(){let n=document.getElementById("noise");n.classList.remove("active");void n.offsetWidth;n.classList.add("active");setTimeout(()=>n.classList.remove("active"),700)}
+function whisper(t){let w=document.getElementById("whisper");w.textContent=t;w.classList.remove("show");void w.offsetWidth;w.classList.add("show")}
+function shake(){document.body.classList.remove("shake");void document.body.offsetWidth;document.body.classList.add("shake");setTimeout(()=>document.body.classList.remove("shake"),600)}
 
-let phase="normal";
-let current=0;
-let normalAnswers=[];
-let supplementAnswers=[];
-let finalNormalAnswered=false;
-let audioCtx=null;
-let threeTimer=null;
-let threeResolved=false;
-let lastThreeAnswer=null;
-let doorAnswerType=null;
-let playStart=Date.now();
-
-const storageKey="relationship_v24_memory";
-
-function getMemory(){
-    try{
-        const raw=localStorage.getItem(storageKey);
-        if(raw) return JSON.parse(raw);
-    }catch(e){}
-    return {
-        plays:0,
-        endings:{open:0,closed:0,unknown:0,stop:0},
-        choices:{},
-        seenAll:false,
-        hiddenSeen:false
-    };
-}
-function saveMemory(m){
-    try{localStorage.setItem(storageKey,JSON.stringify(m));}catch(e){}
-}
-function incrementChoice(key){
-    const m=getMemory();
-    m.choices[key]=(m.choices[key]||0)+1;
-    saveMemory(m);
-}
-function beginPlay(){
-    const m=getMemory();
-    m.plays=(m.plays||0)+1;
-    saveMemory(m);
-    playStart=Date.now();
-}
-
-/* =========================================================
-   顏色狀態
-========================================================= */
-
-function enterNormalMode(){
-    document.body.classList.remove("horror","shake");
-    document.body.classList.add("normal");
-}
-function enterHorrorMode(){
-    document.body.classList.remove("normal","shake");
-    document.body.classList.add("horror");
-}
-function clearEffects(){
-    document.getElementById("darkTransition").classList.remove("active");
-    document.getElementById("noise").classList.remove("active");
-    document.body.classList.remove("shake");
-}
-
-/* =========================================================
-   音效
-========================================================= */
-
-function initAudio(){
-    if(!audioCtx){
-        audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    }
-    if(audioCtx.state==="suspended") audioCtx.resume();
-}
-function tone(frequency,duration,volume,type="sine"){
-    if(!audioCtx)return;
-    const oscillator=audioCtx.createOscillator();
-    const gain=audioCtx.createGain();
-    oscillator.type=type;
-    oscillator.frequency.value=frequency;
-    gain.gain.setValueAtTime(.0001,audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(volume,audioCtx.currentTime+.025);
-    gain.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+duration);
-    oscillator.connect(gain);gain.connect(audioCtx.destination);
-    oscillator.start();oscillator.stop(audioCtx.currentTime+duration+.04);
-}
-function staticSound(strength=.035,duration=.18){
-    if(!audioCtx)return;
-    const buffer=audioCtx.createBuffer(1,audioCtx.sampleRate*duration,audioCtx.sampleRate);
-    const data=buffer.getChannelData(0);
-    for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*strength;
-    const source=audioCtx.createBufferSource();
-    const gain=audioCtx.createGain();
-    gain.gain.value=.65;source.buffer=buffer;source.connect(gain);gain.connect(audioCtx.destination);source.start();
-}
-function lowHum(duration=2.2,volume=.025){
-    if(!audioCtx)return;
-    const oscillator=audioCtx.createOscillator();
-    const gain=audioCtx.createGain();
-    oscillator.type="sine";oscillator.frequency.value=47;
-    gain.gain.setValueAtTime(.0001,audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(volume,audioCtx.currentTime+.55);
-    gain.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+duration);
-    oscillator.connect(gain);gain.connect(audioCtx.destination);
-    oscillator.start();oscillator.stop(audioCtx.currentTime+duration+.1);
-}
-function knock(volume=.28){
-    if(!audioCtx)return;
-    tone(83,.12,volume,"sine");
-    setTimeout(()=>tone(61,.08,volume*.35,"sine"),65);
-}
-function footstep(volume=.12){
-    if(!audioCtx)return;
-    tone(72,.08,volume,"sine");
-    setTimeout(()=>tone(58,.07,volume*.7,"sine"),95);
-    setTimeout(()=>tone(72,.07,volume*.8,"sine"),205);
-}
-
-/* =========================================================
-   視覺效果
-========================================================= */
-
-function noiseFlash(){
-    const noise=document.getElementById("noise");
-    noise.classList.remove("active");void noise.offsetWidth;noise.classList.add("active");
-    staticSound(.045,.35);
-    setTimeout(()=>noise.classList.remove("active"),700);
-}
-function shake(){
-    document.body.classList.remove("shake");void document.body.offsetWidth;document.body.classList.add("shake");
-    setTimeout(()=>document.body.classList.remove("shake"),600);
-}
-function whisper(text){
-    const element=document.getElementById("whisper");
-    element.textContent=text;element.classList.remove("show");void element.offsetWidth;element.classList.add("show");
-}
-
-/* =========================================================
-   首頁
-========================================================= */
-
-function home(){
-    enterNormalMode();clearEffects();
-    const m=getMemory();
-    document.getElementById("app").innerHTML=`
-        <div class="card">
-            <h1>親密關係傾向測驗</h1>
-            <div class="subtitle">RELATIONSHIP & ATTACHMENT TEST</div>
-            <div class="description">
-                <p>歡迎參與本次匿名情感傾向測驗。</p>
-                <p>以下問題沒有標準答案，請依照你的第一直覺回答。</p>
-                <p>測驗約需 3～5 分鐘。</p>
-                <p style="color:#aaa;font-size:12px;margin-top:28px;">本測驗僅供娛樂使用，不代表正式心理評估。</p>
-                ${m.plays>0?`<div class="mini-hidden">你已經來過 ${m.plays} 次。</div>`:""}
-            </div>
-            <button class="start-btn" onclick="startTest()">開始測驗</button>
-        </div>`;
-}
+function home(){document.body.className="";app.innerHTML=`<div class="card"><h1>親密關係傾向測驗</h1><div class="subtitle">RELATIONSHIP & ATTACHMENT TEST</div><div class="description"><p>歡迎參與本次匿名情感傾向測驗。</p><p>以下問題沒有標準答案，請依照你的第一直覺回答。</p><p>測驗約需 3～5 分鐘。</p><p style="color:#aaa;font-size:12px;margin-top:28px">本測驗僅供娛樂使用，不代表正式心理評估。</p></div><button class="start-btn" onclick="startTest()">開始測驗</button></div>`}
 home();
 
-/* =========================================================
-   開始
-========================================================= */
+function startTest(){initAudio();phase="normal";current=0;normalAnswers=[];supplementAnswers=[];document.body.className="";showQuestion()}
 
-function startTest(){
-    initAudio();beginPlay();
-    phase="normal";current=0;normalAnswers=[];supplementAnswers=[];
-    finalNormalAnswered=false;threeResolved=false;lastThreeAnswer=null;doorAnswerType=null;
-    enterNormalMode();clearEffects();showQuestion();
-}
+function branch3(){let x=supplementAnswers[1];return[
+{q:"你說你在家……\n\n那你現在家裡還有其他人嗎？",a:["有。","沒有。","我不知道。","為什麼問這個？"]},
+{q:"你說你在學校……\n\n現在這個時間，你還在學校嗎？",a:["是。","不是。","我不知道。","你怎麼知道我在哪？"]},
+{q:"你說你在外面……\n\n你有注意到周圍的聲音嗎？",a:["有。","沒有。","有一點。","我沒有注意。"]},
+{q:"你說你在其他地方……\n\n那裡現在安靜嗎？",a:["很安靜。","還好。","有一點吵。","你為什麼要知道？"]}
+][x]||null}
+function branch4(){let l=supplementAnswers[1],t=supplementAnswers[2];if(l===0)return t===1?{q:"你說你現在家裡沒有其他人。\n\n那剛才門外的聲音，你覺得是什麼？",a:["可能是風。","鄰居吧。","我不知道。","……我不想回答。"]}:{q:"如果你現在聽見門外有人叫你的名字，你會怎麼做？",a:["確認是誰。","不理會。","先聽聽看。","把門鎖好。"]};if(l===1)return{q:"你剛才說你在學校。\n\n現在附近有其他人在走動嗎？",a:["有。","沒有。","不確定。","我沒有注意。"]};if(l===2)return{q:"你說你現在在外面。\n\n剛才經過的地方，你還記得嗎？",a:["記得。","不太記得。","只記得一部分。","為什麼要問這個？"]};return{q:"你剛才說你在其他地方。\n\n那你現在聽得到附近的聲音嗎？",a:["聽得到。","聽不太到。","有一點。","為什麼？"]}}
+function branch5(){let a=supplementAnswers[0],l=supplementAnswers[1];if(a===0&&l===0)return{q:"如果你現在真的只有一個人在家……\n\n你會確認一下門有沒有鎖嗎？",a:["會。","不用。","剛才已經鎖了。","……現在會。"]};if(l===1)return{q:"如果你現在突然在學校看見一個熟悉的人影……\n\n你會走過去嗎？",a:["會。","不會。","先看看。","我不想知道。"]};if(l===2)return{q:"如果你現在回頭，發現剛才經過的地方站著一個人……\n\n你會回頭看第二次嗎？",a:["會。","不會。","可能會。","我現在不想回頭。"]};return{q:"如果現在有人知道你正在做這份測驗……\n\n你會覺得奇怪嗎？",a:["會。","不會。","有一點。","你到底是誰？"]}}
 
-/* =========================================================
-   題目
-========================================================= */
+const reactions=[
+["原來你現在是一個人啊。","你發現我了？","……你自己也不確定嗎？","不想回答這個嗎？"],
+["原來你現在在家。","原來你還在學校啊。","原來你現在在外面。","原來是這樣啊。"],
+["原來你有注意到。","原來你沒有注意。","嗯……你有聽見。","原來你一直沒有注意。"],
+["原來你會這樣做啊。","我知道了。","嗯……我明白了。","原來你是這樣想的。"],
+["原來你會這麼選。","嗯……知道了。","原來你不會。","……最後一個問題。"]
+];
 
 function showQuestion(){
-    const list=phase==="normal"?normalQuestions:supplementQuestions;
-    if(current>=list.length){
-        if(phase==="normal") showEleven();
-        else afterSupplements();
-        return;
-    }
-
-    const q=list[current];
-    let displayQuestion=q.q;
-
-    /* 第3題分支 */
-    if(phase==="supplement" && current===2){
-        const prior=supplementAnswers.slice(0,2);
-        const privacyCount=prior.filter(v=>v===2||v===3).length;
-        if(privacyCount>=1){
-            displayQuestion="你現在是一個人嗎？";
-        }else{
-            displayQuestion="你現在是一個人嗎？";
-        }
-    }
-
-    /* 第5題根據第3題回答改變 */
-    if(phase==="supplement" && current===4){
-        const q3=supplementAnswers[2];
-        if(q3===0) displayQuestion="那你現在在哪裡？";
-        else if(q3===1) displayQuestion="那……你身邊的人知道你正在做什麼嗎？";
-        else if(q3===2) displayQuestion="你真的不知道自己是不是一個人嗎？";
-        else displayQuestion="那你在哪裡？";
-    }
-
-    const percentage=(current/list.length)*100;
-
-    document.getElementById("app").innerHTML=`
-        <div class="card">
-            <div class="question-number">${phase==="normal"?`第 ${current+1} 題 / 共 10 題`:`補充問題 ${current+1} / 5`}</div>
-            <div class="question">${displayQuestion}</div>
-            <div class="options" id="options"></div>
-            <div class="feedback" id="feedback"></div>
-            <div class="progress"><div class="progress-bar" style="width:${percentage}%"></div></div>
-        </div>`;
-
-    const container=document.getElementById("options");
-    q.a.forEach((text,index)=>{
-        const button=document.createElement("button");
-        button.className="option";
-        button.textContent=String.fromCharCode(65+index)+". "+text;
-        button.onclick=()=>chooseAnswer(index);
-        container.appendChild(button);
-    });
+ let q,total;
+ if(phase==="normal"){if(current>=10)return showEleven();q=normalQuestions[current];total=11}
+ else{total=5;q=current<2?supplements[current]:current===2?branch3():current===3?branch4():branch5()}
+ app.innerHTML=`<div class="card"><div class="question-number">${phase==="normal"?`第 ${current+1} 題 / 共 11 題`:`補充問題 ${current+1} / 5`}</div><div class="question">${q.q}</div><div class="options" id="options"></div><div class="feedback" id="feedback"></div><div class="progress"><div class="progress-bar" style="width:${current/total*100}%"></div></div></div>`;
+ q.a.forEach((t,i)=>{let b=document.createElement("button");b.className="option";b.textContent=String.fromCharCode(65+i)+". "+t;b.onclick=()=>chooseAnswer(i);options.appendChild(b)})
 }
-
-/* =========================================================
-   第11題：紅黑、3秒、喜歡
-========================================================= */
+function chooseAnswer(i){
+ let bs=document.querySelectorAll(".option");bs.forEach(b=>b.disabled=true);bs[i].classList.add("selected");bs.forEach((b,n)=>{if(n!==i)setTimeout(()=>b.classList.add("fade"),100)});
+ let f=document.getElementById("feedback");
+ if(phase==="normal"){f.innerHTML=`<div class="feedback-title">客觀評價</div>${normalQuestions[current][2][i]}`;setTimeout(()=>f.classList.add("show"),250);if(current===8)setTimeout(noiseFlash,500);if(current===9)setTimeout(()=>hum(1.1,.015),650)}
+ else{f.innerHTML=`<div class="feedback-title">SYSTEM</div>${reactions[current][i]||"原來你是這麼想的啊。"}`;setTimeout(()=>f.classList.add("show"),250);if(current===1)setTimeout(()=>hum(.9,.018),500);if(current===2)setTimeout(()=>hum(1.2,.022),400);if(current===3)setTimeout(()=>hum(1.2,.025),400);if(current===4){[.34,.43,.53,.63].forEach((v,n)=>setTimeout(()=>footstep(v),900+n*550))}}
+ if(phase==="normal")normalAnswers[current]=i;else supplementAnswers[current]=i;current++;setTimeout(showQuestion,phase==="supplement"?1450:950)
+}
 
 function showEleven(){
-    enterHorrorMode();
-    document.getElementById("app").innerHTML=`
-        <div class="card">
-            <div class="question-number">第 11 題</div>
-            <div class="question" style="text-align:center;">你喜歡我嗎？</div>
-            <div class="description" style="text-align:center;color:#a98b85;font-size:12px;">
-                你不想回答我嗎？
-            </div>
-            <div style="height:70px;"></div>
-        </div>`;
-
-    threeResolved=false;
-    threeTimer=setTimeout(()=>{
-        if(!threeResolved){
-            threeResolved=true;
-            showPostEleven(false);
-        }
-    },3000);
-    setTimeout(()=>{
-        if(!threeResolved){
-            document.getElementById("app").innerHTML=`
-                <div class="card">
-                    <div class="question-number">第 11 題</div>
-                    <div class="question" style="text-align:center;">你喜歡我嗎？</div>
-                    <div class="description" style="text-align:center;color:#a98b85;font-size:12px;">你不想回答我嗎？</div>
-                </div>`;
-        }
-    },1200);
+ document.body.classList.add("horror");noiseFlash();hum(1.5,.018);clearTimeout(elevenTimer);
+ app.innerHTML=`<div class="card"><div class="question-number">第 11 題 / 共 11 題</div><div class="question" style="text-align:center">你喜歡我嗎？</div><button class="start-btn" style="width:220px;text-align:center" onclick="answerEleven()">喜歡</button></div>`;
+ elevenTimer=setTimeout(()=>{noiseFlash();document.body.style.background="#000";app.innerHTML="";setTimeout(()=>{document.body.className="";normalResult()},650)},1000)
 }
-function showPostEleven(answered){
-    enterNormalMode();
-    document.getElementById("app").innerHTML=`
-        <div class="card">
-            <h1>測驗結束</h1>
-            <div class="description" style="text-align:center;">
-                <p>測驗結束。</p>
-                <div class="ending-line" id="endingLine"></div>
-            </div>
-        </div>`;
-    setTimeout(()=>{
-        const line=document.getElementById("endingLine");
-        if(!line)return;
-        line.textContent=answered?"我記得你的答案。":"你沒有回答。";
-    },1200);
-    setTimeout(beginSupplementNotice,2600);
+function answerEleven(){clearTimeout(elevenTimer);app.innerHTML=`<div class="card"><div class="dialogue"><div class="dialogue-text">喜歡。</div></div></div>`;setTimeout(normalResult,1200)}
+
+function normalResult(){
+ document.body.className="";let score=normalAnswers.reduce((a,b)=>a+b,0),title,text;
+ if(score<=12){title="獨立穩定型";text="你很重視彼此的自由與界線。在關係中，你通常不會因為短暫的距離而失去安全感。"}
+ else if(score<=20){title="溫和陪伴型";text="你重視陪伴，也希望彼此能保有自己的空間。對你而言，信任與溝通是維持關係的重要部分。"}
+ else if(score<=28){title="敏感關注型";text="你會注意關係中的細節，也比較容易察覺對方情緒上的變化。當對方突然改變時，你可能會開始思考原因。"}
+ else{title="深度投入型";text="你對重要的人投入程度很高。你會希望了解對方的狀態，也很在意兩個人之間的連結。"}
+ app.innerHTML=`<div class="card"><h1>測驗完成</h1><div class="subtitle">ANALYSIS COMPLETE</div><div class="description"><p>你的回答已經完成分析。</p><p>${text}</p><p style="text-align:center;font-size:22px;color:#67534d;margin-top:28px">${title}</p></div><button class="start-btn" onclick="suppNotice()">查看完整結果</button></div>`
 }
+function suppNotice(){app.innerHTML=`<div class="card"><h1>測驗結果</h1><div class="description" style="text-align:center"><p>分析已完成。</p><p>感謝你的回答。</p></div></div>`;setTimeout(()=>{darkTransition.classList.add("active");document.body.classList.add("horror");hum(3,.025);setTimeout(()=>{darkTransition.classList.remove("active");app.innerHTML=`<div class="card"><h1>補充確認</h1><div class="description"><p>還有 5 項資料需要補充確認。</p><p>這些問題不會影響你的原始結果。</p><p style="color:#9a756e;margin-top:28px">請繼續回答。</p></div><button class="start-btn" onclick="startSupp()">繼續</button></div>`},5000)},1300)}
+function startSupp(){phase="supplement";current=0;supplementAnswers=[];document.body.classList.add("horror");showQuestion()}
+function afterSupp(){dialogue("補充資料已完成。",()=>setTimeout(doorStart,700))}
+function dialogue(text,next=null,opts=[]){app.innerHTML=`<div class="card"><div class="dialogue"><div class="dialogue-speaker">SYSTEM</div><div class="dialogue-text">${text}</div><div class="dialogue-options" id="dopts"></div></div></div>`;opts.forEach(o=>{let b=document.createElement("button");b.className="option";b.textContent=o.text;b.onclick=o.action;dopts.appendChild(b)});if(!opts.length&&next)setTimeout(next,1000)}
 
-/* =========================================================
-   一般回答
-========================================================= */
-
-function chooseAnswer(index){
-    const buttons=document.querySelectorAll(".option");
-    buttons.forEach(b=>b.disabled=true);
-
-    if(phase==="normal") normalAnswers.push(index);
-    else supplementAnswers.push(index);
-
-    buttons[index].classList.add("selected");
-
-    const feedback=document.getElementById("feedback");
-    if(phase==="normal" && normalFeedback[current]){
-        feedback.textContent=normalFeedback[current][index]||"回答已記錄。";
-    }else{
-        feedback.textContent="回答已記錄。";
-    }
-
-    buttons.forEach((button,i)=>{
-        if(i!==index)setTimeout(()=>button.classList.add("fade"),100);
-    });
-
-    /* 逐步讓「他」存在 */
-    if(phase==="normal"){
-        if(current===2){
-            setTimeout(()=>whisper("……知道了。"),650);
-        }
-        if(current===5){
-            setTimeout(()=>whisper("我會記得。"),650);
-        }
-        if(current===7){
-            setTimeout(()=>whisper("你剛才選的是「"+String.fromCharCode(65+index)+"」。"),650);
-        }
-        if(current===8){
-            setTimeout(()=>lowHum(1.1,.015),500);
-            setTimeout(()=>whisper("我也是。"),900);
-        }
-        if(current===9){
-            setTimeout(()=>whisper("你的答案，我都記得。"),700);
-        }
-    }else{
-        if(current===1){
-            setTimeout(()=>whisper("你不喜歡被一直問。"),650);
-        }
-        if(current===2){
-            const words=["原來你是一個人。","原來你不是一個人。","你不知道？","……你為什麼不回答？"];
-            setTimeout(()=>whisper(words[index]),650);
-        }
-        if(current===4){
-            setTimeout(()=>footstep(.10),550);
-            setTimeout(()=>footstep(.08),900);
-        }
-    }
-
-    current++;
-    setTimeout(showQuestion,720);
+function doorStart(){
+ let l=supplementAnswers[1],r=l===0?"你說你現在在家。":l===1?"你說你現在在學校。":l===2?"你說你現在在外面。":"你說你在其他地方。";
+ dialogue(`${r}\n\n剛才……你有沒有聽到什麼？`,null,[{text:"有。",action:()=>doorAns(0)},{text:"沒有。",action:()=>doorAns(1)},{text:"不確定。",action:()=>doorAns(2)}])
 }
-
-/* =========================================================
-   測驗結束 → 恐怖補充
-========================================================= */
-
-function beginSupplementNotice(){
-    enterNormalMode();
-    document.getElementById("app").innerHTML=`
-        <div class="card">
-            <h1>測驗結束</h1>
-            <div class="description" style="text-align:center;">
-                <p>所有主要問題均已完成。</p>
-                <p style="color:#aaa;margin-top:30px;">……</p>
-            </div>
-        </div>`;
-    setTimeout(startSlowHorrorTransition,1800);
+function doorAns(t){
+ if(t===0){setTimeout(()=>knock(.82),400);setTimeout(()=>dialogue("……對。\n\n我也聽到了。",()=>setTimeout(doorChoice,700)),900)}
+ else if(t===1)dialogue("沒有嗎？\n\n那你再聽一次。",()=>setTimeout(()=>{knock(.88);setTimeout(doorChoice,900)},500))
+ else dialogue("不確定也沒關係。\n\n再聽一次。",()=>setTimeout(()=>{knock(.82);setTimeout(()=>knock(.9),650);setTimeout(doorChoice,1500)},500))
 }
-function startSlowHorrorTransition(){
-    enterHorrorMode();
-    document.getElementById("darkTransition").classList.add("active");
-    lowHum(3,.022);
-    setTimeout(showSupplementNotice,4300);
+function doorChoice(){dialogue("我在外面。\n\n你不用開門。\n我只是想跟你說幾句話。",null,[{text:"我會回答你。",action:doorSecond},{text:"你是誰？",action:doorSecond},{text:"離開。",action:doorSecond}])}
+function doorSecond(){dialogue("沒關係。\n\n我只是想聽你說話。",()=>setTimeout(doorFinal,1100))}
+function doorFinal(){
+ threeSecond.classList.add("show");hum(3,.035);clearTimeout(threeTimer);
+ threeSecond.querySelector(".three-box").innerHTML=`<div class="three-small">請立即回答</div><div class="three-title">如果我現在敲門，<br>你會開門嗎？</div><button class="three-option" onclick="doorThree(0)">會。</button><button class="three-option" onclick="doorThree(1)">不會。</button><button class="three-option" onclick="doorThree(2)">我不知道。</button><button class="three-option" onclick="doorThree(3)">……</button><div class="three-timer"><div class="three-timer-bar"></div></div>`;
+ threeTimer=setTimeout(()=>finishThree(),3000)
 }
-function showSupplementNotice(){
-    document.getElementById("darkTransition").classList.remove("active");
-    enterHorrorMode();
-    document.getElementById("app").innerHTML=`
-        <div class="card">
-            <h1>補充確認</h1>
-            <div class="description">
-                <p>還有幾項資料需要確認。</p>
-                <p>這些問題不會改變原始測驗的分類。</p>
-                <p style="color:#9a756e;margin-top:28px;">我還有幾個問題想問你。</p>
-            </div>
-            <button class="start-btn" onclick="startSupplements()">繼續</button>
-        </div>`;
-}
-function startSupplements(){
-    phase="supplement";current=0;enterHorrorMode();showQuestion();
-}
-
-/* =========================================================
-   補充結束
-========================================================= */
-
-function afterSupplements(){
-    showDialogue("補充資料已完成。",()=>{
-        setTimeout(showLikeAgain,900);
-    });
-}
-
-/* =========================================================
-   再問一次喜不喜歡：四個選項逐漸變成喜歡
-========================================================= */
-
-let likeOptions=["喜歡","不喜歡","不知道","討厭"];
-let likeLocked=[false,false,false,false];
-
-function showLikeAgain(){
-    enterHorrorMode();
-    likeOptions=["喜歡","不喜歡","不知道","討厭"];
-    likeLocked=[false,false,false,false];
-
-    document.getElementById("app").innerHTML=`
-        <div class="card">
-            <div class="question-number">補充問題 6</div>
-            <div class="question" style="text-align:center;">
-                我再問你一次。<br>你喜歡我嗎？
-            </div>
-            <div class="options" id="likeOptions"></div>
-            <div class="feedback" id="likeFeedback"></div>
-        </div>`;
-    renderLikeOptions();
-}
-function renderLikeOptions(){
-    const box=document.getElementById("likeOptions");
-    if(!box)return;
-    box.innerHTML="";
-    likeOptions.forEach((text,index)=>{
-        const b=document.createElement("button");
-        b.className="option heart-option";
-        b.textContent=text;
-        b.onclick=()=>answerLike(index);
-        box.appendChild(b);
-    });
-}
-function answerLike(index){
-    incrementChoice("like_"+likeOptions[index]);
-
-    if(likeOptions[index]!=="喜歡"){
-        likeOptions[index]="喜歡";
-        likeLocked[index]=true;
-        const fb=document.getElementById("likeFeedback");
-        if(fb)fb.textContent="嗯。這樣就好了。";
-        renderLikeOptions();
-        setTimeout(()=>whisper("你可以繼續選。"),450);
-        return;
-    }
-
-    const allLike=likeOptions.every(v=>v==="喜歡");
-    if(allLike){
-        document.getElementById("likeOptions").innerHTML="";
-        document.getElementById("likeFeedback").textContent="我就知道。";
-        setTimeout(()=>{
-            showDialogue("這樣才對。\n\n那我們繼續。",()=>{
-                setTimeout(doorDialogueStart,1100);
-            });
-        },1100);
-    }else{
-        const fb=document.getElementById("likeFeedback");
-        if(fb)fb.textContent="還有幾個答案沒有變成喜歡。";
-    }
-}
-
-/* =========================================================
-   對話系統
-========================================================= */
-
-function showDialogue(text,next=null,options=[]){
-    enterHorrorMode();
-    document.getElementById("app").innerHTML=`
-        <div class="card">
-            <div class="dialogue">
-                <div class="dialogue-speaker">……</div>
-                <div class="dialogue-text">${text}</div>
-                <div class="dialogue-options" id="dialogueOptions"></div>
-            </div>
-        </div>`;
-    const box=document.getElementById("dialogueOptions");
-    if(options.length){
-        options.forEach(option=>{
-            const button=document.createElement("button");
-            button.className="option";
-            button.textContent=option.text;
-            button.onclick=option.action;
-            box.appendChild(button);
-        });
-    }else if(next)setTimeout(next,1100);
-}
-
-/* =========================================================
-   門外劇情：依玩家答案與前面資料改變
-========================================================= */
-
-function doorDialogueStart(){
-    const m=getMemory();
-    const q3=supplementAnswers[2];
-    let remembered="我記得你剛才的回答。";
-
-    if(q3===0) remembered="你剛才說你是一個人。";
-    else if(q3===1) remembered="你剛才說你不是一個人。";
-    else if(q3===2) remembered="你剛才說你不知道。";
-    else if(q3===3) remembered="你剛才沒有好好回答我。";
-
-    if(m.plays>=2) remembered+="\n\n而且……你以前也來過。";
-
-    showDialogue(
-        `${remembered}\n\n剛才……門那邊是不是有聲音？`,
-        null,
-        [
-            {text:"好像有。",action:()=>doorAnswer("heard")},
-            {text:"沒有吧。",action:()=>doorAnswer("notheard")},
-            {text:"我不知道。",action:()=>doorAnswer("unsure")}
-        ]
-    );
-}
-function doorAnswer(type){
-    if(type==="heard"){
-        setTimeout(()=>knock(.32),500);
-        setTimeout(()=>showDialogue("……對。\n\n就在那裡。",()=>setTimeout(nextDoorChoice,900)),1000);
-        return;
-    }
-    if(type==="notheard"){
-        showDialogue("沒有嗎？\n\n可能是我聽錯了。",()=>{
-            setTimeout(()=>{
-                knock(.36);
-                setTimeout(nextDoorChoice,1100);
-            },700);
-        });
-        return;
-    }
-    showDialogue("不知道也沒關係。\n\n再聽一次就好了。",()=>{
-        setTimeout(()=>{
-            knock(.29);setTimeout(()=>knock(.29),700);
-            setTimeout(nextDoorChoice,1700);
-        },700);
-    });
-}
-function nextDoorChoice(){
-    showDialogue(
-        "我在外面。\n\n你不用開門。\n我只是想跟你說幾句話。",
-        null,
-        [
-            {text:"我會回答你。",action:()=>doorSecondAnswer("answer")},
-            {text:"你是誰？",action:()=>doorSecondAnswer("who")},
-            {text:"離開。",action:()=>doorSecondAnswer("leave")}
-        ]
-    );
-}
-function doorSecondAnswer(type){
-    if(type==="who"){
-        showDialogue("你真的還不知道嗎？",()=>setTimeout(doorFinalQuestion,1300));
-        return;
-    }
-    if(type==="leave"){
-        showDialogue("好。\n\n我先不說話。",()=>setTimeout(doorFinalQuestion,1600));
-        return;
-    }
-    showDialogue("沒關係。\n\n我只是想聽你說話。",()=>setTimeout(doorFinalQuestion,1300));
-}
-
-/* =========================================================
-   最終開門問題：四條結局
-========================================================= */
-
-function doorFinalQuestion(){
-    const m=getMemory();
-    let extra="";
-    if(m.plays>=5) extra="\n\n這次……你還要換一個答案嗎？";
-
-    showDialogue(
-        "最後一個問題。\n\n如果我現在敲門，\n你會開門嗎？"+extra,
-        null,
-        [
-            {text:"會。",action:()=>doorFinalAnswer("open")},
-            {text:"不會。",action:()=>doorFinalAnswer("closed")},
-            {text:"我不知道。",action:()=>doorFinalAnswer("unknown")},
-            {text:"不要再問了。",action:()=>doorFinalAnswer("stop")}
-        ]
-    );
-}
-
-function doorFinalAnswer(type){
-    doorAnswerType=type;
-    const m=getMemory();
-    m.endings[type]=(m.endings[type]||0)+1;
-    if(Object.values(m.endings).every(v=>v>0))m.seenAll=true;
-    saveMemory(m);
-
-    if(type==="open") endingOpen();
-    else if(type==="closed") endingClosed();
-    else if(type==="unknown") endingUnknown();
-    else endingStop();
-}
-
-function endingOpen(){
-    showDialogue("……好。",()=>{
-        setTimeout(()=>{
-            knock(.30);
-            setTimeout(()=>showDialogue("那我進來了。",()=>{
-                setTimeout(()=>showDialogue("你果然沒有騙我。",()=>{
-                    setTimeout(()=>endingAfterText("門已經打開了。\n\n可是你什麼時候答應讓我進來的？"),1800);
-                }),1500);
-            }),850);
-        },900);
-    });
-}
-function endingClosed(){
-    showDialogue("好。",()=>{
-        setTimeout(()=>showDialogue("那我不進去。",()=>{
-            setTimeout(()=>{
-                knock(.25);
-                setTimeout(()=>showDialogue("我會等。",()=>{
-                    setTimeout(()=>endingAfterText("門可以一直關著。\n\n你總會再回來的。"),1600);
-                }),900);
-            },1000);
-        }),1000);
-    });
-}
-function endingUnknown(){
-    showDialogue("你總是這樣。",()=>{
-        setTimeout(()=>showDialogue("什麼都不知道。",()=>{
-            setTimeout(()=>showDialogue("沒關係。",()=>{
-                setTimeout(()=>{
-                    showDialogue("那我替你決定。",()=>{
-                        setTimeout(()=>{
-                            knock(.34);
-                            setTimeout(()=>endingAfterText("現在呢？"),1000);
-                        },900);
-                    });
-                },1000);
-            }),1000);
-        }),900);
-    });
-}
-function endingStop(){
-    showDialogue("好。",()=>{
-        setTimeout(()=>{
-            document.getElementById("app").innerHTML=`
-                <div class="card">
-                    <div class="dialogue">
-                        <div class="dialogue-speaker">……</div>
-                        <div class="dialogue-text"></div>
-                    </div>
-                </div>`;
-            setTimeout(()=>knock(.22),2800);
-            setTimeout(()=>knock(.24),4200);
-            setTimeout(()=>showDialogue("我不問了。",()=>setTimeout(()=>endingAfterText("有些答案，不需要說出來。"),1600)),5200);
-        },1200);
-    });
-}
-
-/* =========================================================
-   多周目：結局後特殊訊息
-========================================================= */
-
-function endingAfterText(text){
-    const m=getMemory();
-    let extra="";
-    if(m.seenAll && !m.hiddenSeen){
-        extra="\n\n你已經看過所有結局了。\n\n……至少你以為是。";
-    }else if(m.plays>=5){
-        extra="\n\n你又回來了。";
-    }else if(m.plays>=2){
-        extra="\n\n你以前也做過這個選擇。";
-    }
-
-    document.getElementById("app").innerHTML=`
-        <div class="card">
-            <div class="dialogue">
-                <div class="dialogue-speaker">……</div>
-                <div class="dialogue-text">${text}</div>
-                <div class="ending-line">${extra}</div>
-            </div>
-        </div>`;
-
-    setTimeout(()=>{
-        finalDoorSequence();
-    },2600);
-}
-
-/* =========================================================
-   最後3秒限時題
-========================================================= */
-
-function finalDoorSequence(){
-    document.getElementById("app").innerHTML=`
-        <div class="card">
-            <div class="dialogue">
-                <div class="dialogue-speaker">……</div>
-                <div class="dialogue-text">……</div>
-            </div>
-        </div>`;
-
-    setTimeout(()=>knock(.32),900);
-    setTimeout(()=>knock(.36),1900);
-    setTimeout(()=>knock(.40),2900);
-    setTimeout(showThreeSecondQuestion,3800);
-}
-
-function showThreeSecondQuestion(){
-    enterHorrorMode();
-    const popup=document.getElementById("threeSecond");
-    const title=document.getElementById("threeTitle");
-    title.innerHTML="如果我現在就在門外，<br>你覺得我會做什麼？";
-
-    popup.classList.add("show");
-    lowHum(3,.035);
-    const bar=document.getElementById("threeTimerBar");
-    bar.style.animation="none";void bar.offsetWidth;bar.style.animation="timerThree 3s linear forwards";
-
-    clearTimeout(threeTimer);
-    threeResolved=false;
-    threeTimer=setTimeout(()=>{
-        if(!threeResolved)finishThreeSecond();
-    },3000);
-}
-function threeAnswer(answer){
-    if(threeResolved)return;
-    threeResolved=true;clearTimeout(threeTimer);
-    const responses=["你回答得很快。","你真的這樣想嗎？","你還是不相信我。","你不想回答我嗎？"];
-    hideThreeSecond();whisper(responses[answer]);
-    setTimeout(fakeEnding,1100);
-}
-function finishThreeSecond(){
-    threeResolved=true;hideThreeSecond();whisper("你不想回答我嗎？");
-    setTimeout(fakeEnding,1100);
-}
-function hideThreeSecond(){document.getElementById("threeSecond").classList.remove("show");}
-
-/* =========================================================
-   假結束與異常
-========================================================= */
-
-function fakeEnding(){
-    enterHorrorMode();
-    document.getElementById("app").innerHTML=`
-        <div class="card">
-            <h1>測驗結束</h1>
-            <div class="description" style="text-align:center;">
-                <p>所有問題均已完成。</p>
-                <p style="color:#9a756e;margin-top:35px;">……</p>
-            </div>
-        </div>`;
-
-    setTimeout(()=>whisper("你還會回來。"),1800);
-    setTimeout(finalEndingGlitch,2800);
-}
-function finalEndingGlitch(){
-    setTimeout(()=>lowHum(3,.035),300);
-    setTimeout(()=>knock(.34),1100);
-    setTimeout(()=>knock(.38),2200);
-    setTimeout(()=>knock(.42),3300);
-    setTimeout(()=>noiseFlash(),4100);
-    setTimeout(()=>shake(),4600);
-    setTimeout(()=>noiseFlash(),5000);
-    setTimeout(returnNormalRed,5700);
-}
-
-/* =========================================================
-   再次測驗：正常色，404
-========================================================= */
-
-function returnNormalRed(){
-    enterNormalMode();clearEffects();
-    const m=getMemory();
-    document.getElementById("app").innerHTML=`
-        <div class="card">
-            <h1>親密關係傾向測驗</h1>
-            <div class="subtitle">RELATIONSHIP & ATTACHMENT TEST</div>
-            <div class="description">
-                <p>歡迎再次進行測驗。</p>
-                <p>如果剛才的結果不符合你的想法，可以重新測試一次。</p>
-                <p style="color:#aaa;margin-top:28px;">系統已準備完成。</p>
-                ${m.plays>=2?`<div class="mini-hidden">你已經不是第一次來了。</div>`:""}
-            </div>
-            <button class="start-btn" onclick="go404()">再次測試</button>
-        </div>`;
-}
-function go404(){
-    window.location.href="/20260707/retest/";
-}
+function doorThree(a){clearTimeout(threeTimer);threeSecond.classList.remove("show");whisper(["好。","……我知道了。","原來你也不知道。","……"][a]);setTimeout(fakeEnd,1000)}
+function finishThree(){threeSecond.classList.remove("show");whisper("時間到了。");setTimeout(fakeEnd,1000)}
+function fakeEnd(){document.body.className="horror";app.innerHTML=`<div class="card"><h1>測驗結束</h1><div class="subtitle">ANALYSIS COMPLETE</div><div class="description" style="text-align:center"><p>所有問題均已完成。</p><p>感謝你的參與。</p><p style="color:#9a756e;margin-top:35px">……</p></div></div>`;setTimeout(()=>{whisper("……");setTimeout(()=>hum(3,.035),200);setTimeout(()=>knock(.72),900);setTimeout(()=>knock(.8),1800);setTimeout(()=>knock(.88),2700);setTimeout(shake,3900);setTimeout(returnNormal,4900)},1900)}
+function returnNormal(){document.body.className="";app.innerHTML=`<div class="card"><h1>親密關係傾向測驗</h1><div class="subtitle">RELATIONSHIP & ATTACHMENT TEST</div><div class="description"><p>歡迎再次進行測驗。</p><p>如果剛才的結果不符合你的想法，可以重新測試一次。</p><p style="color:#aaa;margin-top:28px">系統已準備完成。</p></div><button class="start-btn" onclick="go404()">再次測試</button></div>`}
+function go404(){document.body.className="";app.innerHTML=`<div class="card"><div class="error404"><div class="error404-code">404</div><div class="error404-text">Page not found.</div></div></div>`}
 </script>
 </body>
 </html>
