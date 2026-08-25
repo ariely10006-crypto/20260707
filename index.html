@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,14 +12,12 @@
     box-sizing:border-box;
 }
 
-html,
-body{
+html,body{
     margin:0;
     min-height:100%;
 }
 
 body{
-
     min-height:100vh;
 
     font-family:
@@ -29,7 +26,6 @@ body{
         sans-serif;
 
     background:#f1eeeb;
-
     color:#45403d;
 
     transition:
@@ -39,19 +35,11 @@ body{
     overflow-x:hidden;
 }
 
-
-/* ==============================
-   APP
-============================== */
-
 #app{
-
     min-height:100vh;
 
     display:flex;
-
     justify-content:center;
-
     align-items:center;
 
     padding:25px;
@@ -60,24 +48,15 @@ body{
         transform .15s ease;
 }
 
-
-/* ==============================
-   CARD
-============================== */
-
 .card{
-
     width:680px;
-
     max-width:94vw;
 
     padding:42px;
 
-    background:
-        rgba(255,255,255,.97);
+    background:rgba(255,255,255,.97);
 
-    border:
-        1px solid #ddd7d3;
+    border:1px solid #ddd7d3;
 
     box-shadow:
         0 15px 50px
@@ -89,27 +68,18 @@ body{
         box-shadow 5s ease;
 }
 
-
-/* ==============================
-   TITLE
-============================== */
-
 h1{
-
-    margin:
-        0 0 9px;
+    margin:0 0 9px;
 
     text-align:center;
 
     font-size:27px;
-
     font-weight:400;
 
     letter-spacing:4px;
 }
 
 .subtitle{
-
     text-align:center;
 
     color:#aaa19d;
@@ -121,13 +91,7 @@ h1{
     margin-bottom:34px;
 }
 
-
-/* ==============================
-   DESCRIPTION
-============================== */
-
 .description{
-
     font-size:15px;
 
     line-height:2;
@@ -135,27 +99,18 @@ h1{
     color:#696360;
 }
 
-
-/* ==============================
-   BUTTON
-============================== */
-
 .start-btn{
-
     display:block;
 
-    margin:
-        34px auto 0;
+    margin:34px auto 0;
 
-    padding:
-        12px 42px;
+    padding:12px 42px;
 
     background:#fff;
 
     color:#514a47;
 
-    border:
-        1px solid #aaa29d;
+    border:1px solid #aaa29d;
 
     cursor:pointer;
 
@@ -168,25 +123,15 @@ h1{
 }
 
 .start-btn:hover{
-
     background:#eee8e4;
-
     border-color:#80665e;
 }
 
 .start-btn:active{
-
-    transform:
-        scale(.98);
+    transform:scale(.98);
 }
 
-
-/* ==============================
-   QUESTION
-============================== */
-
 .question-number{
-
     color:#aaa19d;
 
     font-size:12px;
@@ -197,7 +142,6 @@ h1{
 }
 
 .question{
-
     font-size:20px;
 
     line-height:1.8;
@@ -205,13 +149,7 @@ h1{
     margin-bottom:25px;
 }
 
-
-/* ==============================
-   FEEDBACK
-============================== */
-
 .feedback{
-
     min-height:28px;
 
     margin-top:18px;
@@ -221,18 +159,9 @@ h1{
     line-height:1.8;
 
     color:#8c8581;
-
-    transition:
-        color .5s ease;
 }
 
-
-/* ==============================
-   OPTIONS
-============================== */
-
 .options{
-
     display:flex;
 
     flex-direction:column;
@@ -241,11 +170,9 @@ h1{
 }
 
 .option{
-
     width:100%;
 
-    padding:
-        14px 16px;
+    padding:14px 16px;
 
     text-align:left;
 
@@ -253,8 +180,7 @@ h1{
 
     color:#403b39;
 
-    border:
-        1px solid #d8d2cf;
+    border:1px solid #d8d2cf;
 
     cursor:pointer;
 
@@ -268,44 +194,32 @@ h1{
 }
 
 .option:hover{
-
     background:#f5efec;
 
     border-color:#a98b82;
 }
 
 .option:active{
-
-    transform:
-        scale(.995);
+    transform:scale(.995);
 }
 
 .option.selected{
-
     background:#eee5e1;
 
     border-color:#927067;
 }
 
 .option.fade{
-
     opacity:0;
 
     pointer-events:none;
 }
 
 .option:disabled{
-
     cursor:default;
 }
 
-
-/* ==============================
-   PROGRESS
-============================== */
-
 .progress{
-
     height:2px;
 
     margin-top:28px;
@@ -314,7 +228,6 @@ h1{
 }
 
 .progress-bar{
-
     height:100%;
 
     background:#99786f;
@@ -324,14 +237,12 @@ h1{
 }
 
 
-/* =========================================================
-   HORROR MODE
-========================================================= */
+/* =========================
+   恐怖模式
+========================= */
 
 body.horror{
-
     background:
-
         radial-gradient(
             circle at 50% 40%,
             #4b2927 0%,
@@ -343,12 +254,9 @@ body.horror{
 }
 
 body.horror .card{
+    background:rgba(27,14,14,.95);
 
-    background:
-        rgba(27,14,14,.95);
-
-    border-color:
-        #67433e;
+    border-color:#67433e;
 
     box-shadow:
         0 25px 90px
@@ -357,23 +265,19 @@ body.horror .card{
 
 body.horror h1,
 body.horror .question{
-
     color:#dfccc7;
 }
 
 body.horror .subtitle,
 body.horror .question-number{
-
     color:#98716b;
 }
 
 body.horror .description{
-
     color:#bca9a4;
 }
 
 body.horror .option{
-
     background:#241413;
 
     color:#d6c4bf;
@@ -382,34 +286,18 @@ body.horror .option{
 }
 
 body.horror .option:hover{
-
     background:#38201e;
-}
-
-body.horror .option.selected{
-
-    background:#38201e;
-
-    border-color:#9b6158;
-}
-
-body.horror .feedback{
-
-    color:#a77a73;
 }
 
 body.horror .progress{
-
     background:#3c2422;
 }
 
 body.horror .progress-bar{
-
     background:#985a52;
 }
 
 body.horror .start-btn{
-
     background:#241413;
 
     color:#d6c4bf;
@@ -418,12 +306,11 @@ body.horror .start-btn{
 }
 
 
-/* ==============================
-   NOISE
-============================== */
+/* =========================
+   雪花雜訊
+========================= */
 
 #noise{
-
     position:fixed;
 
     inset:0;
@@ -435,7 +322,6 @@ body.horror .start-btn{
     opacity:0;
 
     background:
-
         repeating-linear-gradient(
             0deg,
             rgba(255,255,255,.15) 0px,
@@ -448,7 +334,6 @@ body.horror .start-btn{
 }
 
 #noise.active{
-
     animation:
         staticBurst .7s steps(7);
 }
@@ -478,15 +363,15 @@ body.horror .start-btn{
     100%{
         opacity:0;
     }
+
 }
 
 
-/* ==============================
-   SCREEN SHAKE
-============================== */
+/* =========================
+   畫面晃動
+========================= */
 
 body.shake #app{
-
     animation:
         screenShake .55s;
 }
@@ -516,15 +401,15 @@ body.shake #app{
     100%{
         transform:translate(0,0);
     }
+
 }
 
 
-/* ==============================
-   DARK TRANSITION
-============================== */
+/* =========================
+   黑暗轉場
+========================= */
 
 #darkTransition{
-
     position:fixed;
 
     inset:0;
@@ -536,7 +421,6 @@ body.shake #app{
     opacity:0;
 
     background:
-
         radial-gradient(
             circle,
             rgba(95,30,25,.02),
@@ -548,17 +432,15 @@ body.shake #app{
 }
 
 #darkTransition.active{
-
     opacity:.58;
 }
 
 
-/* ==============================
-   DIALOGUE
-============================== */
+/* =========================
+   對話
+========================= */
 
 .dialogue{
-
     text-align:center;
 
     min-height:230px;
@@ -571,7 +453,6 @@ body.shake #app{
 }
 
 .dialogue-speaker{
-
     font-size:10px;
 
     letter-spacing:4px;
@@ -582,7 +463,6 @@ body.shake #app{
 }
 
 .dialogue-text{
-
     min-height:90px;
 
     font-size:19px;
@@ -595,7 +475,6 @@ body.shake #app{
 }
 
 .dialogue-options{
-
     margin-top:22px;
 
     display:flex;
@@ -606,20 +485,17 @@ body.shake #app{
 }
 
 
-/* ==============================
-   WHISPER
-============================== */
+/* =========================
+   異常文字
+========================= */
 
 #whisper{
-
     position:fixed;
 
     left:50%;
-
     bottom:11%;
 
-    transform:
-        translateX(-50%);
+    transform:translateX(-50%);
 
     z-index:4000;
 
@@ -637,7 +513,6 @@ body.shake #app{
 }
 
 #whisper.show{
-
     animation:
         whisperAppear 4s forwards;
 }
@@ -663,54 +538,15 @@ body.shake #app{
     100%{
         opacity:0;
     }
+
 }
 
 
-/* ==============================
-   SYSTEM GLITCH TEXT
-============================== */
-
-.glitch-text{
-
-    position:relative;
-
-    animation:
-        glitchText 1.7s infinite;
-}
-
-@keyframes glitchText{
-
-    0%,
-    90%{
-        transform:none;
-        opacity:1;
-    }
-
-    91%{
-        transform:
-            translateX(-2px);
-        opacity:.7;
-    }
-
-    93%{
-        transform:
-            translateX(2px);
-        opacity:.85;
-    }
-
-    95%{
-        transform:none;
-        opacity:1;
-    }
-}
-
-
-/* ==============================
-   THREE SECOND
-============================== */
+/* =========================
+   三秒問題
+========================= */
 
 #threeSecond{
-
     position:fixed;
 
     inset:0;
@@ -720,11 +556,9 @@ body.shake #app{
     display:flex;
 
     justify-content:center;
-
     align-items:center;
 
-    background:
-        rgba(5,3,3,.96);
+    background:rgba(5,3,3,.96);
 
     opacity:0;
 
@@ -735,14 +569,12 @@ body.shake #app{
 }
 
 #threeSecond.show{
-
     opacity:1;
 
     pointer-events:auto;
 }
 
 .three-box{
-
     width:650px;
 
     max-width:90vw;
@@ -753,7 +585,6 @@ body.shake #app{
 }
 
 .three-small{
-
     font-size:10px;
 
     letter-spacing:5px;
@@ -764,7 +595,6 @@ body.shake #app{
 }
 
 .three-title{
-
     font-size:21px;
 
     line-height:2;
@@ -773,7 +603,6 @@ body.shake #app{
 }
 
 .three-option{
-
     display:block;
 
     width:100%;
@@ -789,8 +618,7 @@ body.shake #app{
 
     color:#d1bdb8;
 
-    border:
-        1px solid #68413c;
+    border:1px solid #68413c;
 
     font-family:inherit;
 
@@ -798,7 +626,6 @@ body.shake #app{
 }
 
 .three-timer{
-
     width:100%;
 
     max-width:430px;
@@ -811,7 +638,6 @@ body.shake #app{
 }
 
 .three-timer-bar{
-
     width:100%;
 
     height:100%;
@@ -831,113 +657,26 @@ body.shake #app{
     to{
         width:0%;
     }
+
 }
 
 
-/* ==============================
-   ANALYSIS
-============================== */
-
-.analysis-line{
-
-    margin:
-        14px 0;
-
-    padding:
-        12px 15px;
-
-    border-left:
-        2px solid #b5a29c;
-
-    background:
-        rgba(130,110,100,.05);
-}
-
-body.horror .analysis-line{
-
-    border-color:#74463f;
-
-    background:
-        rgba(100,40,35,.12);
-}
-
-
-/* ==============================
-   SPECIAL BUTTON
-============================== */
+/* =========================
+   第 11 題
+========================= */
 
 .single-answer{
-
     width:220px;
 
-    margin:
-        35px auto 0;
+    margin:35px auto 0;
 
     text-align:center;
 }
 
 
-/* ==============================
-   FOOTSTEP EFFECT
-============================== */
-
-#footstepIndicator{
-
-    position:fixed;
-
-    left:50%;
-
-    bottom:16%;
-
-    transform:
-        translateX(-50%);
-
-    color:#906963;
-
-    font-size:10px;
-
-    letter-spacing:4px;
-
-    opacity:0;
-
-    pointer-events:none;
-
-    z-index:4500;
-}
-
-#footstepIndicator.show{
-
-    animation:
-        footstepText 3.5s forwards;
-}
-
-@keyframes footstepText{
-
-    0%{
-        opacity:0;
-    }
-
-    25%{
-        opacity:.45;
-    }
-
-    45%{
-        opacity:.12;
-    }
-
-    70%{
-        opacity:.4;
-    }
-
-    100%{
-        opacity:0;
-    }
-}
-
-
-/* ==============================
-   MOBILE
-============================== */
+/* =========================
+   手機
+========================= */
 
 @media(max-width:600px){
 
@@ -946,8 +685,7 @@ body.horror .analysis-line{
     }
 
     .card{
-        padding:
-            27px 21px;
+        padding:27px 21px;
     }
 
     h1{
@@ -965,7 +703,6 @@ body.horror .analysis-line{
 }
 
 </style>
-
 </head>
 
 
@@ -977,12 +714,10 @@ body.horror .analysis-line{
 
 <div id="whisper"></div>
 
-<div id="footstepIndicator"></div>
 
-
-<!-- =====================================================
-     THREE SECOND QUESTION
-===================================================== -->
+<!-- =========================
+     三秒問題
+========================= -->
 
 <div id="threeSecond">
 
@@ -993,11 +728,8 @@ body.horror .analysis-line{
         </div>
 
         <div class="three-title">
-
             如果你現在回頭，<br>
-
             你覺得房間裡會多出什麼？
-
         </div>
 
         <button
@@ -1048,7 +780,7 @@ body.horror .analysis-line{
 
 
 /* =========================================================
-   NORMAL QUESTIONS
+   正常題目
 ========================================================= */
 
 const normalQuestions = [
@@ -1167,7 +899,7 @@ const normalQuestions = [
 
 
 /* =========================================================
-   SUPPLEMENT QUESTIONS
+   補充題
 ========================================================= */
 
 const supplementQuestions = [
@@ -1231,7 +963,7 @@ const supplementQuestions = [
 
 
 /* =========================================================
-   STATE
+   狀態
 ========================================================= */
 
 let phase="normal";
@@ -1242,19 +974,13 @@ let normalAnswers=[];
 
 let supplementAnswers=[];
 
-let finalNormalAnswered=false;
-
 let audioCtx=null;
 
 let threeTimer=null;
 
-let resultProfile=null;
-
-let glitchLevel=0;
-
 
 /* =========================================================
-   AUDIO
+   音效
 ========================================================= */
 
 function initAudio(){
@@ -1269,7 +995,6 @@ function initAudio(){
     }
 
     if(audioCtx.state==="suspended"){
-
         audioCtx.resume();
     }
 }
@@ -1282,7 +1007,7 @@ function tone(
     type="sine"
 ){
 
-    if(!audioCtx) return;
+    if(!audioCtx)return;
 
     const oscillator=
         audioCtx.createOscillator();
@@ -1292,8 +1017,7 @@ function tone(
 
     oscillator.type=type;
 
-    oscillator.frequency.value=
-        frequency;
+    oscillator.frequency.value=frequency;
 
     gain.gain.setValueAtTime(
         .0001,
@@ -1324,16 +1048,12 @@ function tone(
 }
 
 
-/* =========================================================
-   STATIC SOUND
-========================================================= */
-
 function staticSound(
     strength=.035,
     duration=.18
 ){
 
-    if(!audioCtx) return;
+    if(!audioCtx)return;
 
     const buffer=
         audioCtx.createBuffer(
@@ -1374,16 +1094,12 @@ function staticSound(
 }
 
 
-/* =========================================================
-   LOW HUM
-========================================================= */
-
 function lowHum(
     duration=2.2,
     volume=.025
 ){
 
-    if(!audioCtx) return;
+    if(!audioCtx)return;
 
     const oscillator=
         audioCtx.createOscillator();
@@ -1424,13 +1140,11 @@ function lowHum(
 }
 
 
-/* =========================================================
-   KNOCK
-========================================================= */
+/* 敲門 */
 
 function knock(volume=.28){
 
-    if(!audioCtx) return;
+    if(!audioCtx)return;
 
     tone(
         83,
@@ -1441,102 +1155,59 @@ function knock(volume=.28){
 
     setTimeout(
         ()=>{
-
             tone(
                 61,
                 .08,
                 volume*.35,
                 "sine"
             );
-
         },
         65
     );
 }
 
 
-/* =========================================================
-   FOOTSTEPS
-   第五題專用
-========================================================= */
+/* 腳步聲 */
 
-function footstep(volume=.12){
+function footsteps(){
 
-    if(!audioCtx) return;
+    if(!audioCtx)return;
 
-    tone(
-        74,
-        .10,
-        volume,
-        "triangle"
-    );
+    const steps=[
+        0,
+        480,
+        930,
+        1370
+    ];
 
-    setTimeout(
-        ()=>{
-            tone(
-                57,
-                .08,
-                volume*.7,
-                "triangle"
+    steps.forEach(
+        delay=>{
+
+            setTimeout(
+                ()=>{
+                    tone(
+                        72,
+                        .09,
+                        .18,
+                        "sine"
+                    );
+                },
+                delay
             );
-        },
-        210
-    );
-}
 
-
-function footstepsSequence(){
-
-    const indicator=
-        document.getElementById(
-            "footstepIndicator"
-        );
-
-    indicator.textContent=
-        "……腳步聲";
-
-    indicator.classList.remove("show");
-
-    void indicator.offsetWidth;
-
-    indicator.classList.add("show");
-
-
-    footstep(.13);
-
-    setTimeout(
-        ()=>{
-            footstep(.15);
-        },
-        650
-    );
-
-    setTimeout(
-        ()=>{
-            footstep(.18);
-        },
-        1350
-    );
-
-    setTimeout(
-        ()=>{
-            footstep(.20);
-        },
-        2150
+        }
     );
 }
 
 
 /* =========================================================
-   SCREEN EFFECT
+   畫面效果
 ========================================================= */
 
 function noiseFlash(){
 
     const noise=
-        document.getElementById(
-            "noise"
-        );
+        document.getElementById("noise");
 
     noise.classList.remove("active");
 
@@ -1544,10 +1215,7 @@ function noiseFlash(){
 
     noise.classList.add("active");
 
-    staticSound(
-        .045,
-        .35
-    );
+    staticSound(.045,.35);
 
     setTimeout(
         ()=>{
@@ -1560,21 +1228,15 @@ function noiseFlash(){
 
 function shake(){
 
-    document.body.classList.remove(
-        "shake"
-    );
+    document.body.classList.remove("shake");
 
     void document.body.offsetWidth;
 
-    document.body.classList.add(
-        "shake"
-    );
+    document.body.classList.add("shake");
 
     setTimeout(
         ()=>{
-            document.body.classList.remove(
-                "shake"
-            );
+            document.body.classList.remove("shake");
         },
         600
     );
@@ -1584,35 +1246,27 @@ function shake(){
 function whisper(text){
 
     const element=
-        document.getElementById(
-            "whisper"
-        );
+        document.getElementById("whisper");
 
     element.textContent=text;
 
-    element.classList.remove(
-        "show"
-    );
+    element.classList.remove("show");
 
     void element.offsetWidth;
 
-    element.classList.add(
-        "show"
-    );
+    element.classList.add("show");
 }
 
 
 /* =========================================================
-   HOME
+   首頁
 ========================================================= */
 
 function home(){
 
     document.body.className="";
 
-    document.getElementById(
-        "app"
-    ).innerHTML=`
+    document.getElementById("app").innerHTML=`
 
         <div class="card">
 
@@ -1639,11 +1293,13 @@ function home(){
                     測驗約需 3～5 分鐘。
                 </p>
 
-                <p style="
-                    color:#aaa;
-                    font-size:12px;
-                    margin-top:28px;
-                ">
+                <p
+                    style="
+                        color:#aaa;
+                        font-size:12px;
+                        margin-top:28px;
+                    "
+                >
                     本測驗僅供娛樂使用，
                     不代表正式心理評估。
                 </p>
@@ -1665,7 +1321,7 @@ home();
 
 
 /* =========================================================
-   START
+   開始測驗
 ========================================================= */
 
 function startTest(){
@@ -1680,12 +1336,6 @@ function startTest(){
 
     supplementAnswers=[];
 
-    finalNormalAnswered=false;
-
-    resultProfile=null;
-
-    glitchLevel=0;
-
     document.body.className="";
 
     showQuestion();
@@ -1693,55 +1343,7 @@ function startTest(){
 
 
 /* =========================================================
-   FEEDBACK
-========================================================= */
-
-const feedbackPool=[
-
-    [
-        "你的回答顯示，你相當重視彼此的陪伴。",
-        "你傾向透過互動確認彼此的關係。",
-        "你對親近的人有較高的情感投入。",
-        "你會注意對方的情緒變化。"
-    ],
-
-    [
-        "你仍然重視自己的生活空間。",
-        "你傾向讓關係保留一些自由。",
-        "你不太喜歡被要求隨時回報。",
-        "你對界線的敏感度比較高。"
-    ],
-
-    [
-        "你會注意關係中的細微變化。",
-        "你對對方的反應有一定敏感度。",
-        "你傾向觀察情況後再做決定。",
-        "你會在意對方是否和平常不同。"
-    ],
-
-    [
-        "你願意為了關係多做一些溝通。",
-        "你對重要的人有明顯的責任感。",
-        "你傾向在關係出現變化時主動確認。",
-        "你不太喜歡把問題留到最後。"
-    ]
-
-];
-
-
-function getFeedback(index){
-
-    return feedbackPool[index][
-        Math.floor(
-            Math.random()*
-            feedbackPool[index].length
-        )
-    ];
-}
-
-
-/* =========================================================
-   SHOW QUESTION
+   顯示題目
 ========================================================= */
 
 function showQuestion(){
@@ -1755,14 +1357,10 @@ function showQuestion(){
     if(current>=list.length){
 
         if(phase==="normal"){
-
             showNormalResult();
-
         }
         else{
-
             afterSupplements();
-
         }
 
         return;
@@ -1775,9 +1373,7 @@ function showQuestion(){
         (current/list.length)*100;
 
 
-    document.getElementById(
-        "app"
-    ).innerHTML=`
+    document.getElementById("app").innerHTML=`
 
         <div class="card">
 
@@ -1785,19 +1381,14 @@ function showQuestion(){
 
                 ${
                     phase==="normal"
-
                     ? `第 ${current+1} 題 / 共 11 題`
-
-                    : `補充問題 ${current+1} / 5`
-
+                    : `補充題 ${current+1} / 5`
                 }
 
             </div>
 
             <div class="question">
-
                 ${q.q}
-
             </div>
 
             <div
@@ -1814,9 +1405,7 @@ function showQuestion(){
 
                 <div
                     class="progress-bar"
-                    style="
-                        width:${percentage}%;
-                    "
+                    style="width:${percentage}%"
                 ></div>
 
             </div>
@@ -1826,26 +1415,19 @@ function showQuestion(){
 
 
     const container=
-        document.getElementById(
-            "options"
-        );
+        document.getElementById("options");
 
 
     q.a.forEach(
         (text,index)=>{
 
             const button=
-                document.createElement(
-                    "button"
-                );
+                document.createElement("button");
 
-            button.className=
-                "option";
+            button.className="option";
 
             button.textContent=
-                String.fromCharCode(
-                    65+index
-                )
+                String.fromCharCode(65+index)
                 +". "
                 +text;
 
@@ -1854,265 +1436,33 @@ function showQuestion(){
                     chooseAnswer(index);
                 };
 
-            container.appendChild(
-                button
-            );
+            container.appendChild(button);
         }
     );
 }
 
 
 /* =========================================================
-   QUESTION ANSWER
-========================================================= */
-
-function chooseAnswer(index){
-
-    const buttons=
-        document.querySelectorAll(
-            ".option"
-        );
-
-
-    buttons.forEach(
-        button=>{
-            button.disabled=true;
-        }
-    );
-
-
-    if(phase==="normal"){
-
-        normalAnswers.push(index);
-
-    }
-    else{
-
-        supplementAnswers.push(index);
-
-    }
-
-
-    buttons[index].classList.add(
-        "selected"
-    );
-
-
-    buttons.forEach(
-        (button,i)=>{
-
-            if(i!==index){
-
-                setTimeout(
-                    ()=>{
-                        button.classList.add(
-                            "fade"
-                        );
-                    },
-                    100
-                );
-
-            }
-
-        }
-    );
-
-
-    const feedback=
-        document.getElementById(
-            "feedback"
-        );
-
-
-    if(phase==="normal"){
-
-        feedback.textContent=
-            getFeedback(index);
-
-    }
-    else{
-
-        feedback.textContent=
-            supplementFeedback(
-                current,
-                index
-            );
-
-    }
-
-
-    /* 第9題異常 */
-
-    if(
-        phase==="normal" &&
-        current===8
-    ){
-
-        setTimeout(
-            ()=>{
-                noiseFlash();
-            },
-            300
-        );
-
-    }
-
-
-    /* 第10題低頻 */
-
-    if(
-        phase==="normal" &&
-        current===9
-    ){
-
-        setTimeout(
-            ()=>{
-                lowHum(
-                    1.1,
-                    .015
-                );
-            },
-            500
-        );
-
-    }
-
-
-    /* 補充第五題腳步 */
-
-    if(
-        phase==="supplement" &&
-        current===4
-    ){
-
-        setTimeout(
-            ()=>{
-                footstepsSequence();
-            },
-            700
-        );
-
-    }
-
-
-    current++;
-
-
-    /*
-     * 前十題結束
-     */
-
-    if(
-        phase==="normal" &&
-        current===10
-    ){
-
-        setTimeout(
-            ()=>{
-                showEleven();
-            },
-            850
-        );
-
-        return;
-    }
-
-
-    setTimeout(
-        ()=>{
-            showQuestion();
-        },
-        850
-    );
-}
-
-
-/* =========================================================
-   SUPPLEMENT FEEDBACK
-========================================================= */
-
-function supplementFeedback(
-    questionIndex,
-    answerIndex
-){
-
-    const lines=[
-
-        [
-            "這個回答很正常。",
-            "系統已記錄你的界線。",
-            "你的回答沒有異常。",
-            "已完成紀錄。"
-        ],
-
-        [
-            "系統注意到你對這件事有自己的看法。",
-            "這個答案與前面的回答有些相似。",
-            "已記錄。",
-            "……知道了。"
-        ],
-
-        [
-            "你開始注意到問題本身了。",
-            "你的回答顯示，你對這種行為有所警覺。",
-            "系統已經記住。",
-            "不用擔心，只是一個問題。"
-        ],
-
-        [
-            "這個回答……我知道了。",
-            "你似乎開始不喜歡這些問題。",
-            "沒關係，我只是想更了解你。",
-            "我會記得你的答案。"
-        ],
-
-        [
-            "已記錄。",
-            "你回答得很快。",
-            "……就在附近。",
-            "不用回頭。"
-        ]
-
-    ];
-
-    return lines[
-        Math.min(
-            questionIndex,
-            lines.length-1
-        )
-    ][
-        answerIndex % 4
-    ];
-}
-
-
-/* =========================================================
-   QUESTION 11
+   第 11 題
 ========================================================= */
 
 function showEleven(){
 
-    document.getElementById(
-        "app"
-    ).innerHTML=`
+    document.body.className="";
+
+    document.getElementById("app").innerHTML=`
 
         <div class="card">
 
             <div class="question-number">
-
                 第 11 題 / 共 11 題
-
             </div>
 
             <div
                 class="question"
-                style="
-                    text-align:center;
-                "
+                style="text-align:center;"
             >
-
                 你喜歡我嗎？
-
             </div>
 
             <div
@@ -2123,9 +1473,7 @@ function showEleven(){
                     font-size:12px;
                 "
             >
-
                 請回答。
-
             </div>
 
             <button
@@ -2140,26 +1488,20 @@ function showEleven(){
 }
 
 
+/* =========================================================
+   第 11 題回答
+========================================================= */
+
 function answerEleven(){
 
-    finalNormalAnswered=true;
-
-    initAudio();
-
-    document.getElementById(
-        "app"
-    ).innerHTML=`
+    document.getElementById("app").innerHTML=`
 
         <div class="card">
 
             <div class="dialogue">
 
-                <div class="dialogue-speaker">
-                    SYSTEM
-                </div>
-
                 <div class="dialogue-text">
-                    ……
+                    喜歡啊……
                 </div>
 
             </div>
@@ -2167,202 +1509,156 @@ function answerEleven(){
         </div>
     `;
 
-
-    lowHum(
-        1.4,
-        .012
-    );
-
-
     setTimeout(
         ()=>{
-
-            document.getElementById(
-                "app"
-            ).innerHTML=`
-
-                <div class="card">
-
-                    <div class="dialogue">
-
-                        <div class="dialogue-speaker">
-                            SYSTEM
-                        </div>
-
-                        <div class="dialogue-text">
-                            我知道了。
-                        </div>
-
-                    </div>
-
-                </div>
-            `;
-
-        },
-        1000
-    );
-
-
-    setTimeout(
-        ()=>{
-
             showNormalResult();
-
         },
-        2300
+        1800
     );
 }
 
 
 /* =========================================================
-   CALCULATE RESULT
+   一般題目回答
 ========================================================= */
 
-function calculateProfile(){
+function chooseAnswer(index){
 
-    let space=0;
-
-    let connection=0;
-
-    let concern=0;
-
-    let trust=0;
+    const buttons=
+        document.querySelectorAll(".option");
 
 
-    normalAnswers.forEach(
-        (answer,index)=>{
-
-            if(answer===0){
-
-                trust+=2;
-
-            }
-
-            if(answer===1){
-
-                space+=2;
-
-            }
-
-            if(answer===2){
-
-                connection+=2;
-
-            }
-
-            if(answer===3){
-
-                concern+=2;
-
-            }
-
+    buttons.forEach(
+        button=>{
+            button.disabled=true;
         }
     );
 
 
-    const scores={
-
-        space,
-
-        connection,
-
-        concern,
-
-        trust
-
-    };
-
-
-    let type="";
-
-    let description="";
-
-
-    const entries=
-        Object.entries(scores)
-        .sort(
-            (a,b)=>b[1]-a[1]
-        );
-
-
-    const first=
-        entries[0][0];
-
-    const second=
-        entries[1][0];
-
-
-    if(
-        first==="trust"
-    ){
-
-        type="信任穩定型";
-
-        description=
-            "你通常不會因為短暫的訊息變化就立刻懷疑對方。你比較重視關係裡的信任與溝通，也願意讓彼此保有自己的生活。";
-
-    }
-    else if(
-        first==="space"
-    ){
-
-        type="自由界線型";
-
-        description=
-            "你很重視關係中的個人空間。對你來說，喜歡一個人並不代表需要知道對方的一切。";
-
-    }
-    else if(
-        first==="connection"
-    ){
-
-        type="情感連結型";
-
-        description=
-            "你很在意彼此的互動。當對方的態度發生變化時，你通常會注意到，也希望透過溝通維持關係。";
-
+    if(phase==="normal"){
+        normalAnswers.push(index);
     }
     else{
-
-        type="細節敏感型";
-
-        description=
-            "你很容易察覺關係中的細節。這讓你很懂得關心別人，但有時候也可能讓你注意到一些原本不需要在意的小變化。";
-
+        supplementAnswers.push(index);
     }
 
 
-    return{
+    buttons[index].classList.add("selected");
 
-        type,
 
-        description,
+    buttons.forEach(
+        (button,i)=>{
 
-        scores,
+            if(i!==index){
 
-        first,
+                setTimeout(
+                    ()=>{
+                        button.classList.add("fade");
+                    },
+                    100
+                );
+            }
+        }
+    );
 
-        second
 
-    };
+    /*
+     * 第 9 題出現一次短暫雜訊
+     */
+
+    if(
+        phase==="normal" &&
+        current===8
+    ){
+
+        setTimeout(
+            ()=>{
+                noiseFlash();
+            },
+            300
+        );
+    }
+
+
+    /*
+     * 第 10 題出現低頻聲
+     */
+
+    if(
+        phase==="normal" &&
+        current===9
+    ){
+
+        setTimeout(
+            ()=>{
+                lowHum(1.1,.015);
+            },
+            500
+        );
+    }
+
+
+    /*
+     * 補充第 5 題：
+     * 只使用腳步聲，不使用雜訊
+     */
+
+    if(
+        phase==="supplement" &&
+        current===4
+    ){
+
+        setTimeout(
+            ()=>{
+                footsteps();
+            },
+            500
+        );
+    }
+
+
+    current++;
+
+
+    /*
+     * 前十題結束後，
+     * 進入特殊第 11 題
+     */
+
+    if(
+        phase==="normal" &&
+        current===10
+    ){
+
+        setTimeout(
+            ()=>{
+                showEleven();
+            },
+            600
+        );
+
+        return;
+    }
+
+
+    setTimeout(
+        ()=>{
+            showQuestion();
+        },
+        560
+    );
 }
 
 
 /* =========================================================
-   NORMAL RESULT
+   正常結果
 ========================================================= */
 
 function showNormalResult(){
 
     document.body.className="";
 
-    resultProfile=
-        calculateProfile();
-
-
-    document.getElementById(
-        "app"
-    ).innerHTML=`
+    document.getElementById("app").innerHTML=`
 
         <div class="card">
 
@@ -2380,58 +1676,20 @@ function showNormalResult(){
                     你的回答已經完成分析。
                 </p>
 
-                <div class="analysis-line">
-
-                    <strong>
-                        主要傾向
-                    </strong>
-
-                    <br>
-
-                    ${resultProfile.type}
-
-                </div>
-
                 <p>
-                    ${resultProfile.description}
+                    從你的回答來看，你傾向重視
+                    信任、陪伴以及彼此的空間。
                 </p>
 
-                <div class="analysis-line">
-
-                    <strong>
-                        系統摘要
-                    </strong>
-
-                    <br>
-
-                    信任：
-                    ${resultProfile.scores.trust}
-
-                    ／
-
-                    空間：
-                    ${resultProfile.scores.space}
-
-                    ／
-
-                    連結：
-                    ${resultProfile.scores.connection}
-
-                    ／
-
-                    敏感：
-                    ${resultProfile.scores.concern}
-
-                </div>
-
-                <p style="
-                    color:#aaa;
-                    font-size:12px;
-                    margin-top:26px;
-                ">
-
-                    系統正在整理最後資料……
-
+                <p
+                    style="
+                        text-align:center;
+                        font-size:22px;
+                        color:#67534d;
+                        margin-top:28px;
+                    "
+                >
+                    穩定陪伴型
                 </p>
 
             </div>
@@ -2440,9 +1698,7 @@ function showNormalResult(){
                 class="start-btn"
                 onclick="beginSupplementNotice()"
             >
-
                 查看完整結果
-
             </button>
 
         </div>
@@ -2451,14 +1707,12 @@ function showNormalResult(){
 
 
 /* =========================================================
-   RESULT → HORROR
+   補充前
 ========================================================= */
 
 function beginSupplementNotice(){
 
-    document.getElementById(
-        "app"
-    ).innerHTML=`
+    document.getElementById("app").innerHTML=`
 
         <div class="card">
 
@@ -2468,9 +1722,7 @@ function beginSupplementNotice(){
 
             <div
                 class="description"
-                style="
-                    text-align:center;
-                "
+                style="text-align:center;"
             >
 
                 <p>
@@ -2478,79 +1730,16 @@ function beginSupplementNotice(){
                 </p>
 
                 <p>
-                    ${resultProfile
-                        ? resultProfile.type
-                        : "分析完成"
-                    }
+                    不過……
                 </p>
 
-                <p style="
-                    color:#aaa;
-                    margin-top:30px;
-                ">
-
-                    正在確認補充資料……
-
-                </p>
-
-            </div>
-
-        </div>
-    `;
-
-
-    lowHum(
-        1.5,
-        .012
-    );
-
-
-    setTimeout(
-        ()=>{
-            systemAbnormality();
-        },
-        1800
-    );
-}
-
-
-/* =========================================================
-   SYSTEM ABNORMALITY
-========================================================= */
-
-function systemAbnormality(){
-
-    document.getElementById(
-        "app"
-    ).innerHTML=`
-
-        <div class="card">
-
-            <h1 class="glitch-text">
-                資料確認
-            </h1>
-
-            <div
-                class="description"
-                style="
-                    text-align:center;
-                "
-            >
-
-                <p>
-                    正在確認你的回答。
-                </p>
-
-                <p style="
-                    color:#9a756e;
-                ">
-                    已確認 10 / 10 項資料。
-                </p>
-
-                <p style="
-                    color:#9a756e;
-                ">
-                    ……還有一項。
+                <p
+                    style="
+                        color:#9a756e;
+                        margin-top:30px;
+                    "
+                >
+                    還有一些事情需要確認。
                 </p>
 
             </div>
@@ -2563,13 +1752,13 @@ function systemAbnormality(){
         ()=>{
             startSlowHorrorTransition();
         },
-        2200
+        1800
     );
 }
 
 
 /* =========================================================
-   SLOW HORROR TRANSITION
+   慢慢進入恐怖模式
 ========================================================= */
 
 function startSlowHorrorTransition(){
@@ -2579,19 +1768,9 @@ function startSlowHorrorTransition(){
             "darkTransition"
         );
 
-    overlay.classList.add(
-        "active"
-    );
+    overlay.classList.add("active");
 
-    document.body.classList.add(
-        "horror"
-    );
-
-
-    lowHum(
-        5,
-        .022
-    );
+    document.body.classList.add("horror");
 
 
     setTimeout(
@@ -2604,21 +1783,17 @@ function startSlowHorrorTransition(){
 
 
 /* =========================================================
-   SUPPLEMENT NOTICE
+   補充提示
 ========================================================= */
 
 function showSupplementNotice(){
 
     document.getElementById(
         "darkTransition"
-    ).classList.remove(
-        "active"
-    );
+    ).classList.remove("active");
 
 
-    document.getElementById(
-        "app"
-    ).innerHTML=`
+    document.getElementById("app").innerHTML=`
 
         <div class="card">
 
@@ -2636,22 +1811,13 @@ function showSupplementNotice(){
                     這些問題不會影響你的原始結果。
                 </p>
 
-                <p style="
-                    color:#9a756e;
-                    margin-top:28px;
-                ">
-
-                    只是確認一些關於你的事情。
-
-                </p>
-
-                <p style="
-                    color:#76504b;
-                    font-size:12px;
-                ">
-
-                    不會花很久。
-
+                <p
+                    style="
+                        color:#9a756e;
+                        margin-top:28px;
+                    "
+                >
+                    請繼續回答。
                 </p>
 
             </div>
@@ -2660,9 +1826,7 @@ function showSupplementNotice(){
                 class="start-btn"
                 onclick="startSupplements()"
             >
-
                 繼續
-
             </button>
 
         </div>
@@ -2671,7 +1835,7 @@ function showSupplementNotice(){
 
 
 /* =========================================================
-   START SUPPLEMENTS
+   補充題
 ========================================================= */
 
 function startSupplements(){
@@ -2680,16 +1844,14 @@ function startSupplements(){
 
     current=0;
 
-    document.body.classList.add(
-        "horror"
-    );
+    document.body.classList.add("horror");
 
     showQuestion();
 }
 
 
 /* =========================================================
-   AFTER SUPPLEMENTS
+   補充結束
 ========================================================= */
 
 function afterSupplements(){
@@ -2699,21 +1861,19 @@ function afterSupplements(){
         "補充資料已完成。",
 
         ()=>{
-
             setTimeout(
                 ()=>{
                     doorDialogueStart();
                 },
                 900
             );
-
         }
     );
 }
 
 
 /* =========================================================
-   DIALOGUE
+   對話系統
 ========================================================= */
 
 function showDialogue(
@@ -2722,9 +1882,7 @@ function showDialogue(
     options=[]
 ){
 
-    document.getElementById(
-        "app"
-    ).innerHTML=`
+    document.getElementById("app").innerHTML=`
 
         <div class="card">
 
@@ -2761,12 +1919,9 @@ function showDialogue(
             option=>{
 
                 const button=
-                    document.createElement(
-                        "button"
-                    );
+                    document.createElement("button");
 
-                button.className=
-                    "option";
+                button.className="option";
 
                 button.textContent=
                     option.text;
@@ -2774,10 +1929,7 @@ function showDialogue(
                 button.onclick=
                     option.action;
 
-                box.appendChild(
-                    button
-                );
-
+                box.appendChild(button);
             }
         );
 
@@ -2786,19 +1938,20 @@ function showDialogue(
 
         setTimeout(
             next,
-            1300
+            1100
         );
     }
 }
 
 
 /* =========================================================
-   DOOR START
+   門外
 ========================================================= */
 
 function doorDialogueStart(){
 
-    let remembered="";
+    let remembered=
+        "我記得你剛才的回答。";
 
 
     if(normalAnswers.length>0){
@@ -2808,38 +1961,29 @@ function doorDialogueStart(){
                 normalAnswers.length-1
             ];
 
-
         if(last===0){
 
             remembered=
                 "你最後一次的回答，我記得。";
-
         }
+
         else if(last===1){
 
             remembered=
                 "你最後一次回答得很快。";
-
         }
+
         else if(last===2){
 
             remembered=
-                "你想了很久。";
-
+                "你剛才想了很久。";
         }
+
         else{
 
             remembered=
                 "你似乎很在意答案。";
-
         }
-
-    }
-    else{
-
-        remembered=
-            "我記得你剛才的回答。";
-
     }
 
 
@@ -2855,20 +1999,17 @@ function doorDialogueStart(){
 
             {
                 text:"好像有。",
-                action:
-                    ()=>doorAnswer("heard")
+                action:()=>doorAnswer("heard")
             },
 
             {
                 text:"沒有吧。",
-                action:
-                    ()=>doorAnswer("notheard")
+                action:()=>doorAnswer("notheard")
             },
 
             {
                 text:"我不知道。",
-                action:
-                    ()=>doorAnswer("unsure")
+                action:()=>doorAnswer("unsure")
             }
 
         ]
@@ -2877,7 +2018,7 @@ function doorDialogueStart(){
 
 
 /* =========================================================
-   DOOR ANSWER
+   門外第一次回答
 ========================================================= */
 
 function doorAnswer(type){
@@ -2897,9 +2038,7 @@ function doorAnswer(type){
 
                 showDialogue(
 
-                    "……對。
-
-就在那裡。",
+                    "……對。\n\n就在那裡。",
 
                     ()=>{
                         setTimeout(
@@ -2909,7 +2048,6 @@ function doorAnswer(type){
                             900
                         );
                     }
-
                 );
 
             },
@@ -2924,15 +2062,11 @@ function doorAnswer(type){
 
         showDialogue(
 
-            "沒有嗎？
-
-可能是我聽錯了。",
+            "沒有嗎？\n\n可能是我聽錯了。",
 
             ()=>{
-
                 setTimeout(
                     ()=>{
-
                         knock(.36);
 
                         setTimeout(
@@ -2945,9 +2079,7 @@ function doorAnswer(type){
                     },
                     700
                 );
-
             }
-
         );
 
         return;
@@ -2956,12 +2088,9 @@ function doorAnswer(type){
 
     showDialogue(
 
-        "不知道也沒關係。
-
-再聽一次就好了。",
+        "不知道也沒關係。\n\n再聽一次就好了。",
 
         ()=>{
-
             setTimeout(
                 ()=>{
 
@@ -2984,26 +2113,20 @@ function doorAnswer(type){
                 },
                 700
             );
-
         }
-
     );
 }
 
 
 /* =========================================================
-   SECOND DOOR
+   第二段
 ========================================================= */
 
 function nextDoorChoice(){
 
     showDialogue(
 
-        "我在外面。
-
-你不用開門。
-
-我只是想跟你說幾句話。",
+        "我在外面。\n\n你不用開門。\n我只是想跟你說幾句話。",
 
         null,
 
@@ -3011,20 +2134,17 @@ function nextDoorChoice(){
 
             {
                 text:"我會回答你。",
-                action:
-                    ()=>doorSecondAnswer()
+                action:()=>doorSecondAnswer()
             },
 
             {
                 text:"你是誰？",
-                action:
-                    ()=>doorSecondAnswer()
+                action:()=>doorSecondAnswer()
             },
 
             {
                 text:"離開。",
-                action:
-                    ()=>doorSecondAnswer()
+                action:()=>doorSecondAnswer()
             }
 
         ]
@@ -3036,15 +2156,13 @@ function doorSecondAnswer(){
 
     showDialogue(
 
-        "沒關係。
-
-我只是想聽你說話。",
+        "沒關係。\n\n我只是想聽你說話。",
 
         ()=>{
 
             setTimeout(
                 ()=>{
-                    doorPossessiveLine();
+                    doorFinalQuestion();
                 },
                 1300
             );
@@ -3055,64 +2173,14 @@ function doorSecondAnswer(){
 
 
 /* =========================================================
-   POSSESSIVE DIALOGUE
-========================================================= */
-
-function doorPossessiveLine(){
-
-    const lines=[
-
-        "你不用一直回答我。\n我知道你在看。",
-
-        "其實你不用告訴我你在哪裡。\n我只是想確認你還在。",
-
-        "你剛才每一題的答案，我都記得。",
-
-        "你不用害怕。\n我不會打擾你。\n……除非你一直不理我。"
-
-    ];
-
-
-    const selected=
-        lines[
-            Math.floor(
-                Math.random()*lines.length
-            )
-        ];
-
-
-    showDialogue(
-
-        selected,
-
-        ()=>{
-
-            setTimeout(
-                ()=>{
-                    doorFinalQuestion();
-                },
-                1500
-            );
-
-        }
-
-    );
-}
-
-
-/* =========================================================
-   FINAL QUESTION
+   最後問題
 ========================================================= */
 
 function doorFinalQuestion(){
 
     showDialogue(
 
-        "最後一個問題。
-
-如果我現在敲門，
-
-你會開門嗎？",
+        "最後一個問題。\n\n如果我現在敲門，\n你會開門嗎？",
 
         null,
 
@@ -3120,26 +2188,22 @@ function doorFinalQuestion(){
 
             {
                 text:"會。",
-                action:
-                    ()=>doorFinalAnswer()
+                action:()=>doorFinalAnswer("open")
             },
 
             {
                 text:"不會。",
-                action:
-                    ()=>doorFinalAnswer()
+                action:()=>doorFinalAnswer("close")
             },
 
             {
                 text:"我不知道。",
-                action:
-                    ()=>doorFinalAnswer()
+                action:()=>doorFinalAnswer("unsure")
             },
 
             {
                 text:"不要再問了。",
-                action:
-                    ()=>doorFinalAnswer()
+                action:()=>doorFinalAnswer("stop")
             }
 
         ]
@@ -3148,37 +2212,48 @@ function doorFinalQuestion(){
 
 
 /* =========================================================
-   FINAL ANSWER
+   四種不同回答
 ========================================================= */
 
-function doorFinalAnswer(){
+function doorFinalAnswer(type){
+
+    let text="";
+
+
+    if(type==="open"){
+
+        text=
+            "會嗎？\n\n那我就不用等了。";
+    }
+
+    else if(type==="close"){
+
+        text=
+            "不會？\n\n沒關係，我可以等。";
+    }
+
+    else if(type==="unsure"){
+
+        text=
+            "不知道啊……\n\n你還在猶豫。";
+    }
+
+    else if(type==="stop"){
+
+        text=
+            "好。\n\n我不問了。";
+    }
+
 
     showDialogue(
 
-        "……好。",
+        text,
 
         ()=>{
 
             setTimeout(
                 ()=>{
-
-                    showDialogue(
-
-                        "以後見。",
-
-                        ()=>{
-
-                            setTimeout(
-                                ()=>{
-                                    finalDoorSequence();
-                                },
-                                1800
-                            );
-
-                        }
-
-                    );
-
+                    finalDoorLine(type);
                 },
                 1500
             );
@@ -3189,14 +2264,74 @@ function doorFinalAnswer(){
 
 
 /* =========================================================
-   FINAL DOOR SEQUENCE
+   根據答案產生不同的最後台詞
+========================================================= */
+
+function finalDoorLine(type){
+
+    let line="";
+
+
+    if(type==="open"){
+
+        line=
+            "那就記得替我留一盞燈。";
+    }
+
+    else if(type==="close"){
+
+        line=
+            "你不開門也沒關係。\n\n我知道你在哪裡。";
+    }
+
+    else if(type==="unsure"){
+
+        line=
+            "你不用現在決定。\n\n我可以等你。";
+    }
+
+    else{
+
+        line=
+            "好吧。\n\n那我就在門外安靜一點。";
+    }
+
+
+    showDialogue(
+
+        line,
+
+        ()=>{
+
+            setTimeout(
+                ()=>{
+                    showDialogue(
+                        "以後見。",
+                        ()=>{
+                            setTimeout(
+                                ()=>{
+                                    finalDoorSequence();
+                                },
+                                1800
+                            );
+                        }
+                    );
+                },
+                1300
+            );
+
+        }
+    );
+}
+
+
+/* =========================================================
+   最後敲門
 ========================================================= */
 
 function finalDoorSequence(){
 
-    document.getElementById(
-        "app"
-    ).innerHTML=`
+    document.getElementById("app").innerHTML=`
 
         <div class="card">
 
@@ -3250,7 +2385,7 @@ function finalDoorSequence(){
 
 
 /* =========================================================
-   THREE SECOND
+   三秒問題
 ========================================================= */
 
 function showThreeSecondQuestion(){
@@ -3260,18 +2395,11 @@ function showThreeSecondQuestion(){
             "threeSecond"
         );
 
-    popup.classList.add(
-        "show"
-    );
+    popup.classList.add("show");
 
-    lowHum(
-        3,
-        .035
-    );
+    lowHum(3,.035);
 
-    clearTimeout(
-        threeTimer
-    );
+    clearTimeout(threeTimer);
 
     threeTimer=
         setTimeout(
@@ -3285,26 +2413,19 @@ function showThreeSecondQuestion(){
 
 function threeAnswer(answer){
 
-    clearTimeout(
-        threeTimer
-    );
-
+    clearTimeout(threeTimer);
 
     const responses=[
 
         "你選得很快。",
-
         "你真的不想回頭嗎？",
-
         "嗯……什麼都沒有。",
-
         "那就別回頭。"
 
     ];
 
 
     hideThreeSecond();
-
 
     whisper(
         responses[answer]
@@ -3341,29 +2462,22 @@ function finishThreeSecond(){
 function hideThreeSecond(){
 
     document
-        .getElementById(
-            "threeSecond"
-        )
+        .getElementById("threeSecond")
         .classList
-        .remove(
-            "show"
-        );
+        .remove("show");
 }
 
 
 /* =========================================================
-   FAKE ENDING
+   假結束
 ========================================================= */
 
 function fakeEnding(){
 
-    document.body.className=
-        "horror";
+    document.body.className="horror";
 
 
-    document.getElementById(
-        "app"
-    ).innerHTML=`
+    document.getElementById("app").innerHTML=`
 
         <div class="card">
 
@@ -3377,9 +2491,7 @@ function fakeEnding(){
 
             <div
                 class="description"
-                style="
-                    text-align:center;
-                "
+                style="text-align:center;"
             >
 
                 <p>
@@ -3387,25 +2499,26 @@ function fakeEnding(){
                 </p>
 
                 <p>
-                    感謝你的參與。
+                    你的回答已經被記錄。
                 </p>
 
-                <p style="
-                    color:#9a756e;
-                    margin-top:35px;
-                ">
-
-                    系統已保存你的回答。
-
+                <p
+                    style="
+                        color:#9a756e;
+                        margin-top:30px;
+                    "
+                >
+                    不過……
                 </p>
 
-                <p style="
-                    color:#76504b;
-                    font-size:12px;
-                ">
-
-                    不需要再確認了。
-
+                <p
+                    style="
+                        color:#b77c73;
+                        margin-top:20px;
+                    "
+                >
+                    有些人一旦記住了你，
+                    就不太容易忘記。
                 </p>
 
             </div>
@@ -3424,22 +2537,19 @@ function fakeEnding(){
 
 
 /* =========================================================
-   FINAL GLITCH
+   最後雪花
 ========================================================= */
 
 function finalEndingGlitch(){
 
     whisper(
-        "……"
+        "你還在這裡。"
     );
 
 
     setTimeout(
         ()=>{
-            lowHum(
-                3,
-                .035
-            );
+            lowHum(3,.035);
         },
         300
     );
@@ -3495,7 +2605,7 @@ function finalEndingGlitch(){
 
     setTimeout(
         ()=>{
-            returnNormalRed();
+            returnNormal();
         },
         5600
     );
@@ -3503,18 +2613,16 @@ function finalEndingGlitch(){
 
 
 /* =========================================================
-   RED RETEST PAGE
+   再次測試
+   ★ 這裡恢復正常顏色
 ========================================================= */
 
-function returnNormalRed(){
+function returnNormal(){
 
-    document.body.className=
-        "horror";
+    document.body.className="";
 
 
-    document.getElementById(
-        "app"
-    ).innerHTML=`
+    document.getElementById("app").innerHTML=`
 
         <div class="card">
 
@@ -3537,33 +2645,22 @@ function returnNormalRed(){
                     可以重新測試一次。
                 </p>
 
-                <p style="
-                    color:#9a756e;
-                    margin-top:28px;
-                ">
-
+                <p
+                    style="
+                        color:#aaa;
+                        margin-top:28px;
+                    "
+                >
                     系統已準備完成。
-
-                </p>
-
-                <p style="
-                    color:#6f4541;
-                    font-size:12px;
-                ">
-
-                    我會記得你的答案。
-
                 </p>
 
             </div>
 
             <button
                 class="start-btn"
-                onclick="go404()"
+                onclick="restartTest()"
             >
-
                 再次測試
-
             </button>
 
         </div>
@@ -3572,14 +2669,41 @@ function returnNormalRed(){
 
 
 /* =========================================================
-   404
+   重新開始
 ========================================================= */
 
-function go404(){
+function restartTest(){
 
-    window.location.href=
-        "/20260707/retest/";
+    initAudio();
+
+    phase="normal";
+
+    current=0;
+
+    normalAnswers=[];
+
+    supplementAnswers=[];
+
+    document.body.className="";
+
+    document
+        .getElementById("darkTransition")
+        .classList
+        .remove("active");
+
+    document
+        .getElementById("noise")
+        .classList
+        .remove("active");
+
+    document
+        .getElementById("whisper")
+        .classList
+        .remove("show");
+
+    showQuestion();
 }
+
 
 </script>
 
