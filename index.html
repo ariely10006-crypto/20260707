@@ -290,16 +290,29 @@ likeOptions.forEach((text,i)=>{const b=document.createElement("button");b.classN
 }
 function answerLike(index){
 const selected=likeOptions[index];
+
+// 非「喜歡」：先顯示該選項專屬回覆，再永久把它改成「喜歡」。
 if(selected!=="喜歡"){
 likeOptions[index]="喜歡";
 document.getElementById("app").innerHTML=`<div class="card"><div class="dialogue"><div class="dialogue-text">${likeReplies[index]}</div></div></div>`;
-setTimeout(()=>showLikeAgain(),1500);
-return
+setTimeout(()=>{
+if(likeOptions.every(v=>v==="喜歡")){finishLikeQuestion();}
+else{showLikeAgain();}
+},1500);
+return;
 }
-if(likeOptions.every(v=>v==="喜歡")){
+
+// 「喜歡」本身也必須有反應，不能變成無法點擊的死按鈕。
+document.getElementById("app").innerHTML=`<div class="card"><div class="dialogue"><div class="dialogue-text">我也喜歡你。</div></div></div>`;
+setTimeout(()=>{
+if(likeOptions.every(v=>v==="喜歡")){finishLikeQuestion();}
+else{showLikeAgain();}
+},1200);
+}
+
+function finishLikeQuestion(){
 document.getElementById("app").innerHTML=`<div class="card"><div class="dialogue"><div class="dialogue-text">我就知道。<br><br>這樣才對。</div></div></div>`;
-setTimeout(checkSpecialEnding,1300)
-}
+setTimeout(checkSpecialEnding,1300);
 }
 function sequenceMatches(map){return Object.keys(map).every(k=>normalAnswers[Number(k)-1]===map[k])}
 function getSpecialEnding(){
