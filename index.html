@@ -302,11 +302,10 @@ else{showLikeAgain();}
 return;
 }
 
-// 「喜歡」本身也必須有反應，不能變成無法點擊的死按鈕。
+// 玩家直接選「喜歡」時，視為已經給出滿意答案，直接離開補充五。
 document.getElementById("app").innerHTML=`<div class="card"><div class="dialogue"><div class="dialogue-text">我也喜歡你。</div></div></div>`;
 setTimeout(()=>{
-if(likeOptions.every(v=>v==="喜歡")){finishLikeQuestion();}
-else{showLikeAgain();}
+finishLikeQuestion();
 },1200);
 }
 
