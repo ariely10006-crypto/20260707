@@ -120,10 +120,10 @@ const supplements=[
 "因為我想更了解你。",
 "不想回答我嗎?"]},
 {q:"你現在在哪?",a:["在家","在學校","在外面","......"],r:[
-"嗯，你家真好看，支線4-1，你覺得我在哪裡呢?",
-"嗯，我有看到你喔，支線4-2，你有看到我嗎?",
-"好巧啊!我也在外面，支線4-3，猜猜我在哪?",
-"不說嗎?那讓我來猜猜看，支線4-4，真不告訴我嗎?"]}
+"嗯，你家真好看。",
+"嗯，我有看到你喔。",
+"好巧啊!我也在外面。",
+"不說嗎?那讓我來猜猜看。"]}
 ];
 const branches={
 1:{q:"你覺得我在哪裡呢?",a:["在自己家裡","在外面","不知道","......"],r:[
@@ -186,11 +186,8 @@ if(current===9){
 document.getElementById("sheReply").textContent=sheReplies[current][index];
 setTimeout(()=>document.getElementById("sheReply").classList.add("show"),350);
 }
-if(current===2)whisper("……知道了。");
-if(current===5)whisper("我會記得。");
-if(current===7)whisper("你剛才選的是「"+String.fromCharCode(65+index)+"」。");
-if(current===8)lowHum(1.1,.015);
-if(current===9)whisper("你的答案，我都記得。");
+/* 第1～9題只保留系統客觀回覆；第9題額外播放一次雜訊 */
+if(current===8)setTimeout(()=>noiseFlash(),220);
 current++;setTimeout(showNormalQuestion,1050)
 }
 function lowHum(d=2,v=.025){tone(47,d,v)}
@@ -215,8 +212,8 @@ function closeTimer(){document.getElementById("timerLayer").classList.remove("sh
 function answerQ11(index){
 if(timerResolved)return;timerResolved=true;closeTimer();q11Answer=index;
 const r=index===null?"不想回我嗎?T^T":["猜對了","幫幫我嘛~","這麼討厭我T_T","真的不知道嗎?"][index];
-if(index===0){setTimeout(()=>knock(.16),250);setTimeout(()=>knock(.16),430);setTimeout(()=>knock(.16),610)}
-showDialogue(r,beginSupplementNotice)
+if(index===0){setTimeout(()=>knock(.34),250);setTimeout(()=>knock(.34),470);setTimeout(()=>knock(.34),690)}
+showDialogue(r,showNormalResult)
 }
 function showDialogue(text,next=null,options=[]){
 horrorMode();
@@ -225,10 +222,15 @@ const box=document.getElementById("dialogueOptions");
 if(options.length){options.forEach(o=>{const b=document.createElement("button");b.className="option";b.textContent=o.text;b.onclick=o.action;box.appendChild(b)})}
 else if(next)setTimeout(next,1100)
 }
-function beginSupplementNotice(){
+function showNormalResult(){
 normalMode();
-document.getElementById("app").innerHTML=`<div class="card"><h1>測驗結束</h1><div class="description" style="text-align:center;"><p>所有主要問題均已完成。</p><p style="color:#aaa;margin-top:30px;">……</p></div></div>`;
-setTimeout(startSlowHorrorTransition,1800)
+const counts=[0,0,0,0];
+normalAnswers.forEach(i=>{if(i!==undefined&&i!==null)counts[i]++});
+const labels=["較重視陪伴與情感連結","較重視個人空間與界線","較容易注意關係中的細節","較重視直接溝通與確認"];
+let max=Math.max(...counts);
+let winners=counts.map((v,i)=>v===max?i:null).filter(v=>v!==null);
+let result=winners.length===1?labels[winners[0]]:"你的選擇分布得很平均，沒有單一明顯傾向。";
+document.getElementById("app").innerHTML=`<div class="card"><h1>你的測驗結果</h1><div class="subtitle">YOUR RESULT</div><div class="description" style="text-align:center;"><p>${result}</p><p style="margin-top:25px;">這是根據前 10 題實際選擇整理出的結果。</p><p style="color:#aaa;font-size:12px;margin-top:24px;">A：${counts[0]}　B：${counts[1]}　C：${counts[2]}　D：${counts[3]}</p><p style="color:#aaa;font-size:12px;">第 11 題：${q11Answer===null?"未回答":String.fromCharCode(65+q11Answer)}</p></div><button class="start-btn" onclick="startSlowHorrorTransition()">繼續</button></div>`;
 }
 function startSlowHorrorTransition(){
 horrorMode();document.getElementById("darkTransition").classList.add("active");lowHum(3,.022);setTimeout(showSupplementNotice,4300)
@@ -245,11 +247,16 @@ document.getElementById("app").innerHTML=`<div class="card"><div class="question
 renderOptions(q.a,chooseSupplement)
 }
 function chooseSupplement(index){
+const qIndex=current;
 document.querySelectorAll("#options .option").forEach(b=>b.disabled=true);
-supplementAnswers[current]=index;document.querySelectorAll("#options .option")[index].classList.add("selected");
-document.getElementById("feedback").textContent=supplements[current].r[index];
-setTimeout(()=>document.getElementById("sheReply").classList.add("show"),350);
-current++;setTimeout(showSupplementQuestion,1050)
+supplementAnswers[qIndex]=index;
+document.querySelectorAll("#options .option")[index].classList.add("selected");
+const reply=supplements[qIndex].r[index];
+document.getElementById("app").innerHTML=`<div class="card"><div class="dialogue"><div class="dialogue-text">${reply}</div></div></div>`;
+current++;
+setTimeout(()=>{
+if(current>=3){showBranchByAnswer();}else{showSupplementQuestion();}
+},1200);
 }
 function showBranchByAnswer(){showBranchQuestion(supplementAnswers[2]+1)}
 function showBranchQuestion(branch){
@@ -259,15 +266,23 @@ renderOptions(q.a,(index)=>chooseBranch(index,q))
 }
 function chooseBranch(index,q){
 document.querySelectorAll("#options .option").forEach(b=>b.disabled=true);
-supplementAnswers[3]=index;document.querySelectorAll("#options .option")[index].classList.add("selected");
-document.getElementById("feedback").textContent=q.r[index];
-setTimeout(()=>document.getElementById("sheReply").classList.add("show"),350);
-setTimeout(showLikeAgain,1100)
+supplementAnswers[3]=index;
+document.querySelectorAll("#options .option")[index].classList.add("selected");
+const reply=q.r[index];
+document.getElementById("app").innerHTML=`<div class="card"><div class="dialogue"><div class="dialogue-text">${reply}</div></div></div>`;
+setTimeout(showLikeAgain,1200);
 }
 let likeOptions=["喜歡","不喜歡","不知道","討厭"];
+const likeReplies=[
+"我也喜歡你。",
+"不喜歡?你確定?你要好好回答喔~。",
+"你怎麼會不知道?乖，誠實一點。",
+"你在故意惹我嗎?寶貝"
+];
 function showLikeAgain(){
-horrorMode();likeOptions=["喜歡","不喜歡","不知道","討厭"];
-document.getElementById("app").innerHTML=`<div class="card"><div class="question-number">補充問題 5 / 5</div><div class="question" style="text-align:center;">我再問你一次。<br>你喜歡我嗎？</div><div class="options" id="likeOptions"></div><div class="feedback" id="likeFeedback"></div><div class="she-reply show" id="likeReply"></div></div>`;
+horrorMode();
+likeOptions=["喜歡","不喜歡","不知道","討厭"];
+document.getElementById("app").innerHTML=`<div class="card"><div class="question-number">補充問題 5 / 5</div><div class="question" style="text-align:center;">我再問你一次。<br>你喜歡我嗎？</div><div class="options" id="likeOptions"></div></div>`;
 renderLikeOptions()
 }
 function renderLikeOptions(){
@@ -275,17 +290,16 @@ const box=document.getElementById("likeOptions");box.innerHTML="";
 likeOptions.forEach((text,i)=>{const b=document.createElement("button");b.className="option";b.style.textAlign="center";b.textContent=text;b.onclick=()=>answerLike(i);box.appendChild(b)})
 }
 function answerLike(index){
-if(likeOptions[index]!=="喜歡"){
+const selected=likeOptions[index];
+if(selected!=="喜歡"){
 likeOptions[index]="喜歡";
-document.getElementById("likeFeedback").textContent="嗯。這樣就好了。";
-document.getElementById("likeReply").textContent="你可以繼續選。";
-renderLikeOptions();return
+document.getElementById("app").innerHTML=`<div class="card"><div class="dialogue"><div class="dialogue-text">${likeReplies[index]}</div></div></div>`;
+setTimeout(()=>showLikeAgain(),1500);
+return
 }
 if(likeOptions.every(v=>v==="喜歡")){
-document.getElementById("likeOptions").innerHTML="";
-document.getElementById("likeFeedback").textContent="我就知道。";
-document.getElementById("likeReply").textContent="這樣才對。";
-setTimeout(checkSpecialEnding,1200)
+document.getElementById("app").innerHTML=`<div class="card"><div class="dialogue"><div class="dialogue-text">我就知道。<br><br>這樣才對。</div></div></div>`;
+setTimeout(checkSpecialEnding,1300)
 }
 }
 function sequenceMatches(map){return Object.keys(map).every(k=>normalAnswers[Number(k)-1]===map[k])}
@@ -340,9 +354,9 @@ showDialogue("我在外面。\n\n你不用開門。\n我只是想跟你說幾句
 ])
 }
 function doorSecondAnswer(type){
-if(type==="who"){showDialogue("你真的還不知道嗎？",()=>setTimeout(doorFinalQuestion,1300));return}
-if(type==="leave"){showDialogue("好。\n\n我先不說話。",()=>setTimeout(doorFinalQuestion,1600));return}
-showDialogue("沒關係。\n\n我只是想聽你說話。",()=>setTimeout(doorFinalQuestion,1300))
+if(type==="who"){showDialogue("你真的把我忘了嗎?",()=>setTimeout(doorFinalQuestion,1300));return}
+if(type==="leave"){showDialogue("我會等你的。",()=>setTimeout(doorFinalQuestion,1600));return}
+showDialogue("沒關係，你聽我說就好。",()=>setTimeout(doorFinalQuestion,1300))
 }
 function doorFinalQuestion(){
 const m=getMemory();const extra=m.plays>=5?"\n\n這次……你還要換一個答案嗎？":"";
@@ -358,16 +372,16 @@ const m=getMemory();m.endings[type]=(m.endings[type]||0)+1;m.seenAll=Object.keys
 if(type==="open")endingOpen();if(type==="closed")endingClosed();if(type==="unknown")endingUnknown();if(type==="stop")endingStop()
 }
 function endingOpen(){
-showDialogue("……好。",()=>{setTimeout(()=>knock(.16),700);setTimeout(()=>showDialogue("那我進來了。",()=>setTimeout(()=>endingAfterText("門已經打開了。\n\n可是你什麼時候答應讓我進來的？"),1500)),1200)})
+showDialogue("……好。",()=>{setTimeout(()=>knock(.34),700);setTimeout(()=>showDialogue("那我進來了。",()=>setTimeout(()=>endingAfterText("算了，下次可別隨便給別人開門喔。"),1500)),1200)})
 }
 function endingClosed(){
-showDialogue("好。",()=>setTimeout(()=>showDialogue("那我不進去。",()=>{setTimeout(()=>knock(.16),800);setTimeout(()=>showDialogue("我會等。",()=>endingAfterText("門可以一直關著。\n\n你總會再回來的。"),1300),900)},1000),1000))
+showDialogue("好。",()=>setTimeout(()=>showDialogue("那我不進去。",()=>{setTimeout(()=>knock(.34),800);setTimeout(()=>showDialogue("我會等。",()=>endingAfterText("門可以一直關著，我會等到你願意為我開的時候。"),1300),900)},1000),1000))
 }
 function endingUnknown(){
-showDialogue("你總是這樣。",()=>setTimeout(()=>showDialogue("什麼都不知道。",()=>setTimeout(()=>showDialogue("沒關係。",()=>setTimeout(()=>showDialogue("那我替你決定。",()=>{setTimeout(()=>knock(.16),700);setTimeout(()=>endingAfterText("現在呢？"),1200)},900)),900)),900)),900)
+showDialogue("你總是這樣。",()=>setTimeout(()=>showDialogue("什麼都不知道。",()=>setTimeout(()=>showDialogue("沒關係。",()=>setTimeout(()=>showDialogue("那我替你決定。",()=>{setTimeout(()=>knock(.34),700);setTimeout(()=>endingAfterText("沒關係，你可以慢慢決定。"),1200)},900)),900)),900)),900)
 }
 function endingStop(){
-showDialogue("好。",()=>{setTimeout(()=>knock(.16),1800);setTimeout(()=>knock(.16),3200);setTimeout(()=>showDialogue("我不問了。",()=>endingAfterText("有些答案，不需要說出來。")),4200)})
+showDialogue("好。",()=>{setTimeout(()=>knock(.34),1800);setTimeout(()=>knock(.34),3200);setTimeout(()=>showDialogue("我不問了。",()=>endingAfterText("好，我不問了，可是其實你心裡已經有答案了對吧?")),4200)})
 }
 function endingAfterText(text){
 const m=getMemory();let extra=m.seenAll?"\n\n你已經看過所有主要結局了。\n\n……至少你以為是。":m.plays>=5?"\n\n你又回來了。":m.plays>=2?"\n\n你以前也做過這個選擇。":"";
@@ -376,13 +390,13 @@ setTimeout(finalDoorSequence,2600)
 }
 function finalDoorSequence(){
 document.getElementById("app").innerHTML=`<div class="card"><div class="dialogue"><div class="dialogue-text">……</div></div></div>`;
-setTimeout(()=>knock(.16),900);setTimeout(()=>knock(.16),1900);setTimeout(()=>knock(.16),2900);setTimeout(showThreeSecond,3800)
+setTimeout(()=>knock(.34),900);setTimeout(()=>knock(.34),1900);setTimeout(()=>knock(.34),2900);setTimeout(showThreeSecond,3800)
 }
 function showThreeSecond(){
 const layer=document.getElementById("timerLayer");
 document.getElementById("timerTitle").innerHTML="如果我現在就在門外，<br>你覺得我會做什麼？";
 const box=document.getElementById("timerOptions");box.innerHTML="";
-["一個人","一個影子","什麼都沒有","我不想回頭看"].forEach((text,i)=>{const b=document.createElement("button");b.className="timer-option";b.textContent=text;b.onclick=()=>answerThree(i);box.appendChild(b)});
+["一個人","什麼都沒有","我不想回頭看","是你嗎?"].forEach((text,i)=>{const b=document.createElement("button");b.className="timer-option";b.textContent=text;b.onclick=()=>answerThree(i);box.appendChild(b)});
 const bar=document.getElementById("timerBar");bar.className="timer-bar three";void bar.offsetWidth;layer.classList.add("show");lowHum(3,.035);clearTimeout(timerId);timerId=setTimeout(()=>answerThree(null),3000)
 }
 function answerThree(index){
@@ -394,7 +408,7 @@ function fakeEnding(){
 horrorMode();
 document.getElementById("app").innerHTML=`<div class="card"><h1>測驗結束</h1><div class="description" style="text-align:center;"><p>所有問題均已完成。</p><p style="color:#9a756e;margin-top:35px;">……</p></div></div>`;
 setTimeout(()=>whisper("你還會回來。"),1800);setTimeout(()=>lowHum(3,.035),2800);
-setTimeout(()=>knock(.16),3900);setTimeout(()=>knock(.16),5000);setTimeout(()=>knock(.16),6100);
+setTimeout(()=>knock(.34),3900);setTimeout(()=>knock(.34),5000);setTimeout(()=>knock(.34),6100);
 setTimeout(()=>noiseFlash(),6900);setTimeout(()=>{document.body.classList.add("shake");setTimeout(()=>document.body.classList.remove("shake"),600)},7400);
 setTimeout(()=>noiseFlash(),7800);setTimeout(returnAgain,8500)
 }
